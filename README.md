@@ -1,2 +1,3 @@
-# Rancho_de_gorditos
+# Motores
+
 Repository for our game
