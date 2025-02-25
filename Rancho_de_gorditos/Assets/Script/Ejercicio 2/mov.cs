@@ -15,8 +15,8 @@ public class mov : MonoBehaviour
     void Update()
     {
          
-        cordX = Input.GetAxis("Horizontal") * vel;
-        cordZ = Input.GetAxis("Vertical") * vel;
+        cordX = Input.GetAxis("Horizontal");
+        cordZ = Input.GetAxis("Vertical") ;
         pos = new Vector3(cordX, 0, cordZ);
 
         transform.Translate(pos*vel*Time.deltaTime);
