@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Enemigo : MonoBehaviour
+public class Enemigo_No_Persigue : MonoBehaviour
 {
     public float velocidad, VelRot;
     GameObject enemigo, player;
@@ -29,7 +29,7 @@ public class Enemigo : MonoBehaviour
 
         if (dot >= 0 && dot <= 1)
         {
-            Perseguir(E, J, normalizadorR);
+            Perseguir(E, J);
         }
 
     }

@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Enemigo : MonoBehaviour
+public class Enemigo_Menos_FOV : MonoBehaviour
 {
     public float velocidad, VelRot;
     GameObject enemigo, player;
