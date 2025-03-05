@@ -27,7 +27,7 @@ public class Enemigo_Menos_FOV : MonoBehaviour
         dot = Vector3.Dot(normalizadorR, E1);
         Debug.Log(dot);
 
-        if (dot >= 0.7 && dot <= 1)
+        if (dot >=  0.7 && dot <= 1)
         {
             Perseguir(E, J, normalizadorR);
         }

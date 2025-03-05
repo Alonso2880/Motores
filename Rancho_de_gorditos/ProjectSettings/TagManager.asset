@@ -4,8 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Moneda_Velocidad
-  - Objeto_Rotatorio
+  - objeto
   layers:
   - Default
   - TransparentFX

@@ -358,7 +358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6937046
+      value: 3.6937046
       objectReference: {fileID: 0}
     - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -437,7 +437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &754245846
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -548,7 +548,7 @@ Transform:
   m_GameObject: {fileID: 754245845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.115779, y: -0.30629587, z: -5.845085}
+  m_LocalPosition: {x: -3.115779, y: -6.306296, z: -37.845085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -712,6 +712,10 @@ PrefabInstance:
       value: MaleCharacterPBR
       objectReference: {fileID: 0}
     - target: {fileID: 8189980434977739222, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189980434977739222, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -721,7 +725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855052669661678444, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6937041
+      value: 2.6937041
       objectReference: {fileID: 0}
     - target: {fileID: 8855052669661678444, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_LocalPosition.z
