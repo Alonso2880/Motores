@@ -5,7 +5,7 @@ using UnityEngine;
 public class guardar_Inventario : MonoBehaviour
 {
     GameObject player, objeto, colisionado;
-    List<InventoryItemData> inventario = new List<InventoryItemData>();
+    public List<InventoryItemData> inventario = new List<InventoryItemData>();
     Gallina gallina;
     
 
@@ -51,10 +51,10 @@ public class guardar_Inventario : MonoBehaviour
         }
 
 
-       foreach(InventoryItemData item in inventario)
+       /*foreach(InventoryItemData item in inventario)
         {
             Debug.Log(item.nombre + " x" + item.count);
-        }
+        }*/
     }
 
     private void AgregarItem(string nombre, GameObject prefab)

@@ -32,8 +32,9 @@ public class Gallina : MonoBehaviour
                yield return new WaitForSeconds(1);
                 velocidadVec = new Vector3(X, 0, Z)*velocidad;
                 rb.linearVelocity = new Vector3(velocidadVec.x, rb.linearVelocity.y, velocidadVec.z);
-                //Debug.Log("Movimiento es " + velocidadVec.x + " 0 " + velocidadVec.z);
-                yield return new WaitForSeconds(Random.Range(1, 3));
+                Debug.Log("Movimiento es " + velocidadVec.x + " 0 " + velocidadVec.z);
+                //yield return new WaitForSeconds(Random.Range(1, 3));
+                yield return new WaitForSeconds(2);
                 SeMueve = false;
                 random = true;
             }
@@ -58,12 +59,8 @@ public class Gallina : MonoBehaviour
         {
             yield return new WaitForSeconds(tiempoHuevo);
             huevo += 1;
-            Debug.Log("El huevo que hay creado es " + huevo);
-            /*if(g.huevosRecolectados == true)
-            {
-                huevo = 0;
+            //Debug.Log("El huevo que hay creado es " + huevo);
 
-            }*/
         }
 
 
@@ -95,7 +92,7 @@ public class Gallina : MonoBehaviour
         if (collision.gameObject.CompareTag("Valla"))
         {
             //SeMueve = false;
-            //Debug.Log("Me he chocado");
+            Debug.Log("Me he chocado");
             X = Random.Range(-1, 2);
             Z = Random.Range(-1, 2);
         }

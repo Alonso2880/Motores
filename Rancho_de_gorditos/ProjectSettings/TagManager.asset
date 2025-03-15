@@ -6,6 +6,7 @@ TagManager:
   tags:
   - objeto
   - Valla
+  - Tienda
   layers:
   - Default
   - TransparentFX

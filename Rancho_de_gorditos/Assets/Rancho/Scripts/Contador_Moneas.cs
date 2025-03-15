@@ -5,20 +5,19 @@ using UnityEngine.UI;
 public class Contador_Moneas : MonoBehaviour
 {
     public TextMeshProUGUI Cont_monedas;
-    private int monedas = 0;
+    public int monedas = 0;
+    GameObject tienda;
     void Start()
     {
+        tienda = GameObject.FindGameObjectWithTag("Tienda");
+        Tienda tiendaScript = tienda.GetComponent<Tienda>();
         ActualizarMonedas();
     }
 
     
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            monedas++;
-            ActualizarMonedas();
-        }
+        ActualizarMonedas();
     }
     private void ActualizarMonedas()
     {
