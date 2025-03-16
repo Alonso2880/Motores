@@ -12,6 +12,11 @@ public class Gallina : MonoBehaviour
     private int X, Z, X1, tiempoHuevo = 3;
     public int huevo = 0;
 
+    [HideInInspector]  public bool scriptActivo = true;
+    private Coroutine movimientoCoroutine;
+    private Coroutine huevoCoroutine;
+
+
     guardar_Inventario g;
 
 
@@ -20,30 +25,55 @@ public class Gallina : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         velocidad = 2.5f;
         g = GameObject.Find("Player").GetComponent<guardar_Inventario>();
-        StartCoroutine("generarHuevo");
+        huevoCoroutine = StartCoroutine("generarHuevo");
+        movimientoCoroutine = StartCoroutine("movimiento");
+        //StartCoroutine("generarHuevo");
     }
+
+    private void OnDisable()
+    {
+        scriptActivo = false;
+
+        if(movimientoCoroutine != null)
+        {
+            StopCoroutine(movimientoCoroutine);
+        }
+
+        if(huevoCoroutine != null)
+        {
+            StopCoroutine(huevoCoroutine);
+        }
+
+        //rb.linearVelocity = Vector3.zero;
+        random = true;
+        SeMueve = false;
+    }
+
 
     IEnumerator movimiento()
     {
-        while (true)
+        while (scriptActivo)  
         {
             if (SeMueve)
             {
-               yield return new WaitForSeconds(1);
-                velocidadVec = new Vector3(X, 0, Z)*velocidad;
+               //yield return new WaitForSeconds(1);
+                if (!scriptActivo) yield break;
+                
+                
+                velocidadVec = new Vector3(X, 0, Z).normalized*velocidad;
                 rb.linearVelocity = new Vector3(velocidadVec.x, rb.linearVelocity.y, velocidadVec.z);
                 //Debug.Log("Movimiento es " + velocidadVec.x + " 0 " + velocidadVec.z);
                 //yield return new WaitForSeconds(Random.Range(1, 3));
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(3);
                 SeMueve = false;
                 random = true;
             }
             else
             {
                 //Debug.Log("Me he parado");
-                rb.linearVelocity = new Vector3 (0,0,0);
-                yield return new WaitForSeconds(2);
-                SeMueve = true;
+                rb.linearVelocity = Vector3.zero;
+                yield return new WaitForSeconds(1);
+                SeMueve = true; 
                 
                 
             }
@@ -55,10 +85,14 @@ public class Gallina : MonoBehaviour
 
     IEnumerator generarHuevo()
     {
-        while (true) 
+        while (scriptActivo) 
         {
             yield return new WaitForSeconds(tiempoHuevo);
-            huevo += 1;
+            if (scriptActivo)
+            {
+                huevo += 1;
+            }
+            
             //Debug.Log("El huevo que hay creado es " + huevo);
 
         }
@@ -73,26 +107,21 @@ public class Gallina : MonoBehaviour
     
     void FixedUpdate()
     {
+
         
-            
-            if (random == true)
+            if (random && scriptActivo)
             {
                 X = Random.Range(-1, 2);
                 Z = Random.Range(-1, 2);
                 X1 = Random.Range(1, 3);
                 random = false;
             }
-            StartCoroutine("movimiento");
-        
-       
-       
-        
-
+             //StartCoroutine("movimiento");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Valla"))
+        if (scriptActivo && collision.gameObject.CompareTag("Valla"))
         {
             //SeMueve = false;
             Debug.Log("Me he chocado");

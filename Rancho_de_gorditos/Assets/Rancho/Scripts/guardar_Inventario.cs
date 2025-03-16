@@ -160,7 +160,8 @@ public class guardar_Inventario : MonoBehaviour
         Gallina scriptGallina = gallinaActual.GetComponent<Gallina>();
         if(scriptGallina != null)
         {
-            scriptGallina.enabled = false;
+            scriptGallina.enabled = true;
+            scriptGallina.scriptActivo = true;
         }
 
         Vector3 direccionLanzamiento = transform.forward;

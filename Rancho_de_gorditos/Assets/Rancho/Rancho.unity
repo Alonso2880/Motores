@@ -2265,6 +2265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gallina
       objectReference: {fileID: 0}
+    - target: {fileID: 5223091832686651242, guid: b98005f5c21161941a930332c8750e6e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

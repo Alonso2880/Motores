@@ -3,7 +3,7 @@ using UnityEngine;
 public class Tienda_Comprar : MonoBehaviour
 {
     GameObject jugador, contMonedas;
-    int monedasT = 0;
+    
     void Start()
     {
         jugador = GameObject.FindGameObjectWithTag("Player");
