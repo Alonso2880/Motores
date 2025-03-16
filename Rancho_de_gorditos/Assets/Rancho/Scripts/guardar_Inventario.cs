@@ -5,9 +5,17 @@ using UnityEngine;
 public class guardar_Inventario : MonoBehaviour
 {
     GameObject player, objeto, colisionado;
-    public List<InventoryItemData> inventario = new List<InventoryItemData>();
+    [HideInInspector] public List<InventoryItemData> inventario = new List<InventoryItemData>();
     Gallina gallina;
-    
+
+    //Generar la gallina
+    public GameObject gallinaPrefab;
+    public Transform puntoSujección;
+    public float fuerzaLanzamiento = 10f;
+
+    [HideInInspector] public GameObject gallinaActual;
+    [HideInInspector] public bool tieneGallina = false;
+
 
     void Start()
 
@@ -21,7 +29,22 @@ public class guardar_Inventario : MonoBehaviour
 
     void Update()
     {
-        
+        //Coger gallina
+        if (tieneGallina)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                LanzarGallina();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            RecogerGallina();
+        }
+
+
+        //Agregar item al inventario
         if (colisionado != null && Input.GetKeyDown(KeyCode.E))
         {
             ItemCount itemData = colisionado.GetComponent<ItemCount>();
@@ -57,6 +80,7 @@ public class guardar_Inventario : MonoBehaviour
         }*/
     }
 
+    //Agregar item al inventario
     private void AgregarItem(string nombre, GameObject prefab)
     {
         InventoryItemData itemExiste = inventario.Find(item => item.nombre == nombre);
@@ -101,12 +125,70 @@ public class guardar_Inventario : MonoBehaviour
             }
         }
     }
-
+    
+    
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("objeto"))
         {
             colisionado = collision.gameObject;
+        }
+    }
+
+    //Coger gallina
+    public void ObtenerGallina()
+    {
+        gallinaActual = Instantiate(gallinaPrefab, puntoSujección.position, puntoSujección.rotation);
+        gallinaActual.transform.SetParent(puntoSujección);
+        gallinaActual.GetComponent<Rigidbody>().isKinematic = true;
+
+        Gallina scriptGallina = gallinaActual.GetComponent<Gallina>();
+        if (scriptGallina != null)
+        {
+            scriptGallina.enabled = false;
+        }
+
+        tieneGallina = true;
+    }
+
+    private void LanzarGallina()
+    {
+        gallinaActual.transform.SetParent(null);
+        Rigidbody rb = gallinaActual.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        
+        Gallina scriptGallina = gallinaActual.GetComponent<Gallina>();
+        if(scriptGallina != null)
+        {
+            scriptGallina.enabled = false;
+        }
+
+        Vector3 direccionLanzamiento = transform.forward;
+        rb.AddForce(direccionLanzamiento * fuerzaLanzamiento, ForceMode.Impulse);
+        tieneGallina = false;
+    }
+
+    private void RecogerGallina()
+    {
+        Collider[] collides = Physics.OverlapSphere(transform.position, 2f);
+        foreach(Collider col in collides)
+        {
+            if(col.CompareTag("Gallina") && !tieneGallina)
+            {
+                gallinaActual = col.gameObject;
+
+                Gallina scriptGallina = gallinaActual.GetComponent<Gallina>();
+                if (scriptGallina != null)
+                {
+                    scriptGallina.enabled = false;
+                }
+
+                gallinaActual.transform.SetParent(puntoSujección);
+                gallinaActual.transform.position = puntoSujección.position;
+                gallinaActual.GetComponent<Rigidbody>().isKinematic = true;
+                tieneGallina = true;
+                break;
+            }
         }
     }
 }

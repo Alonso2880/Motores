@@ -32,7 +32,7 @@ public class Gallina : MonoBehaviour
                yield return new WaitForSeconds(1);
                 velocidadVec = new Vector3(X, 0, Z)*velocidad;
                 rb.linearVelocity = new Vector3(velocidadVec.x, rb.linearVelocity.y, velocidadVec.z);
-                Debug.Log("Movimiento es " + velocidadVec.x + " 0 " + velocidadVec.z);
+                //Debug.Log("Movimiento es " + velocidadVec.x + " 0 " + velocidadVec.z);
                 //yield return new WaitForSeconds(Random.Range(1, 3));
                 yield return new WaitForSeconds(2);
                 SeMueve = false;
@@ -74,14 +74,17 @@ public class Gallina : MonoBehaviour
     void FixedUpdate()
     {
         
-        if(random == true)
-        {
-            X = Random.Range(-1, 2);
-            Z = Random.Range(-1, 2);
-            X1 = Random.Range(1, 3);
-            random = false;
-        }
-       StartCoroutine("movimiento");
+            
+            if (random == true)
+            {
+                X = Random.Range(-1, 2);
+                Z = Random.Range(-1, 2);
+                X1 = Random.Range(1, 3);
+                random = false;
+            }
+            StartCoroutine("movimiento");
+        
+       
        
         
 
