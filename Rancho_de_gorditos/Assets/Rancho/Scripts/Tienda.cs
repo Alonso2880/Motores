@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tienda : MonoBehaviour
 {
-    GameObject jugador, contMonedas;
+    GameObject jugador, contMonedas, MenuV;
     int monedasT=0;
 
 
@@ -12,7 +12,7 @@ public class Tienda : MonoBehaviour
     {
         jugador = GameObject.FindGameObjectWithTag("Player");
         contMonedas = GameObject.Find("Canvas");
-        
+        MenuV = GameObject.Find("MenuVender");
     }
 
    
@@ -23,18 +23,22 @@ public class Tienda : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        guardar_Inventario jscript = jugador.GetComponent<guardar_Inventario>();
-        Contador_Moneas cont = contMonedas.GetComponent<Contador_Moneas>();
-        
-        
-   
+        Menu_Vender m = MenuV.GetComponent<Menu_Vender>();
         if (collision.gameObject.CompareTag("Player"))
         {
-            foreach(InventoryItemData item in jscript.inventario)
+            m.AbrirMenu();
+        }
+    }
+
+    public void Huevo()
+    {
+        guardar_Inventario jscript = jugador.GetComponent<guardar_Inventario>();
+        Contador_Moneas cont = contMonedas.GetComponent<Contador_Moneas>();
+            foreach (InventoryItemData item in jscript.inventario)
             {
-                if(item.nombre == "Huevo")
+                if (item.nombre == "Huevo")
                 {
-                    if(cont.monedas == 0)
+                    if (cont.monedas == 0)
                     {
                         monedasT = item.count;
                         item.count = 0;
@@ -48,10 +52,10 @@ public class Tienda : MonoBehaviour
                         cont.monedas += monedasT;
                         monedasT = 0;
                     }
-                   
-                    
+
+
                 }
             }
-        }
+        
     }
 }

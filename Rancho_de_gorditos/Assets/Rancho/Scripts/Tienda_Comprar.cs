@@ -1,13 +1,19 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Tienda_Comprar : MonoBehaviour
 {
-    GameObject jugador, contMonedas;
+    [HideInInspector] public GameObject jugador, contMonedas, menu_compra;
     
+
+
     void Start()
     {
         jugador = GameObject.FindGameObjectWithTag("Player");
         contMonedas = GameObject.Find("Canvas");
+        menu_compra = GameObject.Find("MenuCompra");
+       
+
     }
 
    
@@ -17,12 +23,23 @@ public class Tienda_Comprar : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        Menu_Compra m1 = menu_compra.GetComponent<Menu_Compra>();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            m1.AbrirMenu();
+        }
+        
+        
+
+    }
+
+    public void Gallina()
+    {
         guardar_Inventario jscript = jugador.GetComponent<guardar_Inventario>();
         Contador_Moneas cont = contMonedas.GetComponent<Contador_Moneas>();
-
-        if (collision.gameObject.CompareTag("Player") && !jscript.tieneGallina)
+        if (!jscript.tieneGallina)
         {
-            if(cont.monedas < 4)
+            if (cont.monedas < 4)
             {
                 Debug.Log("Monedas insuficientes");
             }
@@ -33,6 +50,5 @@ public class Tienda_Comprar : MonoBehaviour
                 jscript.ObtenerGallina();
             }
         }
-
     }
 }
