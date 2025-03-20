@@ -65,8 +65,5 @@ public class Menu_Compra : MonoBehaviour
         canvasM.enabled = false;
         Time.timeScale = 1;
     }
-    void Update()
-    {
-        
-    }
+
 }
