@@ -9,6 +9,7 @@ public class Gallina : MonoBehaviour
     private Vector3 velocidadVec;
     private float velocidad;
     private bool SeMueve = true, random = true;
+    public bool enterreno = false;
     private int X, Z, X1, tiempoHuevo = 3;
     public int huevo = 0;
 
@@ -85,18 +86,25 @@ public class Gallina : MonoBehaviour
 
     IEnumerator generarHuevo()
     {
-        while (scriptActivo) 
-        {
-            yield return new WaitForSeconds(tiempoHuevo);
-            if (scriptActivo)
+            while (scriptActivo)
             {
-                huevo += 1;
+            if (!enterreno)
+            {
+                yield return null;
+                continue;
             }
-            
-            //Debug.Log("El huevo que hay creado es " + huevo);
+                yield return new WaitForSeconds(tiempoHuevo);
+                if (scriptActivo && enterreno)
+                {
+                    huevo += 1;
+                //Debug.Log("El huevo que hay creado es " + huevo);
+            }
+
+
+
 
         }
-
+        
 
     }
 
@@ -124,9 +132,23 @@ public class Gallina : MonoBehaviour
         if (scriptActivo && collision.gameObject.CompareTag("Valla"))
         {
             //SeMueve = false;
-            Debug.Log("Me he chocado");
+            //Debug.Log("Me he chocado");
             X = Random.Range(-1, 2);
             Z = Random.Range(-1, 2);
+        }
+
+        if (collision.gameObject.CompareTag("Terreno"))
+        {
+            enterreno = true;
+            Debug.Log(enterreno);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Terreno"))
+        {
+            enterreno = false;
         }
     }
 }
