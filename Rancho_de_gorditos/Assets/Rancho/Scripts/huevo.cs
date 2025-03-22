@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class huevo : MonoBehaviour
     GameObject Huevo;
     MeshRenderer HuevoMesh;
     SphereCollider HuevoColl;
-    Gallina galli;
+    public Gallina galli;
     void Start()
     {
         Huevo = this.gameObject;
@@ -15,18 +16,34 @@ public class huevo : MonoBehaviour
         HuevoColl = GetComponent<SphereCollider>();
         HuevoColl.enabled = true;
         galli = GameObject.Find("Gallina").GetComponent<Gallina>();
-
+        
+        if( galli != null )
+        {
+            galli.CH += ActualizarVisualizacion;
+        }
         
     }
 
-   
+    void ActualizarVisualizacion(int eggCount)
+    {
+        bool tieneHuevos = eggCount > 0;
+        HuevoMesh.enabled = tieneHuevos;
+    }
+
+    private void OnDestroy()
+    {
+        if( Huevo != null )
+        {
+            galli.CH -= ActualizarVisualizacion;
+        }
+    }
+
     void Update()
     {
         
         bool tieneHuevos = galli.huevo > 0;
         HuevoMesh.enabled = tieneHuevos;
-        //HuevoColl.enabled = tieneHuevos;
-
+     
 
     }
 }

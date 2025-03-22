@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class Gallina : MonoBehaviour
 {
-    GameObject gallina;
+    GameObject gallina, lugarHuevo;
     private Rigidbody rb;
     private Vector3 velocidadVec;
     private float velocidad;
     private bool SeMueve = true, random = true;
     public bool enterreno = false;
+    [HideInInspector] public bool b=false;
     private int X, Z, X1, tiempoHuevo = 3;
     public int huevo = 0;
+    public GameObject prefabHuevo;
 
     [HideInInspector]  public bool scriptActivo = true;
     private Coroutine movimientoCoroutine;
     private Coroutine huevoCoroutine;
 
+
+    public delegate void ContadorHuevo(int conthuevo);
+    public event ContadorHuevo CH;
 
     guardar_Inventario g;
 
@@ -29,6 +34,7 @@ public class Gallina : MonoBehaviour
         huevoCoroutine = StartCoroutine("generarHuevo");
         movimientoCoroutine = StartCoroutine("movimiento");
         //StartCoroutine("generarHuevo");
+        lugarHuevo = GameObject.Find("LugarHuevo");
     }
 
     private void OnDisable()
@@ -97,20 +103,26 @@ public class Gallina : MonoBehaviour
                 if (scriptActivo && enterreno)
                 {
                     huevo += 1;
+                if (b == false)
+                {
+                    GameObject nuevoHuevo = Instantiate(prefabHuevo, lugarHuevo.transform.position, Quaternion.identity);
+                    huevo huevoScript = nuevoHuevo.GetComponent<huevo>();
+                    huevoScript.galli = this;
+                    b = true;
+                }
+                
+
+
+                CH?.Invoke(huevo);
                 //Debug.Log("El huevo que hay creado es " + huevo);
             }
-
-
-
-
         }
-        
-
     }
 
     public void ResetHuevos()
     {
         huevo = 0;
+        CH?.Invoke(huevo);
     }
     
     void FixedUpdate()

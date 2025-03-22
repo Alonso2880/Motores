@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Añadir_Mejorar_Parcela : MonoBehaviour
 {
-    public GameObject parcela;
+    public GameObject parcela, terreno;
     private GameObject MenuParcela;
     public Transform punto;
     [HideInInspector] public GameObject parcelaPrefab;
