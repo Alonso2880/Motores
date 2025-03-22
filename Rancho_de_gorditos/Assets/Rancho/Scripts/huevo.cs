@@ -16,12 +16,12 @@ public class huevo : MonoBehaviour
         HuevoColl = GetComponent<SphereCollider>();
         HuevoColl.enabled = true;
         galli = GameObject.Find("Gallina").GetComponent<Gallina>();
-        
-        if( galli != null )
+
+        if (galli != null)
         {
             galli.CH += ActualizarVisualizacion;
         }
-        
+
     }
 
     void ActualizarVisualizacion(int eggCount)
@@ -32,7 +32,7 @@ public class huevo : MonoBehaviour
 
     private void OnDestroy()
     {
-        if( Huevo != null )
+        if (Huevo != null)
         {
             galli.CH -= ActualizarVisualizacion;
         }
@@ -40,10 +40,10 @@ public class huevo : MonoBehaviour
 
     void Update()
     {
-        
+
         bool tieneHuevos = galli.huevo > 0;
         HuevoMesh.enabled = tieneHuevos;
-     
+
 
     }
 }

@@ -38,7 +38,7 @@ public class guardar_Inventario : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             RecogerGallina();
         }
@@ -49,17 +49,17 @@ public class guardar_Inventario : MonoBehaviour
         {
             ItemCount itemData = colisionado.GetComponent<ItemCount>();
 
-            if(itemData != null )
+            if (itemData != null)
             {
                 //Esto controla en bucle. Si ambas condiciones son verdaderas el return termina la ejecución del bloque donde está (el forech sigue funcionando).
                 //Como tenemos el collider activo, esto evita que el jugador pueda guardar huevos cuando no los hay.
-                if(itemData.nombre == "Huevo(Clone)" && gallina.huevo <= 0)
+                if (itemData.nombre == "Huevo(Clone)" && gallina.huevo <= 0)
                 {
                     return;
                 }
-                
+
                 AgregarItem(itemData.nombre, itemData.prefab);
-                if(colisionado.name == "Huevo(Clone)")
+                if (colisionado.name == "Huevo(Clone)")
                 {
                     colisionado = null;
 
@@ -69,43 +69,43 @@ public class guardar_Inventario : MonoBehaviour
                     Destroy(colisionado);
                     colisionado = null;
                 }
-                
+
             }
         }
 
 
-       /*foreach(InventoryItemData item in inventario)
-        {
-            Debug.Log(item.nombre + " x" + item.count);
-        }*/
+        /*foreach(InventoryItemData item in inventario)
+         {
+             Debug.Log(item.nombre + " x" + item.count);
+         }*/
     }
 
     //Agregar item al inventario
     private void AgregarItem(string nombre, GameObject prefab)
     {
         InventoryItemData itemExiste = inventario.Find(item => item.nombre == nombre);
-        
+
 
         if (itemExiste != null)
         {
-            
+
             //Si es un huevo
             if (itemExiste.nombre == "Huevo")
             {
                 itemExiste.count += gallina.huevo;
                 gallina.ResetHuevos();
-                
+
             }
             else
             {
                 itemExiste.count++;
             }
-            
+
         }
         else
         {
-           //Si es un huevo
-            if(nombre == "Huevo")
+            //Si es un huevo
+            if (nombre == "Huevo")
             {
                 InventoryItemData nuevoItem = new InventoryItemData();
                 nuevoItem.nombre = nombre;
@@ -113,7 +113,7 @@ public class guardar_Inventario : MonoBehaviour
                 nuevoItem.prefab = prefab;
                 inventario.Add(nuevoItem);
                 gallina.ResetHuevos();
-                
+
             }
             else
             {
@@ -125,11 +125,11 @@ public class guardar_Inventario : MonoBehaviour
             }
         }
     }
-    
-    
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("objeto"))
+        if (collision.gameObject.CompareTag("objeto"))
         {
             colisionado = collision.gameObject;
         }
@@ -156,9 +156,9 @@ public class guardar_Inventario : MonoBehaviour
         gallinaActual.transform.SetParent(null);
         Rigidbody rb = gallinaActual.GetComponent<Rigidbody>();
         rb.isKinematic = false;
-        
+
         Gallina scriptGallina = gallinaActual.GetComponent<Gallina>();
-        if(scriptGallina != null)
+        if (scriptGallina != null)
         {
             scriptGallina.enabled = true;
             scriptGallina.scriptActivo = true;
@@ -172,9 +172,9 @@ public class guardar_Inventario : MonoBehaviour
     private void RecogerGallina()
     {
         Collider[] collides = Physics.OverlapSphere(transform.position, 2f);
-        foreach(Collider col in collides)
+        foreach (Collider col in collides)
         {
-            if(col.CompareTag("Gallina") && !tieneGallina)
+            if (col.CompareTag("Gallina") && !tieneGallina)
             {
                 gallinaActual = col.gameObject;
 
