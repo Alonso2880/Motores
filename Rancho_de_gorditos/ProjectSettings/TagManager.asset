@@ -9,6 +9,7 @@ TagManager:
   - Tienda
   - Gallina
   - Terreno
+  - Recogida_Huevos
   layers:
   - Default
   - TransparentFX

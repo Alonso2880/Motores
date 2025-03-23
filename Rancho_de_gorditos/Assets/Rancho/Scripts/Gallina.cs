@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gallina : MonoBehaviour
 {
-    GameObject gallina, lugarHuevo;
+    GameObject gallina, lugarHuevo, huevoG;
     private Rigidbody rb;
     private Vector3 velocidadVec;
     private float velocidad;
@@ -12,7 +12,7 @@ public class Gallina : MonoBehaviour
     public bool enterreno = false;
     [HideInInspector] public bool b = false;
     private int X, Z, X1, tiempoHuevo = 3;
-    public int huevo = 0;
+    public int huevoTota = 0;
     public GameObject prefabHuevo;
 
     [HideInInspector] public bool scriptActivo = true;
@@ -21,7 +21,7 @@ public class Gallina : MonoBehaviour
 
 
     public delegate void ContadorHuevo(int conthuevo);
-    public event ContadorHuevo CH;
+    //public event ContadorHuevo CH;
 
     guardar_Inventario g;
 
@@ -35,6 +35,9 @@ public class Gallina : MonoBehaviour
         movimientoCoroutine = StartCoroutine("movimiento");
         //StartCoroutine("generarHuevo");
         lugarHuevo = GameObject.Find("LugarHuevo");
+
+        huevoG = GameObject.Find("Huevo");
+       
     }
 
     private void OnDisable()
@@ -92,6 +95,8 @@ public class Gallina : MonoBehaviour
 
     IEnumerator generarHuevo()
     {
+        
+        
         while (scriptActivo)
         {
             if (!enterreno)
@@ -100,7 +105,11 @@ public class Gallina : MonoBehaviour
                 continue;
             }
             yield return new WaitForSeconds(tiempoHuevo);
-            if (scriptActivo && enterreno)
+            huevoTota += 1;
+            huevo h = huevoG.GetComponent<huevo>();
+            h.HuevoTotal += huevoTota;
+            ResetHuevos();
+            /*if (scriptActivo && enterreno)
             {
                 huevo += 1;
                 if (b == false)
@@ -115,14 +124,14 @@ public class Gallina : MonoBehaviour
 
                 CH?.Invoke(huevo);
                 //Debug.Log("El huevo que hay creado es " + huevo);
-            }
+            }*/
         }
     }
 
     public void ResetHuevos()
     {
-        huevo = 0;
-        CH?.Invoke(huevo);
+        huevoTota = 0;
+       // CH?.Invoke(huevo);
     }
 
     void FixedUpdate()

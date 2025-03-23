@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class guardar_Inventario : MonoBehaviour
 {
-    GameObject player, objeto, colisionado;
+    GameObject player, objeto, colisionado, huevoG;
     [HideInInspector] public List<InventoryItemData> inventario = new List<InventoryItemData>();
     Gallina gallina;
 
@@ -15,6 +15,7 @@ public class guardar_Inventario : MonoBehaviour
 
     [HideInInspector] public GameObject gallinaActual;
     [HideInInspector] public bool tieneGallina = false;
+    [HideInInspector] public bool recogidaH = false;
 
 
     void Start()
@@ -23,6 +24,7 @@ public class guardar_Inventario : MonoBehaviour
         player = this.gameObject;
         objeto = GameObject.FindGameObjectWithTag("objeto");
         gallina = GameObject.Find("Gallina").GetComponent<Gallina>();
+        huevoG = GameObject.Find("Huevo");
 
     }
 
@@ -43,34 +45,47 @@ public class guardar_Inventario : MonoBehaviour
             RecogerGallina();
         }
 
+        
 
         //Agregar item al inventario
         if (colisionado != null && Input.GetKeyDown(KeyCode.E))
         {
-            ItemCount itemData = colisionado.GetComponent<ItemCount>();
-
-            if (itemData != null)
+            
+            if(colisionado.name == "Recogida de huevos")
             {
-                //Esto controla en bucle. Si ambas condiciones son verdaderas el return termina la ejecución del bloque donde está (el forech sigue funcionando).
-                //Como tenemos el collider activo, esto evita que el jugador pueda guardar huevos cuando no los hay.
-                if (itemData.nombre == "Huevo(Clone)" && gallina.huevo <= 0)
-                {
-                    return;
-                }
-
-                AgregarItem(itemData.nombre, itemData.prefab);
-                if (colisionado.name == "Huevo(Clone)")
-                {
-                    colisionado = null;
-
-                }
-                else
-                {
-                    Destroy(colisionado);
-                    colisionado = null;
-                }
-
+                AgregarHuevo();
+                Debug.Log("Hola");
             }
+            else
+            {
+                ItemCount itemData = colisionado.GetComponent<ItemCount>();
+                if (itemData != null)
+                {
+                    //Esto controla en bucle. Si ambas condiciones son verdaderas el return termina la ejecución del bloque donde está (el forech sigue funcionando).
+                    //Como tenemos el collider activo, esto evita que el jugador pueda guardar huevos cuando no los hay.
+                   /* if (itemData.nombre == "Huevo(Clone)" && gallina.huevo <= 0)
+                    {
+                        return;
+                    }*/
+
+                    AgregarItem(itemData.nombre, itemData.prefab);
+                    Destroy(colisionado);
+                    /*if (colisionado.name == "Huevo(Clone)")
+                    {
+                        colisionado = null;
+
+                    }
+                    else
+                    {
+                        Destroy(colisionado);
+                        colisionado = null;
+                    }*/
+
+                }
+            }
+            
+
+            
         }
 
 
@@ -84,54 +99,85 @@ public class guardar_Inventario : MonoBehaviour
     private void AgregarItem(string nombre, GameObject prefab)
     {
         InventoryItemData itemExiste = inventario.Find(item => item.nombre == nombre);
-
+        huevo h = huevoG.GetComponent<huevo>();
 
         if (itemExiste != null)
         {
+            itemExiste.count++;
 
-            //Si es un huevo
-            if (itemExiste.nombre == "Huevo")
+            /*if(recogidaH == true)
             {
-                itemExiste.count += gallina.huevo;
-                gallina.ResetHuevos();
-
+                itemExiste.count += h.HuevoTotal;
+                h.Reset();
             }
             else
             {
                 itemExiste.count++;
-            }
+            }*/
+
 
         }
         else
         {
-            //Si es un huevo
-            if (nombre == "Huevo")
-            {
-                InventoryItemData nuevoItem = new InventoryItemData();
-                nuevoItem.nombre = nombre;
-                nuevoItem.count = gallina.huevo;
-                nuevoItem.prefab = prefab;
-                inventario.Add(nuevoItem);
-                gallina.ResetHuevos();
 
-            }
-            else
-            {
-                InventoryItemData nuevoItem = new InventoryItemData();
-                nuevoItem.nombre = nombre;
-                nuevoItem.count = 1;
-                nuevoItem.prefab = prefab;
-                inventario.Add(nuevoItem);
-            }
+            InventoryItemData nuevoItem = new InventoryItemData();
+            nuevoItem.nombre = nombre;
+            nuevoItem.count = 1;
+            nuevoItem.prefab = prefab;
+            inventario.Add(nuevoItem);
+
+            /* if(recogidaH ==false)
+             {
+                 InventoryItemData nuevoItem = new InventoryItemData();
+                 nuevoItem.nombre = "Huevo";
+                 nuevoItem.count = h.HuevoTotal;
+                 inventario.Add(nuevoItem);
+                 h.Reset();
+                 recogidaH = true;
+             }
+             else
+             {
+                 InventoryItemData nuevoItem = new InventoryItemData();
+                 nuevoItem.nombre = nombre;
+                 nuevoItem.count = 1;
+                 nuevoItem.prefab = prefab;
+                 inventario.Add(nuevoItem);
+             }*/
         }
     }
 
+    private void AgregarHuevo()
+    {
+        InventoryItemData itemExiste = inventario.Find(item => item.nombre == "Huevo");
+        huevo h = huevoG.GetComponent<huevo>();
+        if(itemExiste != null)
+        {
+            
+            itemExiste.count += h.HuevoTotal;
+            h.Reset();
+        }
+        else
+        {
+            InventoryItemData nuevoItem = new InventoryItemData();
+            nuevoItem.nombre = "Huevo";
+            nuevoItem.count = h.HuevoTotal;
+            inventario.Add(nuevoItem);
+            h.Reset();
+        }
+        
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("objeto"))
         {
             colisionado = collision.gameObject;
+        }
+        if (collision.gameObject.CompareTag("Recogida_Huevos"))
+        {
+            colisionado = collision.gameObject;
+            recogidaH = true;
+            
         }
     }
 
