@@ -161,7 +161,6 @@ public class Gallina : MonoBehaviour
         if (collision.gameObject.CompareTag("Terreno"))
         {
             enterreno = true;
-            Debug.Log(enterreno);
         }
     }
 
