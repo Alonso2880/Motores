@@ -10,6 +10,7 @@ TagManager:
   - Gallina
   - Terreno
   - Recogida_Huevos
+  - Suelo
   layers:
   - Default
   - TransparentFX
