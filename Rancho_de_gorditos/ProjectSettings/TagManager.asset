@@ -11,6 +11,7 @@ TagManager:
   - Terreno
   - Recogida_Huevos
   - Suelo
+  - playerCamera
   layers:
   - Default
   - TransparentFX
