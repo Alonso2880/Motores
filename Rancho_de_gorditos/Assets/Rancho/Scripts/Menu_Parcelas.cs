@@ -14,6 +14,7 @@ public class Menu_Parcelas : MonoBehaviour
     public Button Ampliar;
     public Button Salir;
     [HideInInspector] public bool comprado=false;
+    [HideInInspector] public GameObject contmonedas;
     void Start()
     {
         Comprar_Gallinas.onClick.AddListener(() => ComprarP(1));
@@ -31,8 +32,9 @@ public class Menu_Parcelas : MonoBehaviour
         baseParcelas = GameObject.Find("Base de parcelas");
         terreno = GameObject.Find("Terreno");
         gallina = GameObject.Find("Gallina");
+        contmonedas = GameObject.Find("Canvas");
 
-        
+
 
 
 
@@ -84,19 +86,39 @@ public class Menu_Parcelas : MonoBehaviour
     {
         Añadir_Mejorar_Parcela a = baseParcelas.GetComponent<Añadir_Mejorar_Parcela>();
         Gallina g = gallina.GetComponent<Gallina>();
+        Contador_Moneas cont = contmonedas.GetComponent<Contador_Moneas>();
         if (comprado)
         {
             switch (n)
             {
                 case 1:
-                    if(terreno.tag == "T_Gallinas")
+                    if(cont.monedas < 4)
                     {
-                        Gallina.multHuevo = 2;
+                        Debug.Log("Te faltan monedas");
                     }
+                    else
+                    {
+                        if (terreno.tag == "T_Gallinas")
+                        {
+                            Gallina.multHuevo = 2;
+                        }
+                        
+                        cont.monedas -= 4;
+                    }
+                    
                     CerrarMenu();
                     break;
                 case 2:
-                    a.AmpliarParcela();
+                    if(cont.monedas < 7)
+                    {
+                        Debug.Log("Te faltan monedas");
+                    }
+                    else
+                    {
+                        a.AmpliarParcela();
+                        cont.monedas -= 7;
+                    }
+                    
                     CerrarMenu();
                     break;
                 case 3:

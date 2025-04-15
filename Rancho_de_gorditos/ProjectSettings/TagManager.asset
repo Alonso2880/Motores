@@ -8,7 +8,6 @@ TagManager:
   - Valla
   - Tienda
   - Gallina
-  - Terreno
   - Recogida_Huevos
   - Suelo
   - playerCamera
@@ -16,6 +15,7 @@ TagManager:
   - T_Vacas
   - T_Cerdos
   - T_Ovejas
+  - huerto
   layers:
   - Default
   - TransparentFX

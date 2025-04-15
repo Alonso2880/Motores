@@ -70,16 +70,7 @@ public class guardar_Inventario : MonoBehaviour
 
                     AgregarItem(itemData.nombre, itemData.prefab);
                     Destroy(colisionado);
-                    /*if (colisionado.name == "Huevo(Clone)")
-                    {
-                        colisionado = null;
-
-                    }
-                    else
-                    {
-                        Destroy(colisionado);
-                        colisionado = null;
-                    }*/
+                    
 
                 }
             }
@@ -99,23 +90,13 @@ public class guardar_Inventario : MonoBehaviour
     private void AgregarItem(string nombre, GameObject prefab)
     {
         InventoryItemData itemExiste = inventario.Find(item => item.nombre == nombre);
+        InventoryUI inventoryUI = Object.FindAnyObjectByType<InventoryUI>();
         huevo h = huevoG.GetComponent<huevo>();
 
         if (itemExiste != null)
         {
             itemExiste.count++;
-
-            /*if(recogidaH == true)
-            {
-                itemExiste.count += h.HuevoTotal;
-                h.Reset();
-            }
-            else
-            {
-                itemExiste.count++;
-            }*/
-
-
+            inventoryUI.UpdateUI();
         }
         else
         {
@@ -125,25 +106,12 @@ public class guardar_Inventario : MonoBehaviour
             nuevoItem.count = 1;
             nuevoItem.prefab = prefab;
             inventario.Add(nuevoItem);
-
-            /* if(recogidaH ==false)
-             {
-                 InventoryItemData nuevoItem = new InventoryItemData();
-                 nuevoItem.nombre = "Huevo";
-                 nuevoItem.count = h.HuevoTotal;
-                 inventario.Add(nuevoItem);
-                 h.Reset();
-                 recogidaH = true;
-             }
-             else
-             {
-                 InventoryItemData nuevoItem = new InventoryItemData();
-                 nuevoItem.nombre = nombre;
-                 nuevoItem.count = 1;
-                 nuevoItem.prefab = prefab;
-                 inventario.Add(nuevoItem);
-             }*/
         }
+       /* InventoryUI inventoryUI = Object.FindAnyObjectByType<InventoryUI>();
+        if (inventoryUI != null && inventoryUI.inventoryPanel.activeSelf)
+        {
+            inventoryUI.UpdateUI();
+        }*/
     }
 
     private void AgregarHuevo()
