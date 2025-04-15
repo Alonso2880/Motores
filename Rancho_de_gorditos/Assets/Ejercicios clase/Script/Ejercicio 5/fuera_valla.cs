@@ -14,7 +14,7 @@ public class fuera_valla : MonoBehaviour
 
     void Update()
     {
-        // Forzamos que el cursor se mantenga visible y desbloqueado en cada frame.
+        
         if (!Cursor.visible || Cursor.lockState != CursorLockMode.None)
         {
             Cursor.visible = true;
@@ -23,7 +23,6 @@ public class fuera_valla : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        
         Desaparecer_Valla();
     }
 

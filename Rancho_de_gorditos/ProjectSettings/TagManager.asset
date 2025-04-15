@@ -12,10 +12,10 @@ TagManager:
   - Recogida_Huevos
   - Suelo
   - playerCamera
-  - cereza
-  - "sand\xEDa"
-  - manzana
-  - "lim\xF3n"
+  - T_Gallinas
+  - T_Vacas
+  - T_Cerdos
+  - T_Ovejas
   layers:
   - Default
   - TransparentFX

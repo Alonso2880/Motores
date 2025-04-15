@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Añadir_Mejorar_Parcela : MonoBehaviour
 {
-    public GameObject parcela, terreno;
+    public GameObject parcela, terreno, parcelaGrande;
     private GameObject MenuParcela;
     public Transform punto;
     [HideInInspector] public GameObject parcelaPrefab;
@@ -19,6 +19,14 @@ public class Añadir_Mejorar_Parcela : MonoBehaviour
         hayParcela = true;
     }
 
+    public void AmpliarParcela()
+    {
+        Destroy(parcelaPrefab);
+        terreno.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+        parcelaPrefab = Instantiate(parcelaGrande, punto.position, punto.rotation);
+        parcelaPrefab.transform.SetParent(punto);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         Menu_Parcelas m = MenuParcela.GetComponent<Menu_Parcelas>();
@@ -28,8 +36,4 @@ public class Añadir_Mejorar_Parcela : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
 }

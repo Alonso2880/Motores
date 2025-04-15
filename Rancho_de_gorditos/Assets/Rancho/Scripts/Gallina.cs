@@ -21,6 +21,7 @@ public class Gallina : MonoBehaviour
 
 
     public delegate void ContadorHuevo(int conthuevo);
+    [HideInInspector] public static int multHuevo=1;
     //public event ContadorHuevo CH;
 
     guardar_Inventario g;
@@ -105,7 +106,7 @@ public class Gallina : MonoBehaviour
                 continue;
             }
             yield return new WaitForSeconds(tiempoHuevo);
-            huevoTota += 1;
+            huevoTota += multHuevo;
             huevo h = huevoG.GetComponent<huevo>();
             h.HuevoTotal += huevoTota;
             ResetHuevos();
@@ -158,7 +159,7 @@ public class Gallina : MonoBehaviour
             Z = Random.Range(-1, 2);
         }
 
-        if (collision.gameObject.CompareTag("Terreno"))
+        if (collision.gameObject.CompareTag("T_Gallinas"))
         {
             enterreno = true;
         }
@@ -166,7 +167,7 @@ public class Gallina : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Terreno"))
+        if (collision.gameObject.CompareTag("T_Gallinas"))
         {
             enterreno = false;
         }
