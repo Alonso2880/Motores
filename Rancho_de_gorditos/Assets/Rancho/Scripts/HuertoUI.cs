@@ -38,6 +38,13 @@ public class HuertoUI : MonoBehaviour
                 hu.Semilla();
                 ads();
                 break;
+            case 2:
+                if(hu.crec >= 3)
+                {
+                    Destroy(hu.semilla1Prefab);
+
+                }
+                break;
         }
     }
     
