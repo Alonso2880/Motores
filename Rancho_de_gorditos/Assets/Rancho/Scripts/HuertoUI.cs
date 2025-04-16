@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class HuertoUI : MonoBehaviour
     private Canvas c;
     public GameObject huertoUI;
     private GameObject Huerto;
+
+    [HideInInspector] public List<InventoryItemData> inventario = new List<InventoryItemData>();
     void Start()
     {
         c = huertoUI.GetComponent<Canvas>();
@@ -31,6 +34,7 @@ public class HuertoUI : MonoBehaviour
 
     private void opciones(int i)
     {
+        
         huerto hu = Huerto.GetComponent<huerto>();
         switch (i)
         {
@@ -42,11 +46,13 @@ public class HuertoUI : MonoBehaviour
                 if(hu.crec >= 3)
                 {
                     Destroy(hu.semilla1Prefab);
-
+                    
                 }
                 break;
         }
     }
+
+  
     
     void Update()
     {
