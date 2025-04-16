@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class HuertoUI : MonoBehaviour
 {
     public Button Salir;
-    public Button Semilla;
+    public Button Semilla, Cosechar;
     private Canvas c;
     public GameObject huertoUI;
     private GameObject Huerto;
+    private int semillas = 2, frutas =3;
 
     [HideInInspector] public List<InventoryItemData> inventario = new List<InventoryItemData>();
     void Start()
@@ -16,6 +17,7 @@ public class HuertoUI : MonoBehaviour
         c = huertoUI.GetComponent<Canvas>();
         Salir.onClick.AddListener(() => ads());
         Semilla.onClick.AddListener(() => opciones(1));
+        Cosechar.onClick.AddListener(() => opciones(2));
         c.enabled = false;
         Huerto = GameObject.Find("Huerto");
     }
@@ -46,7 +48,24 @@ public class HuertoUI : MonoBehaviour
                 if(hu.crec >= 3)
                 {
                     Destroy(hu.semilla1Prefab);
-                    
+                    guardar_Inventario inventarioScript = GameObject.FindAnyObjectByType<guardar_Inventario>();
+
+                    if(inventarioScript != null)
+                    {
+                        for(int x=0; x<semillas; x++)
+                        {
+                            inventarioScript.AgregarItem("semilla", hu.semilla1Prefab);
+                        }
+
+                        for(int y=0; y<frutas; y++)
+                        {
+                            inventarioScript.AgregarItem("Fruta", null);
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.Log("No hay nada que cosechar");
                 }
                 break;
         }

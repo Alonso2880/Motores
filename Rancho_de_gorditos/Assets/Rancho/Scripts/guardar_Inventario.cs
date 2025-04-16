@@ -87,7 +87,7 @@ public class guardar_Inventario : MonoBehaviour
     }
 
     //Agregar item al inventario
-    private void AgregarItem(string nombre, GameObject prefab)
+    public void AgregarItem(string nombre, GameObject prefab)
     {
         InventoryItemData itemExiste = inventario.Find(item => item.nombre == nombre);
         InventoryUI inventoryUI = Object.FindAnyObjectByType<InventoryUI>();
