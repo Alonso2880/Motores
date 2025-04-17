@@ -12,13 +12,15 @@ public class huerto : MonoBehaviour
     //private guardar_Inventario inventario;
     
     
+    
     void Start()
     {
-        huertoUI = GameObject.Find("PlantarSemilla");
+        huertoUI = GameObject.Find("HuertoUI");
         jugador = GameObject.FindGameObjectWithTag("Player");
         Casa = GameObject.Find("CasaBrujita");
         casa c = Casa.GetComponent<casa>();
         dia = c.dia;
+
 
     }
 
@@ -32,6 +34,7 @@ public class huerto : MonoBehaviour
     {
         guardar_Inventario i = jugador.GetComponent<guardar_Inventario>();
         InventoryItemData item = i.inventario.Find(item => item.nombre == "semilla");
+
 
         if (hueco1 == false)
         {
@@ -56,6 +59,7 @@ public class huerto : MonoBehaviour
             }
             else
             {
+                Debug.Log("Segunda semi plant");
                 semilla2Prefab = Instantiate(semilla, huecoPlantar2.position, huecoPlantar2.rotation);
                 semilla2Prefab.transform.SetParent(huecoPlantar2);
                 hueco2 = true;
@@ -68,8 +72,9 @@ public class huerto : MonoBehaviour
 
     private void crecimiento()
     {
+        
         casa c = Casa.GetComponent<casa>();
-        if (hueco1 = true && crec ==1)
+        if (hueco1 && crec ==1)
         {
             if(dia != c.dia)
             {
@@ -81,7 +86,7 @@ public class huerto : MonoBehaviour
             }
         }
 
-        if(hueco1 =true && crec == 2)
+        if(hueco1 && crec == 2)
         {
             if (dia != c.dia)
             {

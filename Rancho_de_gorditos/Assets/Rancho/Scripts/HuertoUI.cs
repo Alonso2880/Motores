@@ -5,11 +5,18 @@ using UnityEngine.UI;
 public class HuertoUI : MonoBehaviour
 {
     public Button Salir;
-    public Button Semilla, Cosechar;
+    public Button Semilla, Cosechar, comprarH, mejorar;
     private Canvas c;
-    public GameObject huertoUI;
-    private GameObject Huerto;
+    public GameObject huertoUI, prefabHuerto;
+    private GameObject Huerto, terrenoHuerto;
+    public Transform huecoHuerto;
     private int semillas = 2, frutas =3;
+    private bool n=false;
+
+    private huerto huScript;
+    private GameObject huertoG;
+
+    [HideInInspector] public GameObject contmonedas;
 
     [HideInInspector] public List<InventoryItemData> inventario = new List<InventoryItemData>();
     void Start()
@@ -18,8 +25,11 @@ public class HuertoUI : MonoBehaviour
         Salir.onClick.AddListener(() => ads());
         Semilla.onClick.AddListener(() => opciones(1));
         Cosechar.onClick.AddListener(() => opciones(2));
+        comprarH.onClick.AddListener(() => opciones(3));
+        mejorar.onClick.AddListener(()=>  opciones(4));
         c.enabled = false;
-        Huerto = GameObject.Find("Huerto");
+        
+        contmonedas = GameObject.Find("Canvas");
     }
 
     private void ads()
@@ -36,38 +46,88 @@ public class HuertoUI : MonoBehaviour
 
     private void opciones(int i)
     {
+        Contador_Moneas cont = contmonedas.GetComponent<Contador_Moneas>();
         
-        huerto hu = Huerto.GetComponent<huerto>();
         switch (i)
         {
+
+            case 3:
+                //Comprar
+                if (cont.monedas >= 3)
+                {
+                    
+                    huertoG = Instantiate(prefabHuerto, huecoHuerto.position, huecoHuerto.rotation);
+                    huertoG.transform.SetParent(huecoHuerto);
+
+                    huScript = huertoG.GetComponent<huerto>();
+
+                    n = true;
+                    cont.monedas -= 3;
+                }
+                else
+                {
+                    Debug.Log("No tienes suficientes monedas");
+                }
+                break;
+
             case 1:
-                hu.Semilla();
-                ads();
+                if (n)
+                {
+                    huScript.Semilla();
+                    ads();
+                }
+                else
+                {
+                    Debug.Log("No hay huerto");
+                }
+                
                 break;
             case 2:
-                if(hu.crec >= 3)
+                if (n)
                 {
-                    Destroy(hu.semilla1Prefab);
-                    guardar_Inventario inventarioScript = GameObject.FindAnyObjectByType<guardar_Inventario>();
-
-                    if(inventarioScript != null)
+                    if (huScript.crec >= 3)
                     {
-                        for(int x=0; x<semillas; x++)
-                        {
-                            inventarioScript.AgregarItem("semilla", hu.semilla1Prefab);
-                        }
+                        Destroy(huScript.semilla1Prefab);
+                        guardar_Inventario inventarioScript = GameObject.FindAnyObjectByType<guardar_Inventario>();
 
-                        for(int y=0; y<frutas; y++)
+                        if (inventarioScript != null)
                         {
-                            inventarioScript.AgregarItem("Fruta", null);
+                            for (int x = 0; x < semillas; x++)
+                            {
+                                inventarioScript.AgregarItem("semilla", huScript.semilla1Prefab);
+                            }
+
+                            for (int y = 0; y < frutas; y++)
+                            {
+                                inventarioScript.AgregarItem("Fruta", null);
+                            }
                         }
+                    }
+                    else
+                    {
+                        Debug.Log("No hay nada que cosechar");
                     }
                 }
                 else
                 {
-                    Debug.Log("No hay nada que cosechar");
+                    Debug.Log("No hay huerto");
+                }
+
+                break;
+
+            case 4:
+                if(cont.monedas >= 5)
+                {
+                    semillas += 1;
+                    frutas += 2;
+                    cont.monedas -= 5;
+                }
+                else
+                {
+                    Debug.Log("No tienes suficiente diner");
                 }
                 break;
+
         }
     }
 
