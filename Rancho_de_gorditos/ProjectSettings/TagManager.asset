@@ -16,6 +16,8 @@ TagManager:
   - T_Cerdos
   - T_Ovejas
   - huerto
+  - PicaPiedras
+  - Piedra
   layers:
   - Default
   - TransparentFX

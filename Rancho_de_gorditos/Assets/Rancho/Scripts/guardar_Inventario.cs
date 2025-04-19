@@ -91,7 +91,7 @@ public class guardar_Inventario : MonoBehaviour
     {
         InventoryItemData itemExiste = inventario.Find(item => item.nombre == nombre);
         InventoryUI inventoryUI = Object.FindAnyObjectByType<InventoryUI>();
-        huevo h = huevoG.GetComponent<huevo>();
+        //huevo h = huevoG.GetComponent<huevo>();
 
         if (itemExiste != null)
         {
@@ -204,6 +204,18 @@ public class guardar_Inventario : MonoBehaviour
                 tieneGallina = true;
                 break;
             }
+        }
+    }
+
+    void OnEnable() // Se ejecuta al volver a la escena
+    {
+        if (GlobalInventory.Instance != null && GlobalInventory.Instance.bosqueItems.Count > 0)
+        {
+            foreach (var item in GlobalInventory.Instance.bosqueItems)
+            {
+                AgregarItem(item.nombre, item.prefab); 
+            }
+            GlobalInventory.Instance.bosqueItems.Clear(); 
         }
     }
 }

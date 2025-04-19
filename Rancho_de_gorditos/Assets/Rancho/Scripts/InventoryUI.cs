@@ -10,6 +10,7 @@ public class InventoryUI : MonoBehaviour
     private Canvas c;
     public Button salir;
     private guardar_Inventario inventory;
+    
 
     
     void Start()

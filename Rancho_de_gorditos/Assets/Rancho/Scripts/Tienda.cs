@@ -30,32 +30,30 @@ public class Tienda : MonoBehaviour
         }
     }
 
-    public void Huevo()
+    public void Huevo(int cantidadAVender)
     {
-        guardar_Inventario jscript = jugador.GetComponent<guardar_Inventario>();
-        Contador_Moneas cont = contMonedas.GetComponent<Contador_Moneas>();
-            foreach (InventoryItemData item in jscript.inventario)
-            {
-                if (item.nombre == "Huevo")
-                {
-                    if (cont.monedas == 0)
-                    {
-                        monedasT = item.count;
-                        item.count = 0;
-                        cont.monedas = monedasT;
-                        monedasT = 0;
-                    }
-                    else
-                    {
-                        monedasT = item.count;
-                        item.count = 0;
-                        cont.monedas += monedasT;
-                        monedasT = 0;
-                    }
+        var inventario = jugador.GetComponent<guardar_Inventario>().inventario;
+        var contador = contMonedas.GetComponent<Contador_Moneas>();
 
+        foreach (InventoryItemData item in inventario)
+        {
+            if (item.nombre != "Huevo" || cantidadAVender <= 0)
+                continue;
 
-                }
-            }
-        
+            // vendemos como máximo los que hay en inventario
+            int vendibles = Mathf.Min(cantidadAVender, item.count);
+
+            // restar del inventario
+            item.count -= vendibles;
+            // sumar monedas
+            contador.monedas += vendibles;
+
+            // descontar de lo que aún queda por vender
+            cantidadAVender -= vendibles;
+
+            // si ya vendimos todo lo que pedía, salimos
+            if (cantidadAVender <= 0)
+                break;
+        }
     }
 }
