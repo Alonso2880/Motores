@@ -411,7 +411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -950237.06, y: 917636.94}
+  m_AnchoredPosition: {x: -999937.94, y: 964737.8}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &11263780
@@ -2438,7 +2438,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 898641179d5fb2a4880998fd9469ecf6, type: 2}
     - target: {fileID: 919132149155446097, guid: bd12dfceec2f7904a81449439306c7fc, type: 3}
       propertyPath: m_Name
-      value: BrujitaColoreada
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bd12dfceec2f7904a81449439306c7fc, type: 3}
       propertyPath: m_TagString
@@ -2470,7 +2470,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 898641179d5fb2a4880998fd9469ecf6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: bd12dfceec2f7904a81449439306c7fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1436913301}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bd12dfceec2f7904a81449439306c7fc, type: 3}
       insertIndex: -1
@@ -2481,6 +2484,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bd12dfceec2f7904a81449439306c7fc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 960642696}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bd12dfceec2f7904a81449439306c7fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 960642697}
   m_SourcePrefab: {fileID: 100100000, guid: bd12dfceec2f7904a81449439306c7fc, type: 3}
 --- !u!1 &450475115
 GameObject:
@@ -5309,7 +5315,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!65 &960642693
 BoxCollider:
@@ -5359,6 +5365,24 @@ MonoBehaviour:
   velCorrer: 9
   velCopia: 0
   animator: {fileID: 960642694}
+--- !u!114 &960642697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960642691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b6926ac204edc49bb82c0d2ae0464d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gallinaPrefab: {fileID: 3884967924807219124, guid: b98005f5c21161941a930332c8750e6e, type: 3}
+  "puntoSujecci\xF3n": {fileID: 1436913301}
+  fuerzaLanzamiento: 10
+  gallinaActual: {fileID: 0}
+  tieneGallina: 0
+  recogidaH: 0
 --- !u!1 &1007461408
 GameObject:
   m_ObjectHideFlags: 0
@@ -8045,6 +8069,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432393669}
   m_CullTransparentMesh: 1
+--- !u!1 &1436913300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1436913301}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1436913301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436913300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.223, y: 1.601, z: 0.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 960642695}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1474136610
 GameObject:
   m_ObjectHideFlags: 0
@@ -10971,12 +11026,12 @@ GameObject:
   - component: {fileID: 2144420186}
   - component: {fileID: 2144420185}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: Playe
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2144420180
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11060,7 +11115,7 @@ Transform:
   m_GameObject: {fileID: 2144420178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.51, y: 0.99401957, z: 0.68}
+  m_LocalPosition: {x: -51.08, y: 0.99401957, z: 0.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
