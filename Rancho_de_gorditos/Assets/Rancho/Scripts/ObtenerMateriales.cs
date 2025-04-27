@@ -14,7 +14,8 @@ public class ObtenerMateriales : MonoBehaviour
     private void picarPiedra()
     {
         LlevarObjeto l = jugador.GetComponent<LlevarObjeto>();
-        Guardar_Inventario_Bosque inventarioScript = GameObject.FindAnyObjectByType<Guardar_Inventario_Bosque>();
+        guardar_Inventario inventarioScript = this.GetComponent<guardar_Inventario>();
+        //Guardar_Inventario_Bosque inventarioScript = GameObject.FindAnyObjectByType<Guardar_Inventario_Bosque>();
         if (l.picaPiedras)
         {
 

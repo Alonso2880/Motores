@@ -11,7 +11,8 @@ public class AlRancho : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                StartCoroutine(CargarEscena("Rancho"));
+                //StartCoroutine(CargarEscena("Rancho"));
+                SceneManager.LoadScene("Rancho");
             }
 
         }

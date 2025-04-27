@@ -21,6 +21,7 @@ public class Menu_Vender : MonoBehaviour
         menu_vender = this.gameObject;
         canvasV = this.GetComponent<Canvas>();
         canvasV.enabled = false;
+        inputCantidad.enabled = false;  
     }
 
     public void OnClickVender()
@@ -57,12 +58,14 @@ public class Menu_Vender : MonoBehaviour
     public void AbrirMenu()
     {
         canvasV.enabled = true;
-        Time.timeScale = 0;
+        Time.timeScale = 0; 
+        inputCantidad.enabled = true;
     }
     private void CerrarMenu()
     {
         canvasV.enabled = false;
         Time.timeScale = 1;
+        inputCantidad.enabled = false;
     }
 
     void Update()

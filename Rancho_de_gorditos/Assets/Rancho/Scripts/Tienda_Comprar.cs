@@ -35,7 +35,8 @@ public class Tienda_Comprar : MonoBehaviour
 
     public void Gallina()
     {
-        guardar_Inventario jscript = jugador.GetComponent<guardar_Inventario>();
+        //guardar_Inventario jscript = jugador.GetComponent<guardar_Inventario>();
+        Coger_Animales jscript = jugador.GetComponent<Coger_Animales>();
         Contador_Moneas cont = contMonedas.GetComponent<Contador_Moneas>();
         if (!jscript.tieneGallina)
         {

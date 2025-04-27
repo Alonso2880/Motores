@@ -6,7 +6,7 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
     public Animator animator;
     private float cordX, cordZ;
     private Vector3 pos;
-    private const float fixedY = -2.384186e-07f;
+    private const float fixedY = 0.002f;
 
     void Start()
     {

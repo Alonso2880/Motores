@@ -1,57 +1,64 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class guardar_Inventario : MonoBehaviour
 {
+    public static guardar_Inventario Instance { get; private set; }
+
     GameObject player, objeto, colisionado, huevoG;
     [HideInInspector] public List<InventoryItemData> inventario = new List<InventoryItemData>();
-    Gallina gallina;
-
-    //Generar la gallina
-    public GameObject gallinaPrefab;
-    public Transform puntoSujección;
-    public float fuerzaLanzamiento = 10f;
-
-    [HideInInspector] public GameObject gallinaActual;
-    [HideInInspector] public bool tieneGallina = false;
     [HideInInspector] public bool recogidaH = false;
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            // Nos suscribimos al evento de escena cargada
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     void Start()
 
     {
         player = this.gameObject;
         objeto = GameObject.FindGameObjectWithTag("objeto");
-        gallina = GameObject.Find("Gallina").GetComponent<Gallina>();
         huevoG = GameObject.Find("Huevo");
+        FindSceneReferences();
 
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Cada vez que cambie de escena, re-asignamos referencias
+        FindSceneReferences();
+    }
+
+    void FindSceneReferences()
+    {
+        objeto = GameObject.FindGameObjectWithTag("objeto");
+        huevoG = GameObject.Find("Huevo");
+        colisionado = null;
     }
 
 
     void Update()
     {
-        //Coger gallina
-        if (tieneGallina)
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                LanzarGallina();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            RecogerGallina();
-        }
-
-        
 
         //Agregar item al inventario
         if (colisionado != null && Input.GetKeyDown(KeyCode.E))
         {
-            
-            if(colisionado.name == "Recogida de huevos")
+
+            if (colisionado.name == "Recogida de huevos")
             {
                 AgregarHuevo();
                 Debug.Log("Hola");
@@ -63,20 +70,20 @@ public class guardar_Inventario : MonoBehaviour
                 {
                     //Esto controla en bucle. Si ambas condiciones son verdaderas el return termina la ejecución del bloque donde está (el forech sigue funcionando).
                     //Como tenemos el collider activo, esto evita que el jugador pueda guardar huevos cuando no los hay.
-                   /* if (itemData.nombre == "Huevo(Clone)" && gallina.huevo <= 0)
-                    {
-                        return;
-                    }*/
+                    /* if (itemData.nombre == "Huevo(Clone)" && gallina.huevo <= 0)
+                     {
+                         return;
+                     }*/
 
                     AgregarItem(itemData.nombre, itemData.prefab);
                     Destroy(colisionado);
-                    
+
 
                 }
             }
-            
 
-            
+
+
         }
 
 
@@ -107,20 +114,20 @@ public class guardar_Inventario : MonoBehaviour
             nuevoItem.prefab = prefab;
             inventario.Add(nuevoItem);
         }
-       /* InventoryUI inventoryUI = Object.FindAnyObjectByType<InventoryUI>();
-        if (inventoryUI != null && inventoryUI.inventoryPanel.activeSelf)
-        {
-            inventoryUI.UpdateUI();
-        }*/
+        /* InventoryUI inventoryUI = Object.FindAnyObjectByType<InventoryUI>();
+         if (inventoryUI != null && inventoryUI.inventoryPanel.activeSelf)
+         {
+             inventoryUI.UpdateUI();
+         }*/
     }
 
     private void AgregarHuevo()
     {
         InventoryItemData itemExiste = inventario.Find(item => item.nombre == "Huevo");
         huevo h = huevoG.GetComponent<huevo>();
-        if(itemExiste != null)
+        if (itemExiste != null)
         {
-            
+
             itemExiste.count += h.HuevoTotal;
             h.Reset();
         }
@@ -132,7 +139,7 @@ public class guardar_Inventario : MonoBehaviour
             inventario.Add(nuevoItem);
             h.Reset();
         }
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -145,77 +152,7 @@ public class guardar_Inventario : MonoBehaviour
         {
             colisionado = collision.gameObject;
             recogidaH = true;
-            
-        }
-    }
 
-    //Coger gallina
-    public void ObtenerGallina()
-    {
-        gallinaActual = Instantiate(gallinaPrefab, puntoSujección.position, puntoSujección.rotation);
-        gallinaActual.transform.SetParent(puntoSujección);
-        gallinaActual.GetComponent<Rigidbody>().isKinematic = true;
-
-        Gallina scriptGallina = gallinaActual.GetComponent<Gallina>();
-        if (scriptGallina != null)
-        {
-            scriptGallina.enabled = false;
-        }
-
-        tieneGallina = true;
-    }
-
-    private void LanzarGallina()
-    {
-        gallinaActual.transform.SetParent(null);
-        Rigidbody rb = gallinaActual.GetComponent<Rigidbody>();
-        rb.isKinematic = false;
-
-        Gallina scriptGallina = gallinaActual.GetComponent<Gallina>();
-        if (scriptGallina != null)
-        {
-            scriptGallina.enabled = true;
-            scriptGallina.scriptActivo = true;
-        }
-
-        Vector3 direccionLanzamiento = transform.forward;
-        rb.AddForce(direccionLanzamiento * fuerzaLanzamiento, ForceMode.Impulse);
-        tieneGallina = false;
-    }
-
-    private void RecogerGallina()
-    {
-        Collider[] collides = Physics.OverlapSphere(transform.position, 2f);
-        foreach (Collider col in collides)
-        {
-            if (col.CompareTag("Gallina") && !tieneGallina)
-            {
-                gallinaActual = col.gameObject;
-
-                Gallina scriptGallina = gallinaActual.GetComponent<Gallina>();
-                if (scriptGallina != null)
-                {
-                    scriptGallina.enabled = false;
-                }
-
-                gallinaActual.transform.SetParent(puntoSujección);
-                gallinaActual.transform.position = puntoSujección.position;
-                gallinaActual.GetComponent<Rigidbody>().isKinematic = true;
-                tieneGallina = true;
-                break;
-            }
-        }
-    }
-
-    void OnEnable() // Se ejecuta al volver a la escena
-    {
-        if (GlobalInventory.Instance != null && GlobalInventory.Instance.bosqueItems.Count > 0)
-        {
-            foreach (var item in GlobalInventory.Instance.bosqueItems)
-            {
-                AgregarItem(item.nombre, item.prefab); 
-            }
-            GlobalInventory.Instance.bosqueItems.Clear(); 
         }
     }
 }

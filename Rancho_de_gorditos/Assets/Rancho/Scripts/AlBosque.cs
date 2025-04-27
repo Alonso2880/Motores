@@ -11,7 +11,8 @@ public class AlBosque : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                StartCoroutine(CargarEscena("Bosque"));
+                //StartCoroutine(CargarEscena("Bosque"));
+                SceneManager.LoadScene("Bosque");
             }
             
         }

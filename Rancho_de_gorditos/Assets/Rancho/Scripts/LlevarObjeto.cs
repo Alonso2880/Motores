@@ -9,6 +9,7 @@ public class LlevarObjeto : MonoBehaviour
     public Transform Objeto;
     [HideInInspector] public bool v, picaPiedras=true;
     private float fuerza = 10f;
+    public Animator animator;
 
     private void Update()
     {
@@ -44,6 +45,7 @@ public class LlevarObjeto : MonoBehaviour
                 herramienta.GetComponent<Rigidbody>().isKinematic = true;
                 v = true;
                 picaPiedras = true;
+               
                 break;
             }
         }
@@ -58,6 +60,7 @@ public class LlevarObjeto : MonoBehaviour
         Vector3 direclan = transform.forward;
         rb.AddForce(direclan * fuerza, ForceMode.Impulse);
         v = false;
+        ;
     }
 
 }

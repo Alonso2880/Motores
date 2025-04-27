@@ -9,13 +9,13 @@ public class InventoryUI : MonoBehaviour
     public GameObject itemUIPrefab;
     private Canvas c;
     public Button salir;
-    private guardar_Inventario inventory;
+    //[HideInInspector] public guardar_Inventario inventory;
     
 
     
     void Start()
     {
-        inventory = FindFirstObjectByType<guardar_Inventario>(FindObjectsInactive.Include);
+        //inventory = FindFirstObjectByType<guardar_Inventario>(FindObjectsInactive.Include); 
         c = inventoryPanel.GetComponent<Canvas>();
         c.enabled = false;
         salir.onClick.AddListener(() => ads());
@@ -32,26 +32,28 @@ public class InventoryUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Time.timeScale = 0;
-            c.enabled = true;   
-            if (inventoryPanel.activeSelf)
-            {
+            c.enabled = !c.enabled;
+            Time.timeScale = c.enabled ? 0 : 1;
+            if (c.enabled)
                 UpdateUI();
-            }
         }
     }
 
     public void UpdateUI()
     {
+        // Destruye todos los elementos viejos
         foreach (Transform child in itemsParent)
-        {
             Destroy(child.gameObject);
-        }
 
-        foreach (InventoryItemData item in inventory.inventario)
+        // Obtén siempre la misma instancia
+        var inventory = guardar_Inventario.Instance;
+        if (inventory == null) return;
+
+        // Recorre la lista
+        foreach (var item in inventory.inventario)
         {
-            GameObject itemUI = Instantiate(itemUIPrefab, itemsParent);
-            itemUI.GetComponent<TMP_Text>().text = $"{item.nombre} x{item.count}";
+            var go = Instantiate(itemUIPrefab, itemsParent);
+            go.GetComponent<TMP_Text>().text = $"{item.nombre} x{item.count}";
         }
     }
 }

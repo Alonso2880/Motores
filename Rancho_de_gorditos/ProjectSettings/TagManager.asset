@@ -18,6 +18,7 @@ TagManager:
   - huerto
   - PicaPiedras
   - Piedra
+  - PlantaSemilla1
   layers:
   - Default
   - TransparentFX
