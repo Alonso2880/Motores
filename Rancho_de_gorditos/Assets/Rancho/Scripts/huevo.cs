@@ -25,20 +25,6 @@ public class huevo : MonoBehaviour
 
     }
 
-    /*void ActualizarVisualizacion(int eggCount)
-    {
-        bool tieneHuevos = eggCount > 0;
-        HuevoMesh.enabled = tieneHuevos;
-    }
-
-    private void OnDestroy()
-    {
-        if (Huevo != null)
-        {
-            galli.CH -= ActualizarVisualizacion;
-        }
-    }*/
-
     public void Reset()
     {
         HuevoTotal = 0;

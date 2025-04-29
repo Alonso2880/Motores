@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class Menu_Parcelas : MonoBehaviour
 {
-    private GameObject baseParcelas, terreno, gallina;
+    private GameObject baseParcelas, gallina;
+    public GameObject terreno;
     private Canvas canvasP;
     public Button Comprar_Gallinas;
     public Button Comprar_Vacas;
@@ -30,7 +31,6 @@ public class Menu_Parcelas : MonoBehaviour
         canvasP.enabled = false;
 
         baseParcelas = GameObject.Find("Base de parcelas");
-        terreno = GameObject.Find("Terreno");
         gallina = GameObject.Find("Gallina");
         contmonedas = GameObject.Find("Canvas");
 
@@ -109,14 +109,14 @@ public class Menu_Parcelas : MonoBehaviour
                     CerrarMenu();
                     break;
                 case 2:
-                    if(cont.monedas < 7)
+                    if(cont.monedas < 6)
                     {
                         Debug.Log("Te faltan monedas");
                     }
                     else
                     {
                         a.AmpliarParcela();
-                        cont.monedas -= 7;
+                        cont.monedas -= 6;
                     }
                     
                     CerrarMenu();

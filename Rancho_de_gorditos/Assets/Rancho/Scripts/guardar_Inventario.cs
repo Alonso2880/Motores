@@ -58,7 +58,7 @@ public class guardar_Inventario : MonoBehaviour
         if (colisionado != null && Input.GetKeyDown(KeyCode.E))
         {
 
-            if (colisionado.name == "Recogida de huevos")
+            if (colisionado.tag == "Recogida_Huevos")
             {
                 AgregarHuevo();
                 Debug.Log("Hola");
@@ -142,7 +142,7 @@ public class guardar_Inventario : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("objeto"))
         {
