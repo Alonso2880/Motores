@@ -411,7 +411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2211668.8, y: 2153670.2}
+  m_AnchoredPosition: {x: -2269274, y: 2210275.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &11263780
@@ -916,7 +916,7 @@ Transform:
   m_GameObject: {fileID: 66787743}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.739109, y: 0.6204, z: 0}
+  m_LocalPosition: {x: -1.795, y: 0.611, z: 0}
   m_LocalScale: {x: 8.73, y: 0.24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8226,7 +8226,7 @@ MonoBehaviour:
   comprarH: {fileID: 1476062667}
   mejorar: {fileID: 688876133}
   huertoUI: {fileID: 1323019905}
-  prefabHuerto: {fileID: 3212500653670323441, guid: 5c59476927d2b964ea531b47edd44b88, type: 3}
+  prefabHuerto: {fileID: 7402286741232846820, guid: 5a2891237e89ecc479d410e6a916e913, type: 3}
   huecoHuerto: {fileID: 1973770665}
   contmonedas: {fileID: 0}
 --- !u!114 &1323019907
@@ -8980,7 +8980,7 @@ Transform:
   m_GameObject: {fileID: 1386283608}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.4803276, y: 0.6204, z: 0}
+  m_LocalPosition: {x: -4.11, y: 0.6204, z: 0}
   m_LocalScale: {x: 8.73, y: 0.24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79229,13 +79229,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973770664}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.1, y: 0.5, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -1.8, y: 0.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 672519063}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1001 &1986599319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79306,7 +79306,7 @@ PrefabInstance:
       objectReference: {fileID: 1065318455}
     - target: {fileID: 919132149155446097, guid: af3e627ee1826014380eebc2d89d3b50, type: 3}
       propertyPath: m_Name
-      value: TerrenoParcela (13)
+      value: Terreno
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -80391,8 +80391,8 @@ GameObject:
   - component: {fileID: 2144420186}
   - component: {fileID: 2144420185}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: jugadorAntiguo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
