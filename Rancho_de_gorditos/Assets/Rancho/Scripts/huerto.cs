@@ -28,6 +28,7 @@ public class huerto : MonoBehaviour
     void Update()
     {
         crecimiento();
+        
     }
 
     public void Semilla()
@@ -48,6 +49,7 @@ public class huerto : MonoBehaviour
                 semilla1Prefab.transform.SetParent(huecoPlantar);
                 hueco1 = true;
                 item.count--;
+                Debug.Log("Hola");
             }
             
         }else 
@@ -64,6 +66,7 @@ public class huerto : MonoBehaviour
                 semilla2Prefab.transform.SetParent(huecoPlantar2);
                 hueco2 = true;
                 item.count--;
+                Debug.Log("Adios");
             }
             
         }

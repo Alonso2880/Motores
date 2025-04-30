@@ -30,6 +30,7 @@ public class HuertoUI : MonoBehaviour
         c.enabled = false;
         
         contmonedas = GameObject.Find("Canvas");
+        Huerto = GameObject.Find("CompraHuerto");
     }
 
     private void ads()
@@ -47,6 +48,7 @@ public class HuertoUI : MonoBehaviour
     private void opciones(int i)
     {
         Contador_Moneas cont = contmonedas.GetComponent<Contador_Moneas>();
+        huerto huScript = Huerto.GetComponent<huerto>();
         
         switch (i)
         {
@@ -59,7 +61,6 @@ public class HuertoUI : MonoBehaviour
                     huertoG = Instantiate(prefabHuerto, huecoHuerto.position, huecoHuerto.rotation);
                     huertoG.transform.SetParent(huecoHuerto);
 
-                    huScript = huertoG.GetComponent<huerto>();
 
                     n = true;
                     cont.monedas -= 3;

@@ -411,7 +411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2269274, y: 2210275.5}
+  m_AnchoredPosition: {x: -2284589, y: 2224590.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &11263780
@@ -3875,7 +3875,7 @@ GameObject:
   - component: {fileID: 672519060}
   - component: {fileID: 672519059}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: CompraHuerto
   m_TagString: huerto
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3898,8 +3898,8 @@ MonoBehaviour:
   planta2: {fileID: 6878211556044347303, guid: b06e052d184d76b41adab191d8b7a6ef, type: 3}
   semilla1Prefab: {fileID: 0}
   semilla2Prefab: {fileID: 0}
-  huecoPlantar: {fileID: 1386283609}
-  huecoPlantar2: {fileID: 66787744}
+  huecoPlantar: {fileID: 66787744}
+  huecoPlantar2: {fileID: 1386283609}
   crec: 1
   dia: 0
 --- !u!65 &672519060
