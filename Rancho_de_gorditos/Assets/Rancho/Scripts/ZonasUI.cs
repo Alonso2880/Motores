@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 public class ZonasUI : MonoBehaviour
 {
@@ -9,7 +10,10 @@ public class ZonasUI : MonoBehaviour
     public TextMeshProUGUI Rancho;
     public TextMeshProUGUI Bosque;
    [HideInInspector] public bool rancho = false, bosque = false;
-    private float tiempo = 5f;
+    private float tiempo = 3f;
+    private bool mostrado = false;
+
+    
     
     void Start()
     {
@@ -18,40 +22,49 @@ public class ZonasUI : MonoBehaviour
         Bosque.enabled = false;
     }
 
-  
-    void Update()
-    {
-        if (rancho)
-        {
-            StartCoroutine(RanchoI(tiempo));
-            
-        }
 
-        if(bosque)
-        {
-            StartCoroutine(BosqueI(tiempo));
-        }
-        
-    }
+     void Update()
+     {
+         if (rancho && !mostrado)
+         {
+             mostrado = true;
+             StartCoroutine(RanchoI(tiempo));
+         }
 
-    private IEnumerator RanchoI(float tiempo)
-    {
+         if(bosque && !mostrado)
+         {
+             mostrado = true;
+             StartCoroutine(BosqueI(tiempo));
+             if (rancho)
+             {
+                 StopCoroutine (BosqueI(tiempo));
+                 Bosque.enabled = false;
+                 bosque = false;
+             }
+         }
 
-        c.enabled=true;
-        Rancho.enabled=true;
-        yield return new WaitForSeconds(tiempo);
-        c.enabled=false;
-        Rancho.enabled = false;
-        rancho = false;
-    }
+     }
 
-    private IEnumerator BosqueI(float tiempo)
-    {
-        c.enabled = true;
-        Bosque.enabled=true;
-        yield return new WaitForSeconds(tiempo);
-        c.enabled = false;
-        Bosque.enabled=false;
-        bosque = false;
-    }
+     private IEnumerator RanchoI(float tiempo)
+     {
+
+         c.enabled=true;
+         Rancho.enabled=true;
+         yield return new WaitForSeconds(tiempo);
+         c.enabled=false;
+         Rancho.enabled = false;
+         rancho = false;
+         mostrado = false;
+     }
+
+     private IEnumerator BosqueI(float tiempo)
+     {
+         c.enabled = true;
+         Bosque.enabled=true;
+         yield return new WaitForSeconds(tiempo);
+         c.enabled = false;
+         Bosque.enabled=false;
+         bosque = false;
+         mostrado = false;
+     }
 }

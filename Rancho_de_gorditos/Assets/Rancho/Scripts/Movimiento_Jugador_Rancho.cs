@@ -7,7 +7,7 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
     private float cordX, cordZ;
     private Vector3 pos;
     private const float fixedY = 0.002f;
-    private GameObject Zona;
+    private GameObject Zona, menuPausa;
 
     void Start()
     {
@@ -17,6 +17,7 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
         startPos.y = fixedY;
         transform.position = startPos;
         Zona = GameObject.Find("ZonasUI");
+        menuPausa = GameObject.Find("MenuPausa");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -35,6 +36,13 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
 
     void Update()
     {
+        MenuPausaUI m = menuPausa.GetComponent<MenuPausaUI>();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            m.c.enabled = true;
+            Time.timeScale = 0;
+        }
+
         cordX = Input.GetAxis("Horizontal");
         cordZ = Input.GetAxis("Vertical");
         pos = new Vector3(cordX, 0, cordZ).normalized;
