@@ -9,7 +9,6 @@ TagManager:
   - Tienda
   - Gallina
   - Recogida_Huevos
-  - Suelo
   - playerCamera
   - T_Gallinas
   - T_Vacas
@@ -19,6 +18,9 @@ TagManager:
   - PicaPiedras
   - Piedra
   - PlantaSemilla1
+  - Actors
+  - Rancho
+  - Bosque
   layers:
   - Default
   - TransparentFX

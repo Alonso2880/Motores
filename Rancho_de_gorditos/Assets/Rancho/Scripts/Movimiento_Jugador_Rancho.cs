@@ -7,6 +7,7 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
     private float cordX, cordZ;
     private Vector3 pos;
     private const float fixedY = 0.002f;
+    private GameObject Zona;
 
     void Start()
     {
@@ -15,6 +16,21 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
         Vector3 startPos = transform.position;
         startPos.y = fixedY;
         transform.position = startPos;
+        Zona = GameObject.Find("ZonasUI");
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        ZonasUI z = Zona.GetComponent<ZonasUI>();
+        if (collision.gameObject.CompareTag("Rancho"))
+        {
+            z.rancho = true;
+        }
+
+        if (collision.gameObject.CompareTag("Bosque"))
+        {
+            z.bosque = true;
+        }
     }
 
     void Update()
