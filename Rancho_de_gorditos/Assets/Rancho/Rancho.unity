@@ -411,7 +411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 85151.55, y: -28324.215}
+  m_AnchoredPosition: {x: 119353.87, y: -40060.594}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &11263780
@@ -882,11 +882,80 @@ MonoBehaviour:
   inventoryPanel: {fileID: 54304705}
   itemUIPrefab: {fileID: 2083663245322029469, guid: f959087e62adf0149be10f59ededb1d2, type: 3}
   salir: {fileID: 349338715}
-  Icono1: {fileID: 1043258057}
-  Icono1Button: {fileID: 1043258056}
+  Iconos:
+  - {fileID: 1043258057}
+  - {fileID: 806936320}
+  - {fileID: 68477548}
+  - {fileID: 1721371915}
+  - {fileID: 1273543189}
+  - {fileID: 1411126421}
+  - {fileID: 1842472896}
+  - {fileID: 869519753}
+  - {fileID: 378613583}
+  - {fileID: 509927954}
+  - {fileID: 855479360}
+  - {fileID: 2113606550}
+  IconoButtons:
+  - {fileID: 1043258056}
+  - {fileID: 806936319}
+  - {fileID: 68477547}
+  - {fileID: 1721371914}
+  - {fileID: 1273543188}
+  - {fileID: 1411126420}
+  - {fileID: 1842472895}
+  - {fileID: 869519752}
+  - {fileID: 378613582}
+  - {fileID: 509927953}
+  - {fileID: 855479359}
+  - {fileID: 2113606549}
+  IconosB: 000000000000000000000000
   Spritehuevo: {fileID: 21300000, guid: da7200f8157950849a56bdc1518060be, type: 3}
+  Spritecarne: {fileID: 21300000, guid: cdc54bcd73a6a4d429d79d449f87edf5, type: 3}
+  SpriteLana: {fileID: 21300000, guid: ecefcdb484983f742b0bb1fbf02b7e92, type: 3}
+  SpriteLeche: {fileID: 21300000, guid: af676e074968dbb4d810110cfefbd68a, type: 3}
+  SpriteMadera: {fileID: 21300000, guid: d9f63e93022ca3743bc07c98cf709dd9, type: 3}
+  SpriteManzana: {fileID: 21300000, guid: b485b8d6dea23604ca976a5920971fe5, type: 3}
+  SpriteNaranja: {fileID: 21300000, guid: e6f51b68cd9c12c46a44d2b078ba7003, type: 3}
+  SpritePatata: {fileID: 21300000, guid: 69b1d82cb3bb7c14b800ad0c0c40e4bc, type: 3}
+  SpriteZanahoria: {fileID: 21300000, guid: 858b74fef31c1f244be2bbd2e79b0022, type: 3}
+  SpriteTomate: {fileID: 21300000, guid: 062eeabc49deedb429839d8010b614ac, type: 3}
+  SpritePimiento: {fileID: 21300000, guid: e14ba610e1221e840b56ca464bb25be2, type: 3}
+  SpriteSemillaPatata: {fileID: 21300000, guid: cb7f1a3291dc4594dade85b9a659b563, type: 3}
+  SpriteSemillaPimiento: {fileID: 21300000, guid: 5bf68d96d5a144a4cb20191813f16482, type: 3}
+  SpriteSemillaTomate: {fileID: 21300000, guid: 3c31fea1983195843874dca4e72927f6, type: 3}
+  SpriteSemillaZanahoria: {fileID: 21300000, guid: 3d7f0ca59aa2deb4bb2e0352274737e0, type: 3}
   PolariodHuevo: {fileID: 441156474}
+  PolariodCarne: {fileID: 674486929}
+  PolariodLana: {fileID: 382894652}
+  PolariodLeche: {fileID: 875277324}
+  PolariodMadera: {fileID: 640107622}
+  PolariodPiedra: {fileID: 194530781}
+  PolariodManzana: {fileID: 1872243419}
+  PolariodNaranja: {fileID: 598074896}
+  PolariodPatata: {fileID: 2142891935}
+  PolariodZanahoria: {fileID: 46945767}
+  PolariodTomate: {fileID: 1498940145}
+  PolariodPimiento: {fileID: 121202972}
+  PolariodSemillaPatata: {fileID: 1995785908}
+  PolariodSemillaPimiento: {fileID: 1872985813}
+  PolariodSemillaTomate: {fileID: 262169025}
+  PolariodSemillaZanahoria: {fileID: 56511596}
   TextoHuevo: {fileID: 2002104617}
+  TextoCarne: {fileID: 1112135523}
+  TextoLana: {fileID: 901933525}
+  TextoLeche: {fileID: 71138282}
+  TextoMadera: {fileID: 1041199085}
+  TextoPiedra: {fileID: 1067394595}
+  TextoManzana: {fileID: 2020077802}
+  TextoNaranja: {fileID: 1596841058}
+  TextoPatata: {fileID: 211211227}
+  TextoZanahoria: {fileID: 1563786287}
+  TextoTomate: {fileID: 1454388235}
+  TextoPimiento: {fileID: 1618539177}
+  TextoSemillaPatata: {fileID: 127573599}
+  TextoSemillaPimiento: {fileID: 1899515973}
+  TextoSemillaTomate: {fileID: 654256363}
+  TextoSemillaZanahoria: {fileID: 818604514}
 --- !u!114 &54304707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7824,7 +7893,7 @@ GameObject:
   - component: {fileID: 818604515}
   - component: {fileID: 818604514}
   m_Layer: 5
-  m_Name: Texto_SemillaPimiento
+  m_Name: Texto_SemillaZanahoria
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14300,7 +14369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcfa678a264dbf344973805e8da10ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nombre: semilla
+  nombre: Semilla_Zanahoria
   prefab: {fileID: 4660572826904177769, guid: c70307583dc11ca4592ea2cf29b51074, type: 3}
 --- !u!54 &1517441389
 Rigidbody:
