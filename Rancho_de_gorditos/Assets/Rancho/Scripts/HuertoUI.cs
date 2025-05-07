@@ -4,138 +4,88 @@ using UnityEngine.UI;
 
 public class HuertoUI : MonoBehaviour
 {
-    public Button Salir;
-    public Button Semilla, Cosechar, comprarH, mejorar;
-    private Canvas c;
-    public GameObject huertoUI, prefabHuerto;
-    private GameObject Huerto, terrenoHuerto;
-    public Transform huecoHuerto;
-    private int semillas = 2, frutas =3;
-    private bool n=false;
+    public Button Zanahoria, Patata, Cerrar, ComprarHuerto, MejorarHuerto, Cosechar;
+    private HuertoManager huertoManager;
+    public Canvas canvas;
+    public GameObject HuertoPrerfab;
+    public Transform HuecoHuerto;
+    private GameObject HuertoG, jugador;
 
-    private huerto huScript;
-    private GameObject huertoG;
-
-    [HideInInspector] public GameObject contmonedas;
-
-    [HideInInspector] public List<InventoryItemData> inventario = new List<InventoryItemData>();
     void Start()
     {
-        c = huertoUI.GetComponent<Canvas>();
-        Salir.onClick.AddListener(() => ads());
-        Semilla.onClick.AddListener(() => opciones(1));
-        Cosechar.onClick.AddListener(() => opciones(2));
-        comprarH.onClick.AddListener(() => opciones(3));
-        mejorar.onClick.AddListener(()=>  opciones(4));
-        c.enabled = false;
-        
-        contmonedas = GameObject.Find("Canvas");
-        Huerto = GameObject.Find("CompraHuerto");
+        huertoManager = Object.FindFirstObjectByType<HuertoManager>();
+        Zanahoria.onClick.AddListener(() => Plantar(1));
+        Patata.onClick.AddListener(() => Plantar(2));
+        Cerrar.onClick.AddListener(() => CerrarUI());
+        ComprarHuerto.onClick.AddListener(() => ComprarH());
+        Cosechar.onClick.AddListener(() => cosechar());
+        canvas.enabled = false;
+        jugador = GameObject.Find("Player");
     }
 
-    private void ads()
+    private void Plantar(int tipo)
     {
-        c.enabled = false;
-        Time.timeScale = 1;
-    }
+        guardar_Inventario g = jugador.GetComponent<guardar_Inventario>();
+        InventoryItemData itemZa = g.inventario.Find(item => item.nombre == "Semilla_Zanahoria");
+        InventoryItemData itemPa = g.inventario.Find(item => item.nombre == "Semilla_Patata");
 
-    public void inicio()
-    {
-        c.enabled = true;
-        Time.timeScale = 0;
-    }
-
-    private void opciones(int i)
-    {
-        Contador_Moneas cont = contmonedas.GetComponent<Contador_Moneas>();
-        huerto huScript = Huerto.GetComponent<huerto>();
-        
-        switch (i)
+        if (tipo == 1)
         {
-
-            case 3:
-                //Comprar
-                if (cont.monedas >= 3)
+            if(itemZa != null && itemZa.count >= 1)
+            {
+                bool exito = huertoManager.PlantarSemilla(tipo);
+                itemZa.count--;
+                if (!exito)
                 {
-                    
-                    huertoG = Instantiate(prefabHuerto, huecoHuerto.position, huecoHuerto.rotation);
-                    huertoG.transform.SetParent(huecoHuerto);
-
-
-                    n = true;
-                    cont.monedas -= 3;
+                    Debug.Log("No puedes plantar: huerto lleno.");
                 }
-                else
-                {
-                    Debug.Log("No tienes suficientes monedas");
-                }
-                break;
-
-            case 1:
-                if (n)
-                {
-                    huScript.Semilla();
-                    ads();
-                }
-                else
-                {
-                    Debug.Log("No hay huerto");
-                }
-                
-                break;
-            case 2:
-                if (n)
-                {
-                    if (huScript.crec >= 3)
-                    {
-                        Destroy(huScript.semilla1Prefab);
-                        guardar_Inventario inventarioScript = GameObject.FindAnyObjectByType<guardar_Inventario>();
-
-                        if (inventarioScript != null)
-                        {
-                            for (int x = 0; x < semillas; x++)
-                            {
-                                inventarioScript.AgregarItem("semilla", huScript.semilla1Prefab);
-                            }
-
-                            for (int y = 0; y < frutas; y++)
-                            {
-                                inventarioScript.AgregarItem("Fruta", null);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log("No hay nada que cosechar");
-                    }
-                }
-                else
-                {
-                    Debug.Log("No hay huerto");
-                }
-
-                break;
-
-            case 4:
-                if(cont.monedas >= 5)
-                {
-                    semillas += 1;
-                    frutas += 2;
-                    cont.monedas -= 5;
-                }
-                else
-                {
-                    Debug.Log("No tienes suficiente diner");
-                }
-                break;
-
+            }
+            else
+            {
+                Debug.Log("No tienes semillas de zanahoria");
+            }
         }
+       
+            
+        CerrarUI();
     }
 
-  
-    
-    void Update()
+    private void ComprarH()
     {
-        
+        HuertoG = Instantiate(HuertoPrerfab, HuecoHuerto.position, HuecoHuerto.rotation);
+        HuertoG.transform.SetParent(HuecoHuerto);
+    }
+
+    private void CerrarUI()
+    {
+        Time.timeScale = 1;
+        canvas.enabled = false;
+    }
+
+    public void AbrirUI()
+    {
+        Time.timeScale = 0;
+        canvas.enabled = true;
+
+    }
+
+    private void cosechar()
+    {
+        var manager = Object.FindFirstObjectByType<HuertoManager>();
+        List<Planta.Tipo> tipos = manager.CosecharTodas();
+        var inventarioScript = jugador.GetComponent<guardar_Inventario>();
+        foreach (var tipo in tipos)
+        {
+            // Asumiendo que cada tipo da 1 semilla
+            switch (tipo)
+            {
+                case Planta.Tipo.Zanahoria:
+                    inventarioScript.AgregarItem("Semilla_Zanahoria", null);
+                    break;
+                case Planta.Tipo.Patata:
+                    inventarioScript.AgregarItem("Semilla_Patata", null);
+                    break;
+            }
+        }
     }
 }
