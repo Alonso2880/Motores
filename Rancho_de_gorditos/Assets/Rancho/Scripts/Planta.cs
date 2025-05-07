@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Planta : MonoBehaviour
 {
-    public enum Tipo { Zanahoria = 1, Patata = 2 }
+    public enum Tipo { Zanahoria = 1, Patata = 2, Tomate = 3, Pimiento = 4 }
     private Tipo tipo;
     private GameObject semillaPrefab;
     private GameObject brotePrefab;

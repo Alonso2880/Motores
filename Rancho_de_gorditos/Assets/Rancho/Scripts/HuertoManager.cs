@@ -3,12 +3,14 @@ using System.Collections.Generic;
 public class HuertoManager : MonoBehaviour
 {
     [Header("Prefabs de Plantas")]
-    public GameObject semillaPrefab, brotePrefab, zanahoriaPrefab, patataPrefab;
+    public GameObject semillaPrefab, brotePrefab, zanahoriaPrefab, patataPrefab, pimientoPrefab, tomatePrefab;
 
     public float ySemilla = 0.551f;
     public float yBrote = 0.925f;
     public float yZanahoria = 1.199f;
     public float yPatata = 0.862f;
+    public float yPimiento = 1.923f;
+    public float yTomate = 1.923f;
 
     [Header("Huecos de Plantación")]
     public List<Transform> huecos;
@@ -48,22 +50,37 @@ public class HuertoManager : MonoBehaviour
                 contenedor.transform.localPosition = Vector3.zero;
                 contenedor.transform.localRotation = Quaternion.identity;
 
-                // Determinar offset de fruto y prefab
-                float offsetFruto = (tipo == (int)Planta.Tipo.Zanahoria) ? yZanahoria : yPatata;
-                GameObject frutoPrefab = (tipo == (int)Planta.Tipo.Zanahoria) ? zanahoriaPrefab : patataPrefab;
+                // Seleccionar prefabs y offsets según el tipo
+                GameObject frutoPrefab;
+                float offsetFruto;
+
+                switch (tipo)
+                {
+                    case (int)Planta.Tipo.Zanahoria:
+                        frutoPrefab = zanahoriaPrefab;
+                        offsetFruto = yZanahoria;
+                        break;
+                    case (int)Planta.Tipo.Patata:
+                        frutoPrefab = patataPrefab;
+                        offsetFruto = yPatata;
+                        break;
+                    case (int)Planta.Tipo.Tomate:
+                        frutoPrefab = tomatePrefab;
+                        offsetFruto = yTomate;
+                        break;
+                    case (int)Planta.Tipo.Pimiento:
+                        frutoPrefab = pimientoPrefab;
+                        offsetFruto = yPimiento;
+                        break;
+                    default:
+                        Debug.LogError($"Tipo de planta no soportado: {tipo}");
+                        Destroy(contenedor);
+                        return false;
+                }
 
                 // Añadir componente Planta y pasar datos
                 var planta = contenedor.AddComponent<Planta>();
-                planta.Inicializar(
-                    (Planta.Tipo)tipo,
-                    semillaPrefab,
-                    brotePrefab,
-                    frutoPrefab,
-                    casaScript,
-                    ySemilla,
-                    yBrote,
-                    offsetFruto
-                );
+                planta.Inicializar((Planta.Tipo)tipo, semillaPrefab, brotePrefab,frutoPrefab,casaScript,ySemilla,yBrote,offsetFruto);
 
                 estados[i].ocupado = true;
                 estados[i].planta = planta;

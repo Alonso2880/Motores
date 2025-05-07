@@ -28,7 +28,7 @@ public class InventoryUI : MonoBehaviour
     public Sprite SpriteLana;
     public Sprite SpriteLeche;
     public Sprite SpriteMadera;
-    //public Sprite SpritePiedra;
+    public Sprite SpritePiedra;
     public Sprite SpriteManzana;
     public Sprite SpriteNaranja;
     public Sprite SpritePatata;
@@ -108,6 +108,20 @@ public class InventoryUI : MonoBehaviour
 
                 MostrarIconoHuevo();
                 MostrarIconoZanahoria();
+                MostrarIconoCarne();
+                MostrarIconoLana();
+                MostrarIconoLeche();
+                MostrarIconoMadera();
+                MostrarIconoRoca();
+                MostrarIconoManzana();
+                MostrarIconoNaranja();
+                MostrarIconoPatata();
+                MostrarIconoPimiento();
+                MostrarIconoSemillaPatata();
+                MostrarIconoSemillaPimiento();
+                MostrarIconoSemillaTomate();
+                MostrarIconoTomate();
+                MostrarIconoZanahoria1();
             }
                 adios = true;
         }
@@ -190,6 +204,526 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    private void MostrarIconoCarne()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData CarneItem = inventory.inventario.Find(item => item.nombre == "Carne");
+
+        if (CarneItem != null && CarneItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = Spritecarne;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoCarne);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == Spritecarne)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoCarne);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoLana()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData LanaItem = inventory.inventario.Find(item => item.nombre == "Lana");
+
+        if (LanaItem != null && LanaItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteLana;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoLana);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteLana)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoLana);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoLeche()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData LecheItem = inventory.inventario.Find(item => item.nombre == "Leche");
+
+        if (LecheItem != null && LecheItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteLeche;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoLeche);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteLeche)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoLeche);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoMadera()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData MaderaItem = inventory.inventario.Find(item => item.nombre == "Madera");
+
+        if (MaderaItem != null && MaderaItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteMadera;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoMadera);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteMadera)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoMadera);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoRoca()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData RocaItem = inventory.inventario.Find(item => item.nombre == "Roca");
+
+        if (RocaItem != null && RocaItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpritePiedra;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoRoca);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpritePiedra)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoRoca);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoManzana()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData ManzanaItem = inventory.inventario.Find(item => item.nombre == "Manzana");
+
+        if (ManzanaItem != null && ManzanaItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteManzana;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoManzana);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteManzana)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoManzana);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoNaranja()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData NaranjaItem = inventory.inventario.Find(item => item.nombre == "Naranja");
+
+        if (NaranjaItem != null && NaranjaItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteNaranja;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoNaranja);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteLana)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoLana);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoPatata()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData PatataItem = inventory.inventario.Find(item => item.nombre == "Patata");
+
+        if (PatataItem != null && PatataItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpritePatata;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoPatata);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpritePatata)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoPatata);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoPimiento()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData PimientoItem = inventory.inventario.Find(item => item.nombre == "Pimiento");
+
+        if (PimientoItem != null && PimientoItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpritePimiento;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoPimiento);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpritePimiento)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoPimiento);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoSemillaPatata()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData SemillaPatataItem = inventory.inventario.Find(item => item.nombre == "Semilla_Patata");
+
+        if (SemillaPatataItem != null && SemillaPatataItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteSemillaPatata;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoSemillaPatata);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteSemillaPatata)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoSemillaPatata);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoSemillaPimiento()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData SemillaPimientoItem = inventory.inventario.Find(item => item.nombre == "Semilla_Pimiento");
+
+        if (SemillaPimientoItem != null && SemillaPimientoItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteSemillaPimiento;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoSemillaPimiento);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteSemillaPimiento)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoSemillaPimiento);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoSemillaTomate()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData SemillaTomateItem = inventory.inventario.Find(item => item.nombre == "Semilla_Tomate");
+
+        if (SemillaTomateItem != null && SemillaTomateItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteSemillaTomate;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoSemillaTomate);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteSemillaTomate)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoSemillaTomate);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoTomate()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData TomateItem = inventory.inventario.Find(item => item.nombre == "Tomate");
+
+        if (TomateItem != null && TomateItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteTomate;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoTomate);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteTomate)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoTomate);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+    private void MostrarIconoZanahoria1()
+    {
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData ZanahoriaItem = inventory.inventario.Find(item => item.nombre == "Zanahoria");
+
+        if (ZanahoriaItem != null && ZanahoriaItem.count >= 1)
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (!IconosB[i])
+                {
+                    Iconos[i].sprite = SpriteZanahoria;
+                    Iconos[i].enabled = true;
+                    IconoButtons[i].onClick.AddListener(InfoZanahoria);
+                    IconosB[i] = true;
+                    break;
+                }
+
+            }
+
+
+        }
+        else
+        {
+            for (int i = 0; i < Iconos.Count; i++)
+            {
+                if (IconosB[i] && Iconos[i].sprite == SpriteZanahoria)
+                {
+                    Iconos[i].sprite = null;
+                    Iconos[i].enabled = false;
+                    IconoButtons[i].onClick.RemoveListener(InfoZanahoria);
+                    IconosB[i] = false;
+                }
+            }
+        }
+    }
+
+
+
     //Funciones de información
     private void InfoHuevo()
     {
@@ -203,6 +737,104 @@ public class InventoryUI : MonoBehaviour
         DesactivarInfo();
         PolariodSemillaZanahoria.enabled = true;
         TextoSemillaZanahoria.enabled=true;
+    }
+
+    private void InfoCarne()
+    {
+        DesactivarInfo();
+        PolariodCarne.enabled = true;
+        TextoCarne.enabled = true;
+    }
+
+    private void InfoLana()
+    {
+        DesactivarInfo();
+        PolariodLana.enabled = true;
+        TextoLana.enabled = true;
+    }
+
+    private void InfoLeche()
+    {
+        DesactivarInfo();
+        PolariodLeche.enabled = true;
+        TextoLeche.enabled = true;
+    }
+
+    private void InfoMadera()
+    {
+        DesactivarInfo();
+        PolariodMadera.enabled = true;
+        TextoMadera.enabled = true;
+    }
+
+    private void InfoRoca()
+    {
+        DesactivarInfo();
+        PolariodPiedra.enabled = true;
+        TextoPiedra.enabled = true;
+    }
+
+    private void InfoManzana()
+    {
+        DesactivarInfo();
+        PolariodManzana.enabled = true;
+        TextoManzana.enabled = true;
+    }
+
+    private void InfoNaranja()
+    {
+        DesactivarInfo();
+        PolariodNaranja.enabled = true;
+        TextoNaranja.enabled = true;
+    }
+
+    private void InfoPatata()
+    {
+        DesactivarInfo();
+        PolariodPatata.enabled = true;
+        TextoPatata.enabled = true;
+    }
+
+    private void InfoPimiento()
+    {
+        DesactivarInfo();
+        PolariodPimiento.enabled = true;
+        TextoPimiento.enabled = true;
+    }
+
+    private void InfoTomate()
+    {
+        DesactivarInfo();
+        PolariodTomate.enabled = true;
+        TextoTomate.enabled = true;
+    }
+
+    private void InfoZanahoria()
+    {
+        DesactivarInfo();
+        PolariodZanahoria.enabled = true;
+        TextoZanahoria.enabled = true;
+    }
+
+    private void InfoSemillaPatata()
+    {
+        DesactivarInfo();
+        PolariodSemillaPatata.enabled = true;
+        TextoSemillaPatata.enabled = true;
+    }
+
+    private void InfoSemillaPimiento()
+    {
+        DesactivarInfo();
+        PolariodSemillaPimiento.enabled = true;
+        TextoSemillaPimiento.enabled = true;
+    }
+
+    private void InfoSemillaTomate()
+    {
+        DesactivarInfo();
+        PolariodSemillaTomate.enabled = true;
+        TextoSemillaTomate.enabled = true;
     }
     public void UpdateUI()
     {
