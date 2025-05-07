@@ -113,6 +113,12 @@ public class HuertoManager : MonoBehaviour
                 Destroy(estado.planta.gameObject);
                 estado.ocupado = false;
                 estado.planta = null;
+
+                // Resetear la altura del hueco al valor inicial de semilla
+                Transform hueco = huecos[i];
+                Vector3 pos = hueco.localPosition;
+                pos.y = ySemilla;
+                hueco.localPosition = pos;
             }
         }
         return cosechadas;
