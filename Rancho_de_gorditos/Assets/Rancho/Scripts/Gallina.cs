@@ -96,21 +96,36 @@ public class Gallina : MonoBehaviour
 
     IEnumerator generarHuevo()
     {
+        
+        
         while (scriptActivo)
         {
             if (!enterreno)
             {
-                
                 yield return null;
                 continue;
             }
-
-            
             yield return new WaitForSeconds(tiempoHuevo);
             huevoTota += multHuevo;
             huevo h = huevoG.GetComponent<huevo>();
             h.HuevoTotal += huevoTota;
             ResetHuevos();
+            /*if (scriptActivo && enterreno)
+            {
+                huevo += 1;
+                if (b == false)
+                {
+                    GameObject nuevoHuevo = Instantiate(prefabHuevo, lugarHuevo.transform.position, Quaternion.identity);
+                    huevo huevoScript = nuevoHuevo.GetComponent<huevo>();
+                    huevoScript.galli = this;
+                    b = true;
+                }
+
+
+
+                CH?.Invoke(huevo);
+                //Debug.Log("El huevo que hay creado es " + huevo);
+            }*/
         }
     }
 
@@ -144,24 +159,15 @@ public class Gallina : MonoBehaviour
             Z = Random.Range(-1, 2);
         }
 
-<<<<<<< Updated upstream
         if (collision.gameObject.CompareTag("T_Gallinas"))
-=======
-        if (collision.gameObject.CompareTag("Terreno_Gallinas"))
->>>>>>> Stashed changes
         {
             enterreno = true;
-            
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-<<<<<<< Updated upstream
         if (collision.gameObject.CompareTag("T_Gallinas"))
-=======
-        if (collision.gameObject.CompareTag("Terreno_Gallinas"))
->>>>>>> Stashed changes
         {
             enterreno = false;
         }
