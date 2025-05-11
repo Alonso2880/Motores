@@ -16,6 +16,7 @@ public class Menu_Parcelas3 : MonoBehaviour
     public Button Salir;
     [HideInInspector] public bool comprado=false;
     [HideInInspector] public GameObject contmonedas;
+    private bool galli = false;
     void Start()
     {
         Comprar_Gallinas.onClick.AddListener(() => ComprarP(1));
@@ -48,28 +49,29 @@ public class Menu_Parcelas3 : MonoBehaviour
             switch (n)
             {
                 case 1:
-                    a.GenerarParcela();
+                    a.GenerarParcelaGallina();
                     terreno.tag = "T_Gallinas";
+                    galli = true;
                     CerrarMenu();
                     comprado = true;
                     break;
 
                 case 2:
-                    a.GenerarParcela();
+                    a.GenerarParcelaVaca();
                     terreno.tag = "T_Vacas";
                     CerrarMenu();
                     comprado = true;
                     break;
 
                 case 3:
-                    a.GenerarParcela();
+                    a.GenerarParcelaCerdo();
                     terreno.tag = "T_Cerdos";
                     CerrarMenu();
                     comprado = true;
                     break;
 
                 case 4:
-                    a.GenerarParcela();
+                    a.GenerarParcelaOveja();
                     terreno.tag = "T_Ovejas";
                     CerrarMenu();
                     comprado = true;
@@ -115,8 +117,16 @@ public class Menu_Parcelas3 : MonoBehaviour
                     }
                     else
                     {
-                        a.AmpliarParcela();
-                        cont.monedas -= 6;
+                        if (galli)
+                        {
+                            a.AmpliarParcela();
+                            cont.monedas -= 6;
+                        }
+                        else
+                        {
+                            a.AmpliarParcelaResto();
+                            cont.monedas -= 6;
+                        };
                     }
                     
                     CerrarMenu();
