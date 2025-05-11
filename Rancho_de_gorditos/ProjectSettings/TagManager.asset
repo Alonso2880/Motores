@@ -9,6 +9,7 @@ TagManager:
   - Tienda
   - Gallina
   - Recogida_Huevos
+<<<<<<< Updated upstream
   - playerCamera
   - T_Gallinas
   - T_Vacas
@@ -21,6 +22,13 @@ TagManager:
   - Actors
   - Rancho
   - Bosque
+=======
+  - Suelo
+  - Terreno_Gallinas
+  - Terreno_Cerdos
+  - Terreno_Ovejas
+  - Terreno_Vacas
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

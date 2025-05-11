@@ -12,5 +12,5 @@ EditorBuildSettings:
     path: Assets/Rancho/Bosque.unity
     guid: d293d7a9ddf4ea6408757cf28dd93ffc
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 01b6c9b7a6c5f6a41a90a14e1be11aca, type: 3}
   m_UseUCBPForAssetBundles: 0
