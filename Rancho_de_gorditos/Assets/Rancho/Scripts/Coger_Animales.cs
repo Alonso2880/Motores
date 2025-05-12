@@ -7,12 +7,12 @@ public class Coger_Animales : MonoBehaviour
 {
     GameObject player;
     Gallina gallina;
-    public GameObject gallinaPrefab;
+    public GameObject gallinaPrefab, cerdoPrefab, vacaPrefab, ovejaPrefab;
     public Transform puntoSujección;
     public float fuerzaLanzamiento = 10f;
 
-    [HideInInspector] public GameObject gallinaActual;
-    [HideInInspector] public bool tieneGallina = false;
+    [HideInInspector] public GameObject gallinaActual, cerdoActual, vacaActual, ovejaActual;
+    [HideInInspector] public bool tieneGallina = false, tieneCerdo = false, tieneOveja = false, tieneVaca = false, g=false, c= false, v=false, o=false;
     void Start()
     {
         player = this.gameObject;
@@ -29,13 +29,109 @@ public class Coger_Animales : MonoBehaviour
                 LanzarGallina();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (tieneCerdo)
         {
-            RecogerGallina();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                LanzarCerdo();
+            }
+        }
+        if (tieneOveja)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                LanzarOveja();
+            }
+        }
+        if (tieneVaca)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                LanzarVaca();
+            }
+        }
+
+        if (g)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                RecogerGallina();
+            }
+        }
+
+        if (c)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                RecogerCerdo();
+            }
+        }
+
+        if (o)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                RecogerOveja();
+            }
+        }
+
+        if (v)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                RecogerVaca();
+            }
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Gallina"))
+        {
+            g = true;
+        }
+
+        if (collision.gameObject.CompareTag("Cerdo"))
+        {
+            c = true;
+        }
+
+        if (collision.gameObject.CompareTag("Oveja"))
+        {
+            o = true;
+        }
+
+        if (collision.gameObject.CompareTag("Vaca"))
+        {
+            v = true;
         }
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Gallina"))
+        {
+            g = false;
+        }
+
+        if (collision.gameObject.CompareTag("Cerdo"))
+        {
+            c = false;
+        }
+
+        if (collision.gameObject.CompareTag("Oveja"))
+        {
+            o = false;
+        }
+
+        if (collision.gameObject.CompareTag("Vaca"))
+        {
+            v = false;
+        }
+    }
+
+    //Obtener
     public void ObtenerGallina()
     {
         gallinaActual = Instantiate(gallinaPrefab, puntoSujección.position, puntoSujección.rotation);
@@ -51,6 +147,52 @@ public class Coger_Animales : MonoBehaviour
         tieneGallina = true;
     }
 
+    public void ObtenerCerdo()
+    {
+        cerdoActual = Instantiate(cerdoPrefab, puntoSujección.position, puntoSujección.rotation);
+        cerdoActual.transform.SetParent(puntoSujección);
+        cerdoActual.GetComponent<Rigidbody>().isKinematic = true;
+
+        Gallina scriptGallina = cerdoActual.GetComponent<Gallina>();
+        if (scriptGallina != null)
+        {
+            scriptGallina.enabled = false;
+        }
+
+        tieneCerdo = true;
+    }
+
+    public void ObtenerOveja()
+    {
+        ovejaActual = Instantiate(ovejaPrefab, puntoSujección.position, puntoSujección.rotation);
+        ovejaActual.transform.SetParent(puntoSujección);
+        ovejaActual.GetComponent<Rigidbody>().isKinematic = true;
+
+        Gallina scriptGallina = ovejaActual.GetComponent<Gallina>();
+        if (scriptGallina != null)
+        {
+            scriptGallina.enabled = false;
+        }
+
+        tieneOveja = true;
+    }
+
+    public void ObtenerVaca()
+    {
+        vacaActual = Instantiate(vacaPrefab, puntoSujección.position, puntoSujección.rotation);
+        vacaActual.transform.SetParent(puntoSujección);
+        vacaActual.GetComponent<Rigidbody>().isKinematic = true;
+
+        Gallina scriptGallina = vacaActual.GetComponent<Gallina>();
+        if (scriptGallina != null)
+        {
+            scriptGallina.enabled = false;
+        }
+
+        tieneVaca = true;
+    }
+
+    //Lanzar
     private void LanzarGallina()
     {
         gallinaActual.transform.SetParent(null);
@@ -72,6 +214,71 @@ public class Coger_Animales : MonoBehaviour
         tieneGallina = false;
     }
 
+    private void LanzarCerdo()
+    {
+        cerdoActual.transform.SetParent(null);
+        Rigidbody rb = cerdoActual.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+
+        string scene = SceneManager.GetActiveScene().name;
+
+        Gallina scriptGallina = cerdoActual.GetComponent<Gallina>();
+        if (scriptGallina != null)
+        {
+            scriptGallina.enabled = true;
+            scriptGallina.scriptActivo = true;
+        }
+
+        Vector3 direccionLanzamiento = transform.forward;
+        rb.AddForce(direccionLanzamiento * fuerzaLanzamiento, ForceMode.Impulse);
+
+        tieneCerdo = false;
+    }
+
+    private void LanzarOveja()
+    {
+        ovejaActual.transform.SetParent(null);
+        Rigidbody rb = ovejaActual.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+
+        string scene = SceneManager.GetActiveScene().name;
+
+        Gallina scriptGallina = ovejaActual.GetComponent<Gallina>();
+        if (scriptGallina != null)
+        {
+            scriptGallina.enabled = true;
+            scriptGallina.scriptActivo = true;
+        }
+
+        Vector3 direccionLanzamiento = transform.forward;
+        rb.AddForce(direccionLanzamiento * fuerzaLanzamiento, ForceMode.Impulse);
+
+        tieneOveja = false;
+    }
+
+    private void LanzarVaca()
+    {
+        vacaActual.transform.SetParent(null);
+        Rigidbody rb = vacaActual.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+
+        string scene = SceneManager.GetActiveScene().name;
+
+        Gallina scriptGallina = vacaActual.GetComponent<Gallina>();
+        if (scriptGallina != null)
+        {
+            scriptGallina.enabled = true;
+            scriptGallina.scriptActivo = true;
+        }
+
+        Vector3 direccionLanzamiento = transform.forward;
+        rb.AddForce(direccionLanzamiento * fuerzaLanzamiento, ForceMode.Impulse);
+
+        tieneVaca = false;
+    }
+
+
+    //Recoger
     private void RecogerGallina()
     {
         Collider[] collides = Physics.OverlapSphere(transform.position, 2f);
@@ -95,6 +302,94 @@ public class Coger_Animales : MonoBehaviour
                 gallinaActual.transform.position = puntoSujección.position;
                 gallinaActual.GetComponent<Rigidbody>().isKinematic = true;
                 tieneGallina = true;
+                g = false;
+                break;
+            }
+        }
+    }
+
+    private void RecogerCerdo()
+    {
+        Collider[] collides = Physics.OverlapSphere(transform.position, 2f);
+        foreach (Collider col in collides)
+        {
+            if (col.CompareTag("Cerdo") && !tieneCerdo)
+            {
+                string escena = SceneManager.GetActiveScene().name;
+                string prefabName = col.gameObject.name.Replace("(Clone)", "");
+
+
+                cerdoActual = col.gameObject;
+
+                Gallina scriptGallina = cerdoActual.GetComponent<Gallina>();
+                if (scriptGallina != null)
+                {
+                    scriptGallina.enabled = false;
+                }
+
+                cerdoActual.transform.SetParent(puntoSujección);
+                cerdoActual.transform.position = puntoSujección.position;
+                cerdoActual.GetComponent<Rigidbody>().isKinematic = true;
+                tieneCerdo = true;
+                c = false;
+                break;
+            }
+        }
+    }
+
+    private void RecogerOveja()
+    {
+        Collider[] collides = Physics.OverlapSphere(transform.position, 2f);
+        foreach (Collider col in collides)
+        {
+            if (col.CompareTag("Oveja") && !tieneOveja)
+            {
+                string escena = SceneManager.GetActiveScene().name;
+                string prefabName = col.gameObject.name.Replace("(Clone)", "");
+
+
+                ovejaActual = col.gameObject;
+
+                Gallina scriptGallina = ovejaActual.GetComponent<Gallina>();
+                if (scriptGallina != null)
+                {
+                    scriptGallina.enabled = false;
+                }
+
+                ovejaActual.transform.SetParent(puntoSujección);
+                ovejaActual.transform.position = puntoSujección.position;
+                ovejaActual.GetComponent<Rigidbody>().isKinematic = true;
+                tieneOveja = true;
+                o = false;
+                break;
+            }
+        }
+    }
+
+    private void RecogerVaca()
+    {
+        Collider[] collides = Physics.OverlapSphere(transform.position, 2f);
+        foreach (Collider col in collides)
+        {
+            if (col.CompareTag("Vaca") && !tieneVaca)
+            {
+                string escena = SceneManager.GetActiveScene().name;
+                string prefabName = col.gameObject.name.Replace("(Clone)", "");
+
+
+                vacaActual = col.gameObject;
+
+                Gallina scriptGallina = vacaActual.GetComponent<Gallina>();
+                if (scriptGallina != null)
+                {
+                    scriptGallina.enabled = false;
+                }
+
+                vacaActual.transform.SetParent(puntoSujección);
+                vacaActual.transform.position = puntoSujección.position;
+                vacaActual.GetComponent<Rigidbody>().isKinematic = true;
+                tieneVaca = true;
+                v = false;
                 break;
             }
         }

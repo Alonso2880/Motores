@@ -22,7 +22,6 @@ public class Gallina : MonoBehaviour
 
     public delegate void ContadorHuevo(int conthuevo);
     [HideInInspector] public static int multHuevo=1;
-    //public event ContadorHuevo CH;
 
     guardar_Inventario g;
 
@@ -34,7 +33,6 @@ public class Gallina : MonoBehaviour
         g = GameObject.Find("Player").GetComponent<guardar_Inventario>();
         huevoCoroutine = StartCoroutine("generarHuevo");
         movimientoCoroutine = StartCoroutine("movimiento");
-        //StartCoroutine("generarHuevo");
         lugarHuevo = GameObject.Find("LugarHuevo");
 
         huevoG = GameObject.Find("Huevo");
@@ -54,8 +52,6 @@ public class Gallina : MonoBehaviour
         {
             StopCoroutine(huevoCoroutine);
         }
-
-        //rb.linearVelocity = Vector3.zero;
         random = true;
         SeMueve = false;
     }
@@ -67,26 +63,18 @@ public class Gallina : MonoBehaviour
         {
             if (SeMueve)
             {
-                //yield return new WaitForSeconds(1);
                 if (!scriptActivo) yield break;
-
-
                 velocidadVec = new Vector3(X, 0, Z).normalized * velocidad;
                 rb.linearVelocity = new Vector3(velocidadVec.x, rb.linearVelocity.y, velocidadVec.z);
-                //Debug.Log("Movimiento es " + velocidadVec.x + " 0 " + velocidadVec.z);
-                //yield return new WaitForSeconds(Random.Range(1, 3));
                 yield return new WaitForSeconds(3);
                 SeMueve = false;
                 random = true;
             }
             else
             {
-                //Debug.Log("Me he parado");
                 rb.linearVelocity = Vector3.zero;
                 yield return new WaitForSeconds(1);
                 SeMueve = true;
-
-
             }
         }
 
@@ -110,29 +98,12 @@ public class Gallina : MonoBehaviour
             huevo h = huevoG.GetComponent<huevo>();
             h.HuevoTotal += huevoTota;
             ResetHuevos();
-            /*if (scriptActivo && enterreno)
-            {
-                huevo += 1;
-                if (b == false)
-                {
-                    GameObject nuevoHuevo = Instantiate(prefabHuevo, lugarHuevo.transform.position, Quaternion.identity);
-                    huevo huevoScript = nuevoHuevo.GetComponent<huevo>();
-                    huevoScript.galli = this;
-                    b = true;
-                }
-
-
-
-                CH?.Invoke(huevo);
-                //Debug.Log("El huevo que hay creado es " + huevo);
-            }*/
         }
     }
 
     public void ResetHuevos()
     {
         huevoTota = 0;
-       // CH?.Invoke(huevo);
     }
 
     void FixedUpdate()
@@ -146,15 +117,12 @@ public class Gallina : MonoBehaviour
             X1 = Random.Range(1, 3);
             random = false;
         }
-        //StartCoroutine("movimiento");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (scriptActivo && collision.gameObject.CompareTag("Valla"))
         {
-            //SeMueve = false;
-            //Debug.Log("Me he chocado");
             X = Random.Range(-1, 2);
             Z = Random.Range(-1, 2);
         }

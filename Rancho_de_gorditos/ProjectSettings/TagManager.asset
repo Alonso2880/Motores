@@ -21,6 +21,9 @@ TagManager:
   - Actors
   - Rancho
   - Bosque
+  - Oveja
+  - Cerdo
+  - Vaca
   layers:
   - Default
   - TransparentFX
