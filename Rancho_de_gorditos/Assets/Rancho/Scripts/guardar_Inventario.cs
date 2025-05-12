@@ -7,7 +7,7 @@ public class guardar_Inventario : MonoBehaviour
 {
     public static guardar_Inventario Instance { get; private set; }
 
-    GameObject player, objeto, colisionado, huevoG;
+    GameObject player, objeto, colisionado, huevoG, CarneC, LanaL, LecheL;
     [HideInInspector] public List<InventoryItemData> inventario = new List<InventoryItemData>();
     [HideInInspector] public bool recogidaH = false;
 
@@ -33,6 +33,9 @@ public class guardar_Inventario : MonoBehaviour
         player = this.gameObject;
         objeto = GameObject.FindGameObjectWithTag("objeto");
         huevoG = GameObject.Find("Huevo");
+        CarneC = GameObject.Find("Carne");
+        LecheL = GameObject.Find("Leche");
+        LanaL = GameObject.Find("Lana");
         FindSceneReferences();
 
     }
@@ -47,6 +50,9 @@ public class guardar_Inventario : MonoBehaviour
     {
         objeto = GameObject.FindGameObjectWithTag("objeto");
         huevoG = GameObject.Find("Huevo");
+        CarneC = GameObject.Find("Carne");
+        LecheL = GameObject.Find("Leche");
+        LanaL = GameObject.Find("Lana");
         colisionado = null;
     }
 
@@ -80,6 +86,24 @@ public class guardar_Inventario : MonoBehaviour
 
 
                 }
+            }
+
+            if (colisionado.tag == "Recogida_Carne")
+            {
+                AgregarCarne();
+                Debug.Log("Hola");
+            }
+
+            if (colisionado.tag == "Recogida_Lana")
+            {
+                AgregarLana();
+                Debug.Log("Hola");
+            }
+
+            if (colisionado.tag == "Recogida_Leche")
+            {
+                AgregarLeche();
+                Debug.Log("Hola");
             }
 
 
@@ -142,6 +166,69 @@ public class guardar_Inventario : MonoBehaviour
 
     }
 
+    private void AgregarCarne()
+    {
+        InventoryItemData itemExiste = inventario.Find(item => item.nombre == "Carne");
+        Carne c = CarneC.GetComponent<Carne>();
+        if (itemExiste != null)
+        {
+
+            itemExiste.count += c.CarneTotal;
+            c.Reset();
+        }
+        else
+        {
+            InventoryItemData nuevoItem = new InventoryItemData();
+            nuevoItem.nombre = "Carne";
+            nuevoItem.count = c.CarneTotal;
+            inventario.Add(nuevoItem);
+            c.Reset();
+        }
+
+    }
+
+    private void AgregarLana()
+    {
+        InventoryItemData itemExiste = inventario.Find(item => item.nombre == "Lana");
+        Lana l = LanaL.GetComponent<Lana>();
+        if (itemExiste != null)
+        {
+
+            itemExiste.count += l.LanaTotal;
+            l.Reset();
+        }
+        else
+        {
+            InventoryItemData nuevoItem = new InventoryItemData();
+            nuevoItem.nombre = "Lana";
+            nuevoItem.count = l.LanaTotal;
+            inventario.Add(nuevoItem);
+            l.Reset();
+        }
+
+    }
+
+    private void AgregarLeche()
+    {
+        InventoryItemData itemExiste = inventario.Find(item => item.nombre == "Leche");
+        Leche l = LecheL.GetComponent<Leche>();
+        if (itemExiste != null)
+        {
+
+            itemExiste.count += l.LecheTotal;
+            l.Reset();
+        }
+        else
+        {
+            InventoryItemData nuevoItem = new InventoryItemData();
+            nuevoItem.nombre = "Leche";
+            nuevoItem.count = l.LecheTotal;
+            inventario.Add(nuevoItem);
+            l.Reset();
+        }
+
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("objeto"))
@@ -149,6 +236,27 @@ public class guardar_Inventario : MonoBehaviour
             colisionado = collision.gameObject;
         }
         if (collision.gameObject.CompareTag("Recogida_Huevos"))
+        {
+            colisionado = collision.gameObject;
+            recogidaH = true;
+
+        }
+
+        if (collision.gameObject.CompareTag("Recogida_Lana"))
+        {
+            colisionado = collision.gameObject;
+            recogidaH = true;
+
+        }
+
+        if (collision.gameObject.CompareTag("Recogida_Leche"))
+        {
+            colisionado = collision.gameObject;
+            recogidaH = true;
+
+        }
+
+        if (collision.gameObject.CompareTag("Recogida_Carne"))
         {
             colisionado = collision.gameObject;
             recogidaH = true;

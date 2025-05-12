@@ -24,6 +24,9 @@ TagManager:
   - Oveja
   - Cerdo
   - Vaca
+  - Recogida_Lana
+  - Recogida_Leche
+  - Recogida_Carne
   layers:
   - Default
   - TransparentFX

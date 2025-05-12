@@ -51,7 +51,7 @@ public class Coger_Animales : MonoBehaviour
             }
         }
 
-        if (g)
+        if (g && !c && !o && !v)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -59,7 +59,7 @@ public class Coger_Animales : MonoBehaviour
             }
         }
 
-        if (c)
+        if (c && !g && !o && !v)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -67,7 +67,7 @@ public class Coger_Animales : MonoBehaviour
             }
         }
 
-        if (o)
+        if (o && !g && !v && !c)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -75,7 +75,7 @@ public class Coger_Animales : MonoBehaviour
             }
         }
 
-        if (v)
+        if (v && !g && !c && !o)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -222,11 +222,11 @@ public class Coger_Animales : MonoBehaviour
 
         string scene = SceneManager.GetActiveScene().name;
 
-        Gallina scriptGallina = cerdoActual.GetComponent<Gallina>();
-        if (scriptGallina != null)
+        Cerdo scriptCerdo = cerdoActual.GetComponent<Cerdo>();
+        if (scriptCerdo != null)
         {
-            scriptGallina.enabled = true;
-            scriptGallina.scriptActivo = true;
+            scriptCerdo.enabled = true;
+            scriptCerdo.scriptActivo = true;
         }
 
         Vector3 direccionLanzamiento = transform.forward;
@@ -243,11 +243,11 @@ public class Coger_Animales : MonoBehaviour
 
         string scene = SceneManager.GetActiveScene().name;
 
-        Gallina scriptGallina = ovejaActual.GetComponent<Gallina>();
-        if (scriptGallina != null)
+        Oveja scriptOveja = ovejaActual.GetComponent<Oveja>();
+        if (scriptOveja != null)
         {
-            scriptGallina.enabled = true;
-            scriptGallina.scriptActivo = true;
+            scriptOveja.enabled = true;
+            scriptOveja.scriptActivo = true;
         }
 
         Vector3 direccionLanzamiento = transform.forward;
@@ -264,11 +264,11 @@ public class Coger_Animales : MonoBehaviour
 
         string scene = SceneManager.GetActiveScene().name;
 
-        Gallina scriptGallina = vacaActual.GetComponent<Gallina>();
-        if (scriptGallina != null)
+        Vaca scriptVaca = vacaActual.GetComponent<Vaca>();
+        if (scriptVaca != null)
         {
-            scriptGallina.enabled = true;
-            scriptGallina.scriptActivo = true;
+            scriptVaca.enabled = true;
+            scriptVaca.scriptActivo = true;
         }
 
         Vector3 direccionLanzamiento = transform.forward;
@@ -321,10 +321,10 @@ public class Coger_Animales : MonoBehaviour
 
                 cerdoActual = col.gameObject;
 
-                Gallina scriptGallina = cerdoActual.GetComponent<Gallina>();
-                if (scriptGallina != null)
+                Cerdo scriptCerdo = cerdoActual.GetComponent<Cerdo>();
+                if (scriptCerdo != null)
                 {
-                    scriptGallina.enabled = false;
+                    scriptCerdo.enabled = false;
                 }
 
                 cerdoActual.transform.SetParent(puntoSujección);
@@ -350,10 +350,10 @@ public class Coger_Animales : MonoBehaviour
 
                 ovejaActual = col.gameObject;
 
-                Gallina scriptGallina = ovejaActual.GetComponent<Gallina>();
-                if (scriptGallina != null)
+                Oveja scriptOveja = ovejaActual.GetComponent<Oveja>();
+                if (scriptOveja != null)
                 {
-                    scriptGallina.enabled = false;
+                    scriptOveja.enabled = false;
                 }
 
                 ovejaActual.transform.SetParent(puntoSujección);
@@ -379,10 +379,10 @@ public class Coger_Animales : MonoBehaviour
 
                 vacaActual = col.gameObject;
 
-                Gallina scriptGallina = vacaActual.GetComponent<Gallina>();
-                if (scriptGallina != null)
+                Vaca scriptVaca = vacaActual.GetComponent<Vaca>();
+                if (scriptVaca != null)
                 {
-                    scriptGallina.enabled = false;
+                    scriptVaca.enabled = false;
                 }
 
                 vacaActual.transform.SetParent(puntoSujección);

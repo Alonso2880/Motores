@@ -82,10 +82,8 @@ public class Oveja : MonoBehaviour
     }
 
 
-    IEnumerator generarLeche()
+    IEnumerator generarLana()
     {
-
-
         while (scriptActivo)
         {
             if (!enterreno)
