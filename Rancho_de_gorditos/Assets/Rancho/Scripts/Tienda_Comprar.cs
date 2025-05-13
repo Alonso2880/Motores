@@ -35,7 +35,6 @@ public class Tienda_Comprar : MonoBehaviour
 
     public void Gallina()
     {
-        //guardar_Inventario jscript = jugador.GetComponent<guardar_Inventario>();
         Coger_Animales jscript = jugador.GetComponent<Coger_Animales>();
         Contador_Moneas cont = contMonedas.GetComponent<Contador_Moneas>();
         if (!jscript.tieneGallina)
@@ -49,6 +48,63 @@ public class Tienda_Comprar : MonoBehaviour
                 Debug.Log("Comprado una gallina por 4 monedas");
                 cont.monedas -= 4;
                 jscript.ObtenerGallina();
+            }
+        }
+    }
+
+    public void Cerdo()
+    {
+        Coger_Animales jscript = jugador.GetComponent<Coger_Animales>();
+        Contador_Moneas cont = contMonedas.GetComponent<Contador_Moneas>();
+        if (!jscript.tieneCerdo)
+        {
+            if (cont.monedas < 4)
+            {
+                Debug.Log("Monedas insuficientes");
+            }
+            else
+            {
+                Debug.Log("Comprado un cerdo por 4 monedas");
+                cont.monedas -= 4;
+                jscript.ObtenerCerdo();
+            }
+        }
+    }
+
+    public void Oveja()
+    {
+        Coger_Animales jscript = jugador.GetComponent<Coger_Animales>();
+        Contador_Moneas cont = contMonedas.GetComponent<Contador_Moneas>();
+        if (!jscript.tieneOveja)
+        {
+            if (cont.monedas < 4)
+            {
+                Debug.Log("Monedas insuficientes");
+            }
+            else
+            {
+                Debug.Log("Comprado una oveja por 4 monedas");
+                cont.monedas -= 4;
+                jscript.ObtenerOveja();
+            }
+        }
+    }
+
+    public void Vaca()
+    {
+        Coger_Animales jscript = jugador.GetComponent<Coger_Animales>();
+        Contador_Moneas cont = contMonedas.GetComponent<Contador_Moneas>();
+        if (!jscript.tieneVaca)
+        {
+            if (cont.monedas < 4)
+            {
+                Debug.Log("Monedas insuficientes");
+            }
+            else
+            {
+                Debug.Log("Comprado una vaca por 4 monedas");
+                cont.monedas -= 4;
+                jscript.ObtenerVaca();
             }
         }
     }

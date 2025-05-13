@@ -38,13 +38,16 @@ public class Menu_Compra : MonoBehaviour
                 CerrarMenu();
                 break;
             case 2:
-
+                t.Oveja();
+                CerrarMenu();
                 break;
             case 3:
-
+                t.Vaca();
+                CerrarMenu();
                 break;
             case 4:
-
+                t.Cerdo();
+                CerrarMenu();
                 break;
 
             case 5:

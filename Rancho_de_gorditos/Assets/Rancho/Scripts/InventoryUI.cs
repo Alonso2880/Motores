@@ -39,6 +39,7 @@ public class InventoryUI : MonoBehaviour
     public Sprite SpriteSemillaPimiento;
     public Sprite SpriteSemillaTomate;
     public Sprite SpriteSemillaZanahoria;
+    public Sprite TestSprite;
 
     //Polaroids
     public Image PolariodHuevo;
@@ -243,6 +244,7 @@ public class InventoryUI : MonoBehaviour
 
     private void MostrarIconoLana()
     {
+        
         var inventory = guardar_Inventario.Instance;
         InventoryItemData LanaItem = inventory.inventario.Find(item => item.nombre == "Lana");
 
@@ -252,7 +254,7 @@ public class InventoryUI : MonoBehaviour
             {
                 if (!IconosB[i])
                 {
-                    Iconos[i].sprite = SpriteLana;
+                    Iconos[i].sprite = Spritecarne;
                     Iconos[i].enabled = true;
                     IconoButtons[i].onClick.AddListener(InfoLana);
                     IconosB[i] = true;

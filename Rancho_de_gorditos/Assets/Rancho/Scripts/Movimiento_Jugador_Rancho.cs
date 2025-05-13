@@ -7,7 +7,7 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
     private float cordX, cordZ;
     private Vector3 pos;
     private const float fixedY = 0.002f;
-    private GameObject Zona, menuPausa, huertoUI;
+    private GameObject Zona, menuPausa, huertoUI, menuInicial;
 
     void Start()
     {
@@ -19,20 +19,40 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
         Zona = GameObject.Find("ZonasUI");
         menuPausa = GameObject.Find("MenuPausa");
         huertoUI = GameObject.Find("HuertoUI");
+        menuInicial = GameObject.Find("MenuInicio");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         ZonasUI z = Zona.GetComponent<ZonasUI>();
         HuertoUI h = huertoUI.GetComponent<HuertoUI>();
+        MenuInicio m = menuInicial.GetComponent<MenuInicio>();
         if (collision.gameObject.CompareTag("Rancho"))
         {
-            z.rancho = true;
+            if (!m.menuIncio)
+            {
+                z.rancho = false;
+            }
+
+            if (!m.menuIncio)
+            {
+                z.rancho = true;
+            }
+            
         }
 
         if (collision.gameObject.CompareTag("Bosque"))
         {
-            z.bosque = true;
+
+            if (!m.menuIncio)
+            {
+                z.bosque = false;
+            }
+
+            if (!m.menuIncio)
+            {
+                z.bosque = true;
+            }
         }
 
         if (collision.gameObject.CompareTag("huerto"))
