@@ -254,7 +254,7 @@ public class InventoryUI : MonoBehaviour
             {
                 if (!IconosB[i])
                 {
-                    Iconos[i].sprite = Spritecarne;
+                    Iconos[i].sprite = SpriteLana;
                     Iconos[i].enabled = true;
                     IconoButtons[i].onClick.AddListener(InfoLana);
                     IconosB[i] = true;
