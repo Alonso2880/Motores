@@ -59,7 +59,7 @@ public class Hechizos : MonoBehaviour
         if (combinacion.Length == secuenciaTomate.Length)
         {
             string comb = combinacion.ToString();
-            if (comb.Contains(secuenciaTomate))
+            if (comb.Contains(secuenciaTomate) && h.col.name == "BroteTomate")
             {
                 
                 tomate = true;
