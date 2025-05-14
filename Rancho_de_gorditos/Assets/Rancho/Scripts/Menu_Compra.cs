@@ -12,6 +12,7 @@ public class Menu_Compra : MonoBehaviour
     public Button c_vacas;
     public Button c_cerdos;
     private GameObject tienda;
+    private GameObject Buzónui;
     [HideInInspector] public GameObject coli;
     void Start()
     {
@@ -26,6 +27,10 @@ public class Menu_Compra : MonoBehaviour
         canvasM.enabled = false;
 
         tienda = GameObject.Find("Tienda_Comprar");
+        Buzónui = GameObject.Find("MenuBuzón");
+        
+
+
     }
 
     private void ComprarOpciones(int num)
@@ -59,7 +64,26 @@ public class Menu_Compra : MonoBehaviour
 
 
     public void AbrirMenu()
-    {
+    { 
+        BuzónUI b = Buzónui.GetComponent<BuzónUI>();
+        c_vacas.gameObject.SetActive(false);
+        c_ovejas.gameObject.SetActive(false);
+        c_cerdos.gameObject.SetActive(false);
+
+        if (b.E1)
+        {
+            c_cerdos.gameObject.SetActive(true);
+        }
+
+        if(b.E2)
+        {
+            c_vacas.gameObject.SetActive(true);
+        }
+
+        if (b.E3)
+        {
+            c_ovejas.gameObject.SetActive(false);
+        }
         canvasM.enabled = true;
         Time.timeScale = 0;
     }

@@ -9,8 +9,13 @@ public class Hechizos : MonoBehaviour
     private GameObject player;
 
     private StringBuilder combinacion;
-    private const string secuenciaSemilla1 = "12345";
-    public bool semilla = false;
+    private const string secuenciaTomate = "12345";
+    private const string secuenciaZanahoria = "54321";
+    private const string secuenciaManzana = "12534";
+    private const string secuenciaPatatas = "43521";
+    private const string secuenciaPimientos = "32145";
+    private const string secuenciaNaranjas = "54123";
+    public bool tomate = false, zanahoria = false, manzana = false, patatas = false, pimientos = false, naranjas = false;
 
     
     void Start()
@@ -51,23 +56,107 @@ public class Hechizos : MonoBehaviour
     void Update()
     {
         Hechizo h = player.GetComponent<Hechizo>();
-        if (combinacion.Length == secuenciaSemilla1.Length)
+        if (combinacion.Length == secuenciaTomate.Length)
         {
             string comb = combinacion.ToString();
-            if (comb.Contains(secuenciaSemilla1))
+            if (comb.Contains(secuenciaTomate))
             {
                 
-                semilla = true;
+                tomate = true;
                 combinacion.Clear();
                 canvas.enabled = false;
-                //h.enZona = false;
             }
             else
             {
                 
                 combinacion.Clear();
-               // canvas.enabled = false;
             }
         }
+
+        if (combinacion.Length == secuenciaZanahoria.Length)
+        {
+            string comb = combinacion.ToString();
+            if (comb.Contains(secuenciaZanahoria))
+            {
+
+                zanahoria = true;
+                combinacion.Clear();
+                canvas.enabled = false;
+            }
+            else
+            {
+
+                combinacion.Clear();
+            }
+        }
+
+        if (combinacion.Length == secuenciaManzana.Length)
+        {
+            string comb = combinacion.ToString();
+            if (comb.Contains(secuenciaManzana))
+            {
+
+                manzana = true;
+                combinacion.Clear();
+                canvas.enabled = false;
+            }
+            else
+            {
+
+                combinacion.Clear();
+            }
+        }
+
+        if (combinacion.Length == secuenciaPatatas.Length)
+        {
+            string comb = combinacion.ToString();
+            if (comb.Contains(secuenciaPatatas))
+            {
+
+                patatas = true;
+                combinacion.Clear();
+                canvas.enabled = false;
+            }
+            else
+            {
+
+                combinacion.Clear();
+            }
+        }
+
+        if (combinacion.Length == secuenciaPimientos.Length)
+        {
+            string comb = combinacion.ToString();
+            if (comb.Contains(secuenciaPimientos))
+            {
+
+                pimientos = true;
+                combinacion.Clear();
+                canvas.enabled = false;
+            }
+            else
+            {
+
+                combinacion.Clear();
+            }
+        }
+
+        if (combinacion.Length == secuenciaNaranjas.Length)
+        {
+            string comb = combinacion.ToString();
+            if (comb.Contains(secuenciaNaranjas))
+            {
+
+                naranjas = true;
+                combinacion.Clear();
+                canvas.enabled = false;
+            }
+            else
+            {
+
+                combinacion.Clear();
+            }
+        }
+
     }
 }
