@@ -22,12 +22,12 @@ public class Hechizo : MonoBehaviour
             h.canvas.enabled = true;
         }
 
-        if (h.semilla)
+        /*if ()
         {
             Debug.Log("Has conseguido una semilla");
             inventarioScript.AgregarItem("semilla", prefabSemilla);
-            h.semilla = false;
-        }
+             = false;
+        }*/
     }
 
     void OnCollisionEnter(Collision collision)
