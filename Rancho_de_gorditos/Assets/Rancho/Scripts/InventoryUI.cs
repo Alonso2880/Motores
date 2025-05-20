@@ -21,6 +21,9 @@ public class InventoryUI : MonoBehaviour
     public List<Button> IconoButtons;
     public List<bool> IconosB;
 
+    private GameObject Ajs;
+    public Button Ajustes, Cartas;
+
 
     //Sprites
     public Sprite Spritehuevo;
@@ -84,10 +87,18 @@ public class InventoryUI : MonoBehaviour
         c = inventoryPanel.GetComponent<Canvas>();
         c.enabled = false;
         salir.onClick.AddListener(() => ads());
+        Ajustes.onClick.AddListener(() => ajus());
         player = GameObject.Find("Player");
+        Ajs = GameObject.Find("Ajustes");
 
     }
 
+    private void ajus()
+    {
+        AjustesUI a = Ajs.GetComponent<AjustesUI>();
+        c.enabled = false;
+        a.inicio();
+    }
     private void ads()
     {
         c.enabled = false;
