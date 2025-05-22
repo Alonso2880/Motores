@@ -45,7 +45,7 @@ public class MenuPausaUI : MonoBehaviour
     {
         if(AjustesU != null)
         {
-            Debug.Log("H");
+            //Debug.Log("H");
         }
     }
 }

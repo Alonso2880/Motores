@@ -72,7 +72,7 @@ public class Hechizos : MonoBehaviour
     
     void Update()
     {
-        Debug.Log($"Combinación actual ({combinacion.Length}): {combinacion}");
+        //Debug.Log($"Combinación actual ({combinacion.Length}): {combinacion}");
         Hechizo h = player.GetComponent<Hechizo>();
 
         if(combinacion.Length == secuenciaNaranjas.Length && h.col.name == "BroteNaranja" && combinacion.ToString() == secuenciaNaranjas)

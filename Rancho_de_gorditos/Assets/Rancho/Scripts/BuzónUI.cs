@@ -67,6 +67,8 @@ public class BuzónUI : MonoBehaviour
         switch (i)
         {
             case 1:
+                Debug.Log("Carta 1");
+                can.enabled=true;
                 panel.SetActive(true);
                 entregar1.gameObject.SetActive(true);
                 entregar2.gameObject.SetActive(false);
