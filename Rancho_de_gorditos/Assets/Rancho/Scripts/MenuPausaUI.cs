@@ -6,6 +6,8 @@ public class MenuPausaUI : MonoBehaviour
     public Canvas c;
     public Button pausa, salir, ajustes;
     private GameObject ManuInicio, AjustesU;
+
+    [HideInInspector] public bool pausaM = false;
     void Start()
     {
         pausa.onClick.AddListener(() => opciones(1));
@@ -14,7 +16,7 @@ public class MenuPausaUI : MonoBehaviour
         c.enabled = false;
 
         ManuInicio = GameObject.Find("MenuInicio");
-        AjustesU = GameObject.Find("Ajustes");
+        AjustesU = GameObject.Find("AjustesIU");
     }
 
     private void opciones (int n)
@@ -41,6 +43,9 @@ public class MenuPausaUI : MonoBehaviour
    
     void Update()
     {
-        
+        if(AjustesU != null)
+        {
+            Debug.Log("H");
+        }
     }
 }

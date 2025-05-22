@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class ObtenerMateriales : MonoBehaviour
 {
-    private GameObject jugador, piedra;
-    private int piedras = 2;
+    private GameObject jugador, piedra, madera;
     public GameObject piedraMat;
     void Start()
     {
@@ -15,26 +14,35 @@ public class ObtenerMateriales : MonoBehaviour
     {
         LlevarObjeto l = jugador.GetComponent<LlevarObjeto>();
         guardar_Inventario inventarioScript = this.GetComponent<guardar_Inventario>();
-        //Guardar_Inventario_Bosque inventarioScript = GameObject.FindAnyObjectByType<Guardar_Inventario_Bosque>();
         if (l.picaPiedras)
         {
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-
-                /*for (int a = 0; a < piedras; a++)
-                {
-
-                    inventarioScript.AgregarItem("Piedra", null);
-                }*/
-                inventarioScript.AgregarItem("Piedra", piedraMat);
-                Destroy(piedra);
+                inventarioScript.AgregarItem("Roca", piedraMat);
                 Debug.Log("Me muero");
                 piedra = null;
             }
-
-
         }
+    }
+
+    private void cortarMadera()
+    {
+        LlevarObjeto l = jugador.GetComponent<LlevarObjeto>();
+        guardar_Inventario inventarioScript = this.GetComponent<guardar_Inventario>();
+
+        if (l.hacha)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                inventarioScript.AgregarItem("Madera", null);
+                inventarioScript.AgregarItem("Madera", null);
+                Debug.Log("Me muero");
+                madera = null;
+
+            }
+        }
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -46,6 +54,12 @@ public class ObtenerMateriales : MonoBehaviour
             piedra = collision.gameObject;
             picarPiedra();
             
+        }
+
+        if (collision.gameObject.CompareTag("madera"))
+        {
+            madera = collision.gameObject;
+            cortarMadera();
         }
     }
 }

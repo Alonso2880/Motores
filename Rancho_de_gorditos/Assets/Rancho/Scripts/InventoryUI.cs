@@ -11,7 +11,7 @@ public class InventoryUI : MonoBehaviour
     public Transform itemsParent;
     public GameObject inventoryPanel;
     public GameObject itemUIPrefab;
-    private Canvas c;
+   [HideInInspector] public Canvas c;
     public Button salir;
     private bool adios=false;
 
@@ -80,7 +80,6 @@ public class InventoryUI : MonoBehaviour
     public Image TextoSemillaTomate;
     public Image TextoSemillaZanahoria;
 
-
     void Start()
     {
         
@@ -89,7 +88,7 @@ public class InventoryUI : MonoBehaviour
         salir.onClick.AddListener(() => ads());
         Ajustes.onClick.AddListener(() => ajus());
         player = GameObject.Find("Player");
-        Ajs = GameObject.Find("Ajustes");
+        Ajs = GameObject.Find("AjustesIU");
 
     }
 

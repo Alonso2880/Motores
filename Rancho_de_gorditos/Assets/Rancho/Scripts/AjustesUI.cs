@@ -5,7 +5,7 @@ public class AjustesUI : MonoBehaviour
 {
     public Canvas can;
     public Button volver;
-    private GameObject MP;
+    private GameObject MP, InvenUI;
     public Slider volumen, brillo;
     
     public Image brightnessOverlay;
@@ -18,6 +18,7 @@ public class AjustesUI : MonoBehaviour
         volver.onClick.AddListener(() => Volver());
 
         MP = GameObject.Find("MenuPausa");
+        InvenUI = GameObject.Find("InventoryPanel");
 
         float volumenG = PlayerPrefs.GetFloat("VolumenMaestro", 0.5f);
         float brilloG = PlayerPrefs.GetFloat(BrightnessKey, 1f);
@@ -68,8 +69,10 @@ public class AjustesUI : MonoBehaviour
     private void Volver()
     {
         MenuPausaUI m = MP.GetComponent<MenuPausaUI>();
-
-        can.enabled = false;
-        m.c.enabled = true;
+            can.enabled = false;
+            m.c.enabled = true;
+          
+        
+        
     }
 }

@@ -27,6 +27,8 @@ TagManager:
   - Recogida_Lana
   - Recogida_Leche
   - Recogida_Carne
+  - Hacha
+  - madera
   layers:
   - Default
   - TransparentFX

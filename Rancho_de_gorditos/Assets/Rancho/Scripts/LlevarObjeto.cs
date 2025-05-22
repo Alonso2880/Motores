@@ -7,7 +7,7 @@ public class LlevarObjeto : MonoBehaviour
     public GameObject lugarSuc;
     [HideInInspector] public GameObject herramienta;
     public Transform Objeto;
-    [HideInInspector] public bool v, picaPiedras=true;
+    [HideInInspector] public bool v, picaPiedras = true, hacha = true;
     private float fuerza = 10f;
     public Animator animator;
 
@@ -25,6 +25,12 @@ public class LlevarObjeto : MonoBehaviour
                 {
                     TirarObjeto();
                     picaPiedras = false;
+                }
+
+                if (hacha)
+                {
+                    TirarObjeto();
+                    hacha = false;
                 }
                 
             }
@@ -46,6 +52,19 @@ public class LlevarObjeto : MonoBehaviour
                 v = true;
                 picaPiedras = true;
                
+                break;
+            }
+
+            if (col.CompareTag("Hacha"))
+            {
+                herramienta = col.gameObject;
+
+                herramienta.transform.SetParent(Objeto);
+                herramienta.transform.position = Objeto.position;
+                herramienta.GetComponent<Rigidbody>().isKinematic = true;
+                v = true;
+                hacha = true;
+
                 break;
             }
         }
