@@ -47,7 +47,7 @@ public class huerto : MonoBehaviour
 
         if (pimiento)
         {
-
+            crecimientoPimientos();
         }
     }
     
@@ -190,6 +190,42 @@ public class huerto : MonoBehaviour
                 crec++;
             }
         }
+    }
+
+    private void crecimientoPimientos()
+    {
+        Vector3 nuevaPosHueco1 = huecoPlantar.localPosition;
+        Vector3 nuevaPosHueco2 = huecoPlantar2.localPosition;
+
+        casa c = Casa.GetComponent<casa>();
+        if (hueco1 && crec == 1)
+        {
+            if (dia != c.dia)
+            {
+                Destroy(semilla1Prefab);
+                nuevaPosHueco1.y = YBrote;
+                huecoPlantar.localPosition = nuevaPosHueco1;
+                semilla1Prefab = Instantiate(brote, huecoPlantar.position, huecoPlantar.rotation);
+                semilla1Prefab.transform.SetParent(huecoPlantar);
+                dia = c.dia;
+                crec++;
+            }
+        }
+
+        if (hueco1 && crec == 2)
+        {
+            if (dia != c.dia)
+            {
+                nuevaPosHueco1.y = YTomate;
+                huecoPlantar.localPosition = nuevaPosHueco1;
+                Destroy(semilla1Prefab);
+                semilla1Prefab = Instantiate(pimientos, huecoPlantar.position, huecoPlantar.rotation);
+                semilla1Prefab.transform.SetParent(huecoPlantar);
+                dia = c.dia;
+                crec++;
+            }
+        }
+
     }
 
 

@@ -10,7 +10,7 @@ public class InventoryUI : MonoBehaviour
 
     public Transform itemsParent;
     public GameObject inventoryPanel;
-    public GameObject itemUIPrefab;
+    public GameObject itemUIPrefab, buzón;
    [HideInInspector] public Canvas c;
     public Button salir;
     private bool adios=false;
@@ -87,6 +87,7 @@ public class InventoryUI : MonoBehaviour
         c.enabled = false;
         salir.onClick.AddListener(() => ads());
         Ajustes.onClick.AddListener(() => ajus());
+        Cartas.onClick.AddListener(() => buz());
         player = GameObject.Find("Player");
         Ajs = GameObject.Find("MenuPausa");
 
@@ -97,6 +98,13 @@ public class InventoryUI : MonoBehaviour
         MenuPausaUI a = Ajs.GetComponent<MenuPausaUI>();
         c.enabled = false;
         a.inicio();
+    }
+
+    private void buz()
+    {
+        BuzónUI b = buzón.GetComponent<BuzónUI>();
+        c.enabled = false;
+        b.abrir();
     }
     private void ads()
     {

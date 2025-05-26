@@ -28,6 +28,7 @@ public class ObtenerMateriales : MonoBehaviour
 
     private void cortarMadera()
     {
+
         LlevarObjeto l = jugador.GetComponent<LlevarObjeto>();
         guardar_Inventario inventarioScript = this.GetComponent<guardar_Inventario>();
 
@@ -47,19 +48,44 @@ public class ObtenerMateriales : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        
+        LlevarObjeto l = jugador.GetComponent<LlevarObjeto>();
+        guardar_Inventario inventarioScript = this.GetComponent<guardar_Inventario>();
+
         if (collision.gameObject.CompareTag("Piedra"))
         {
             
             piedra = collision.gameObject;
-            picarPiedra();
-            
+            // picarPiedra();
+            if (l.picaPiedras)
+            {
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    inventarioScript.AgregarItem("Roca", piedraMat);
+                    Debug.Log("Me muero");
+                    piedra = null;
+                }
+            }
+
         }
 
         if (collision.gameObject.CompareTag("madera"))
         {
+            //Debug.Log("hh");
             madera = collision.gameObject;
-            cortarMadera();
+            // cortarMadera();
+
+            if (l.hacha)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    inventarioScript.AgregarItem("Madera", null);
+                    inventarioScript.AgregarItem("Madera", null);
+                    Debug.Log("Me muero");
+                    madera = null;
+
+                }
+            }
         }
     }
 }

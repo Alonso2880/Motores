@@ -9,7 +9,7 @@ public class ZonasUI : MonoBehaviour
     public Canvas c;
     public TextMeshProUGUI Rancho;
     public TextMeshProUGUI Bosque;
-   [HideInInspector] public bool rancho = false, bosque = false;
+    public bool rancho = false, bosque = false;
     private float tiempo = 3f;
     private bool mostrado = false;
 

@@ -11,7 +11,7 @@ public class HuertoUI : MonoBehaviour
     public Transform HuecoHuerto, HuecoHuerto2, HuecoHuerto3, HuecoHuerto4;
     private GameObject HuertoG, jugador;
     private bool compHu1 = false, compHu2 = false, compHu3 = false, compHu4 = false, mejHu1 = false, mejHu2 = false, mejHu3 = false, mejHu4 = false;
-
+    [HideInInspector] public GameObject contmonedas;
     void Start()
     {
         huertoManager = Object.FindFirstObjectByType<HuertoManager>();
@@ -116,6 +116,7 @@ public class HuertoUI : MonoBehaviour
 
     private void ComprarH()
     {
+        Contador_Moneas cont = contmonedas.GetComponent<Contador_Moneas>();
         if (!compHu1) 
         { 
         HuertoG = Instantiate(HuertoPrerfab, HuecoHuerto.position, HuecoHuerto.rotation);
@@ -124,26 +125,29 @@ public class HuertoUI : MonoBehaviour
         CerrarUI();
         }
 
-        if(compHu1 && mejHu1)
+        if(compHu1 && mejHu1 && cont.monedas >=50)
         {
             HuertoG = Instantiate(HuertoPrerfab, HuecoHuerto2.position, HuecoHuerto2.rotation);
             HuertoG.transform.SetParent(HuecoHuerto2);
             compHu2 = true;
+            cont.monedas -= 50;
             CerrarUI();
         }
 
-        if(compHu2 && mejHu2)
+        if(compHu2 && mejHu2 && cont.monedas >= 150)
         {
             HuertoG = Instantiate(HuertoPrerfab, HuecoHuerto3.position, HuecoHuerto3.rotation);
             HuertoG.transform.SetParent(HuecoHuerto3);
+            cont.monedas -= 150;
             compHu3 = true;
             CerrarUI();
         }
 
-        if(compHu3 && mejHu3)
+        if(compHu3 && mejHu3 && cont.monedas >= 250)
         {
             HuertoG = Instantiate(HuertoPrerfab, HuecoHuerto4.position, HuecoHuerto4.rotation);
             HuertoG.transform.SetParent(HuecoHuerto4);
+            cont.monedas -= 250;
             compHu4 = true;
             CerrarUI();
         }
@@ -153,26 +157,54 @@ public class HuertoUI : MonoBehaviour
     {
         if (compHu1)
         {
-            mejHu1 = true;
-            CerrarUI();
+            var inventory = guardar_Inventario.Instance;
+            InventoryItemData RocaItem = inventory.inventario.Find(item => item.nombre == "Roca");
+            if (RocaItem != null && RocaItem.count >= 10)
+            {
+                mejHu1 = true;
+                RocaItem.count -= 10;
+                CerrarUI();
+            } 
+            
         }
 
         if (compHu2)
         {
-            mejHu2 = true;
-            CerrarUI();
+            var inventory = guardar_Inventario.Instance;
+            InventoryItemData RocaItem = inventory.inventario.Find(item => item.nombre == "Roca");
+            if(RocaItem != null && RocaItem.count >= 10)
+            {
+                mejHu2 = true;
+                RocaItem.count -= 10;
+                CerrarUI();
+            }
+            
         }
 
         if (compHu3)
         {
-            mejHu3 = true;
-            CerrarUI();
+            var inventory = guardar_Inventario.Instance;
+            InventoryItemData RocaItem = inventory.inventario.Find(item => item.nombre == "Roca");
+            if(RocaItem != null && RocaItem.count >= 10)
+            {
+                mejHu3 = true;
+                RocaItem.count -= 10;
+                CerrarUI();
+            }
+            
         }
 
         if (compHu4)
         {
-            mejHu4 = true;
-            CerrarUI();
+            var inventory = guardar_Inventario.Instance;
+            InventoryItemData RocaItem = inventory.inventario.Find(item => item.nombre == "Roca");
+            if(RocaItem != null && RocaItem.count >= 10)
+            {
+                mejHu4 = true;
+                RocaItem.count -= 10;
+                CerrarUI();
+            }
+            
         }
     }
 
@@ -233,22 +265,137 @@ public class HuertoUI : MonoBehaviour
                 case Planta.Tipo.Zanahoria:
                     inventarioScript.AgregarItem("Semilla_Zanahoria", null);
                     inventarioScript.AgregarItem("Zanahoria", null);
+
+                    if (mejHu1)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Zanahoria", null);
+                        inventarioScript.AgregarItem("Zanahoria", null);
+                    }
+
+                    if (mejHu2)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Zanahoria", null);
+                        inventarioScript.AgregarItem("Zanahoria", null);
+                        inventarioScript.AgregarItem("Zanahoria", null);
+
+                    }
+
+                    if (mejHu3)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Zanahoria", null);
+                        inventarioScript.AgregarItem("Zanahoria", null);
+                        inventarioScript.AgregarItem("Zanahoria", null);
+                        inventarioScript.AgregarItem("Zanahoria", null);
+                    }
+
+                    if (mejHu4)
+                    {
+                        inventarioScript.AgregarItem("Zanahoria", null);
+                        inventarioScript.AgregarItem("Zanahoria", null);
+                        inventarioScript.AgregarItem("Zanahoria", null);
+                    }
+
                     break;
                 case Planta.Tipo.Patata:
                     inventarioScript.AgregarItem("Semilla_Patata", null);
                     inventarioScript.AgregarItem("Patata", null);
+
+                    if (mejHu1)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Patata", null);
+                        inventarioScript.AgregarItem("Patata", null);
+                    }
+
+                    if (mejHu2)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Patata", null);
+                        inventarioScript.AgregarItem("Patata", null);
+                        inventarioScript.AgregarItem("Patata", null);
+                    }
+
+                    if (mejHu3)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Patata", null);
+                        inventarioScript.AgregarItem("Patata", null);
+                        inventarioScript.AgregarItem("Patata", null);
+                        inventarioScript.AgregarItem("Patata", null);
+                    }
+
+                    if (mejHu4)
+                    {
+                        inventarioScript.AgregarItem("Patata", null);
+                        inventarioScript.AgregarItem("Patata", null);
+                        inventarioScript.AgregarItem("Patata", null);
+                    }
+
                     break;
 
                 case Planta.Tipo.Tomate:
                     inventarioScript.AgregarItem("Semilla_Tomate", null);
                     inventarioScript.AgregarItem("Tomate", null);
+
+                    if (mejHu1)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Tomate", null);
+                        inventarioScript.AgregarItem("Tomate", null);
+                    }
+
+                    if (mejHu2)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Tomate", null);
+                        inventarioScript.AgregarItem("Tomate", null);
+                        inventarioScript.AgregarItem("Tomate", null);
+                    }
+
+                    if (mejHu3)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Tomate", null);
+                        inventarioScript.AgregarItem("Tomate", null);
+                        inventarioScript.AgregarItem("Tomate", null);
+                        inventarioScript.AgregarItem("Tomate", null);
+                    }
+
+                    if (mejHu4)
+                    {
+                        inventarioScript.AgregarItem("Tomate", null);
+                        inventarioScript.AgregarItem("Tomate", null);
+                        inventarioScript.AgregarItem("Tomate", null);
+                    }
                     break;
 
                 case Planta.Tipo.Pimiento:
                     inventarioScript.AgregarItem("Semilla_Pimiento", null);
                     inventarioScript.AgregarItem("Pimiento", null);
+                    if (mejHu1)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Pimiento", null);
+                        inventarioScript.AgregarItem("Pimiento", null);
+                    }
+
+                    if (mejHu2)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Pimiento", null);
+                        inventarioScript.AgregarItem("Pimiento", null);
+                        inventarioScript.AgregarItem("Pimiento", null);
+                    }
+
+                    if (mejHu3)
+                    {
+                        inventarioScript.AgregarItem("Semilla_Pimiento", null);
+                        inventarioScript.AgregarItem("Pimiento", null);
+                        inventarioScript.AgregarItem("Pimiento", null);
+                        inventarioScript.AgregarItem("Pimiento", null);
+                    }
+
+                    if (mejHu4)
+                    {
+                        inventarioScript.AgregarItem("Pimiento", null);
+                        inventarioScript.AgregarItem("Pimiento", null);
+                        inventarioScript.AgregarItem("Pimiento", null);
+                    }
                     break;
+            }
             }
         }
     }
-}
+

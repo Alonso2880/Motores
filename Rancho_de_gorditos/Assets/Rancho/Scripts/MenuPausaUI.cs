@@ -4,8 +4,9 @@ using UnityEngine.UI;
 public class MenuPausaUI : MonoBehaviour
 {
     public Canvas c;
-    public Button pausa, salir, ajustes;
+    public Button pausa, salir, ajustes, inventario, cartas;
     private GameObject ManuInicio, AjustesU;
+    public GameObject Inventario, buzon;
 
     [HideInInspector] public bool pausaM = false;
     void Start()
@@ -13,11 +14,29 @@ public class MenuPausaUI : MonoBehaviour
         pausa.onClick.AddListener(() => opciones(1));
         salir.onClick.AddListener(()=> opciones (2));
         ajustes.onClick.AddListener(()=> opciones(3));
+        inventario.onClick.AddListener(() => invent());
+        cartas.onClick.AddListener(() => cart());
         c.enabled = false;
 
         ManuInicio = GameObject.Find("MenuInicio");
         AjustesU = GameObject.Find("AjustesIU");
     }
+
+    private void invent()
+    {
+        InventoryUI i = Inventario.GetComponent<InventoryUI>();
+        c.enabled = false;
+        i.c.enabled = true;
+    }
+
+    private void cart()
+    {
+        BuzónUI b = buzon.GetComponent<BuzónUI>();
+        c.enabled = false;
+        b.abrir();
+    }
+
+
 
     private void opciones (int n)
     {

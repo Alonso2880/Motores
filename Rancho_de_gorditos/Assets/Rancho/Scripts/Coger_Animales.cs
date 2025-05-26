@@ -16,7 +16,7 @@ public class Coger_Animales : MonoBehaviour
     void Start()
     {
         player = this.gameObject;
-        gallina = GameObject.Find("Gallina").GetComponent<Gallina>();
+        gallina = GameObject.Find("Pollo").GetComponent<Gallina>();
     }
 
 

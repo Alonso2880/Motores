@@ -1,10 +1,11 @@
+using System.Runtime.ConstrainedExecution;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Menu_Parcelas2 : MonoBehaviour
 {
-    private GameObject baseParcelas, gallina;
+    private GameObject baseParcelas, gallina, cerdo, vaca, oveja;
     public GameObject terreno, buzon;
     private Canvas canvasP;
     public Button Comprar_Gallinas;
@@ -31,8 +32,11 @@ public class Menu_Parcelas2 : MonoBehaviour
         canvasP = GetComponent<Canvas>();
         canvasP.enabled = false;
 
-        baseParcelas = GameObject.Find("Base de parcelas2");
-        gallina = GameObject.Find("Gallina");
+        baseParcelas = GameObject.Find("Base de parcelas");
+        gallina = GameObject.Find("Pollo");
+        cerdo = GameObject.Find("Cerdo");
+        vaca = GameObject.Find("Vaca");
+        oveja = GameObject.Find("Oveja");
         contmonedas = GameObject.Find("Canvas");
         //buzon = GameObject.Find("MenúBuzón");
     }
@@ -82,15 +86,20 @@ public class Menu_Parcelas2 : MonoBehaviour
 
     public void Mejoras(int n)
     {
-        Añadir_Mejorar_Parcela2 a = baseParcelas.GetComponent<Añadir_Mejorar_Parcela2>();
+        Añadir_Mejorar_Parcela a = baseParcelas.GetComponent<Añadir_Mejorar_Parcela>();
         Gallina g = gallina.GetComponent<Gallina>();
+        Cerdo c = cerdo.GetComponent<Cerdo>();
+        Vaca v = vaca.GetComponent<Vaca>();
+        Oveja o = oveja.GetComponent<Oveja>();
         Contador_Moneas cont = contmonedas.GetComponent<Contador_Moneas>();
+        var inventory = guardar_Inventario.Instance;
+        InventoryItemData MaderaItem = inventory.inventario.Find(item => item.nombre == "Madera");
         if (comprado)
         {
             switch (n)
             {
                 case 1:
-                    if(cont.monedas < 4)
+                    if (cont.monedas < 30)
                     {
                         Debug.Log("Te faltan monedas");
                     }
@@ -99,15 +108,34 @@ public class Menu_Parcelas2 : MonoBehaviour
                         if (terreno.tag == "T_Gallinas")
                         {
                             Gallina.multHuevo = 2;
+                            cont.monedas -= 30;
                         }
-                        
-                        cont.monedas -= 4;
+
+                        if (terreno.tag == "T_Cerdos")
+                        {
+                            Cerdo.multcarne = 2;
+                            cont.monedas -= 30;
+                        }
+
+                        if (terreno.tag == "T_Vacas")
+                        {
+                            Vaca.multLeche = 2;
+                            cont.monedas -= 30;
+                        }
+
+                        if (terreno.tag == "T_Ovejas")
+                        {
+                            Oveja.multLana = 2;
+                            cont.monedas -= 30;
+                        }
+
+
                     }
-                    
+
                     CerrarMenu();
                     break;
                 case 2:
-                    if(cont.monedas < 6)
+                    if (MaderaItem != null && MaderaItem.count >= 15)
                     {
                         Debug.Log("Te faltan monedas");
                     }
@@ -116,15 +144,16 @@ public class Menu_Parcelas2 : MonoBehaviour
                         if (galli)
                         {
                             a.AmpliarParcela();
-                            cont.monedas -= 6;
+                            MaderaItem.count -= 15;
                         }
                         else
                         {
                             a.AmpliarParcelaResto();
-                            cont.monedas -= 6;
+                            MaderaItem.count -= 15;
                         }
+
                     }
-                    
+
                     CerrarMenu();
                     break;
                 case 3:

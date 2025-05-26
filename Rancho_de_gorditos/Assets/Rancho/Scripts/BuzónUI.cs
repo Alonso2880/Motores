@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class BuzónUI : MonoBehaviour
 {
-    public Button Vercarta1, Vercarta2, Vercarta3, entregar1, entregar2, entregar3, minijuego;
+    public Button Vercarta1, Vercarta2, Vercarta3, entregar1, entregar2, entregar3, minijuego, inventario, ajustes;
     public Button salir;
     public Canvas can;
-    public GameObject panel, panel2, panel3;
+    public GameObject panel, panel2, panel3, Inventario, Pausa;
     private Image i, i2, i3;
     private GameObject Casa;
     public bool E1 = false, E2= false, E3= false, EM = false;
@@ -22,6 +22,8 @@ public class BuzónUI : MonoBehaviour
         entregar2.onClick.AddListener(() => Entrega2());
         entregar3.onClick.AddListener(() => Entrega3());
         minijuego.onClick.AddListener(() => Minijuego());
+        inventario.onClick.AddListener(() => invent());
+        ajustes.onClick.AddListener(() => ajust());
 
         can = this.gameObject.GetComponent<Canvas>();
         can.enabled = false;
@@ -34,6 +36,21 @@ public class BuzónUI : MonoBehaviour
 
 
     }
+
+    private void invent()
+    {
+        InventoryUI i = Inventario.GetComponent<InventoryUI>();
+        can.enabled = false;
+        i.c.enabled = true;
+    }
+
+    private void ajust()
+    {
+        MenuPausaUI m = Pausa.GetComponent<MenuPausaUI>();
+        can.enabled = false;
+        m.inicio();
+    }
+
 
     private void Update()
     {

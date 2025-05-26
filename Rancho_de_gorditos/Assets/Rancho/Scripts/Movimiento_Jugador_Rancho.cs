@@ -8,6 +8,7 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
     private Vector3 pos;
     private const float fixedY = 0.002f;
     private GameObject Zona, menuPausa, huertoUI, menuInicial;
+    public GameObject Rancho, Bosque;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
         ZonasUI z = Zona.GetComponent<ZonasUI>();
         HuertoUI h = huertoUI.GetComponent<HuertoUI>();
         MenuInicio m = menuInicial.GetComponent<MenuInicio>();
-        if (collision.gameObject.CompareTag("Rancho"))
+        if (collision.gameObject == Rancho)
         {
             if (!m.menuIncio)
             {
@@ -41,9 +42,9 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
             
         }
 
-        if (collision.gameObject.CompareTag("Bosque"))
+        if (collision.gameObject == Bosque)
         {
-
+            
             if (!m.menuIncio)
             {
                 z.bosque = false;
