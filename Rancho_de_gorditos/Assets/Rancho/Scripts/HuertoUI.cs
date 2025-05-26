@@ -7,7 +7,7 @@ public class HuertoUI : MonoBehaviour
     public Button Zanahoria, Patata, Cerrar, ComprarHuerto, MejorarHuerto, Cosechar, Tomate, Pimiento, MejoraHuerto;
     private HuertoManager huertoManager;
     public Canvas canvas;
-    public GameObject HuertoPrerfab;
+    public GameObject HuertoPrerfab, buzon;
     public Transform HuecoHuerto, HuecoHuerto2, HuecoHuerto3, HuecoHuerto4;
     private GameObject HuertoG, jugador;
     private bool compHu1 = false, compHu2 = false, compHu3 = false, compHu4 = false, mejHu1 = false, mejHu2 = false, mejHu3 = false, mejHu4 = false;
@@ -25,6 +25,13 @@ public class HuertoUI : MonoBehaviour
         MejoraHuerto.onClick.AddListener(() => mejorar());
         canvas.enabled = false;
         jugador = GameObject.Find("Player");
+
+        Zanahoria.gameObject.SetActive(false);
+        Patata.gameObject.SetActive(false);
+        Tomate.gameObject.SetActive(false);
+        Pimiento.gameObject.SetActive(false);
+        Cosechar.gameObject.SetActive(false);
+        MejoraHuerto.gameObject.SetActive(false);
     }
 
     private void Plantar(int tipo)
@@ -179,6 +186,37 @@ public class HuertoUI : MonoBehaviour
     {
         Time.timeScale = 0;
         canvas.enabled = true;
+        BuzónUI b = buzon.GetComponent<BuzónUI>();
+
+        if(compHu1 && !b.E1 && !b.E2)
+        {
+            Cosechar.gameObject.SetActive(true);
+            MejoraHuerto.gameObject.SetActive(true);
+            Zanahoria.gameObject.SetActive(true);
+            Tomate.gameObject.SetActive(true);
+            Patata.gameObject.SetActive(false);
+            Pimiento.gameObject.SetActive(false);
+        }
+
+        if (compHu1 && b.E1 && !b.E2)
+        {
+            Cosechar.gameObject.SetActive(true);
+            MejoraHuerto.gameObject.SetActive(true);
+            Zanahoria.gameObject.SetActive(true);
+            Tomate.gameObject.SetActive(true);
+            Patata.gameObject.SetActive(true);
+            Pimiento.gameObject.SetActive(false);
+        }
+
+        if (compHu1 && b.E1 && b.E2)
+        {
+            Cosechar.gameObject.SetActive(true);
+            MejoraHuerto.gameObject.SetActive(true);
+            Zanahoria.gameObject.SetActive(true);
+            Tomate.gameObject.SetActive(true);
+            Patata.gameObject.SetActive(true);
+            Pimiento.gameObject.SetActive(true);
+        }
 
     }
 

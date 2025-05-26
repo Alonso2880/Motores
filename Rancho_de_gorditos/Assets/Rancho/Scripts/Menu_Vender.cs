@@ -16,7 +16,7 @@ public class Menu_Vender : MonoBehaviour
         v_huevos.onClick.AddListener(OnClickVender);
         salir.onClick.AddListener(CerrarMenu);
 
-        tienda = GameObject.Find("Tienda_Vender");
+        tienda = GameObject.Find("TiendaVender");
 
         menu_vender = this.gameObject;
         canvasV = this.GetComponent<Canvas>();

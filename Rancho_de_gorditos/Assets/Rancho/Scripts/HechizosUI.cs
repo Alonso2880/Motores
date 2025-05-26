@@ -169,7 +169,7 @@ public class Hechizos : MonoBehaviour
             Izquierda_Il.GetComponent<Image>().enabled = false;
             canvas.enabled = false;
             combinacion.Clear();
-            
+            Time.timeScale = 1;
         }
     }
 }

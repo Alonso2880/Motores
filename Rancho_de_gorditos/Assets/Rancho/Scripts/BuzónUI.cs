@@ -67,27 +67,67 @@ public class BuzónUI : MonoBehaviour
         switch (i)
         {
             case 1:
-                Debug.Log("Carta 1");
-                can.enabled=true;
-                panel.SetActive(true);
-                entregar1.gameObject.SetActive(true);
-                entregar2.gameObject.SetActive(false);
-                entregar3.gameObject.SetActive(false);
+                if (!E1)
+                {
+                    Debug.Log("Carta 1");
+                    can.enabled = true;
+                    panel.SetActive(true);
+                    entregar1.gameObject.SetActive(true);
+                    entregar2.gameObject.SetActive(false);
+                    entregar3.gameObject.SetActive(false);
+                }
+                if (E1)
+                {
+                    Debug.Log("Carta 1");
+                    can.enabled = true;
+                    panel.SetActive(true);
+                    entregar1.gameObject.SetActive(false);
+                    entregar2.gameObject.SetActive(false);
+                    entregar3.gameObject.SetActive(false);
+                }
                 break;
+
+
             case 2:
                 cerrar();
                 break;
+
+
             case 3:
-                panel2.SetActive(true);
-                entregar2.gameObject.SetActive(true);
-                entregar3.gameObject.SetActive(false);
-                entregar1.gameObject.SetActive(false);
+                if (!E2)
+                {
+                    panel2.SetActive(true);
+                    entregar2.gameObject.SetActive(true);
+                    entregar3.gameObject.SetActive(false);
+                    entregar1.gameObject.SetActive(false);
+                }
+                if (E2)
+                {
+                    panel2.SetActive(true);
+                    entregar2.gameObject.SetActive(false);
+                    entregar3.gameObject.SetActive(false);
+                    entregar1.gameObject.SetActive(false);
+                }
+                
                 break;
+
+
             case 4:
-                panel3.SetActive(true);
-                entregar3.gameObject.SetActive(true);
-                entregar2.gameObject.SetActive(false);
-                entregar1.gameObject.SetActive(false);
+                if (!E3)
+                {
+                    panel3.SetActive(true);
+                    entregar3.gameObject.SetActive(true);
+                    entregar2.gameObject.SetActive(false);
+                    entregar1.gameObject.SetActive(false);
+                }
+                if (E3)
+                {
+                    panel3.SetActive(true);
+                    entregar3.gameObject.SetActive(false);
+                    entregar2.gameObject.SetActive(false);
+                    entregar1.gameObject.SetActive(false);
+                }
+               
                 break;
         }
     }
@@ -114,15 +154,26 @@ public class BuzónUI : MonoBehaviour
     private void Entrega1()
     {
         var inventory = guardar_Inventario.Instance;
-        InventoryItemData HuevosItem = inventory.inventario.Find(item => item.nombre == "Huevos");
+        InventoryItemData HuevosItem = inventory.inventario.Find(item => item.nombre == "Huevo");
         InventoryItemData ZanItem = inventory.inventario.Find(item => item.nombre == "Zanahoria");
         InventoryItemData TomaItem = inventory.inventario.Find(item => item.nombre == "Tomate");
 
-        if(HuevosItem != null && HuevosItem.count >=30 && ZanItem != null && ZanItem.count >= 6 && TomaItem != null && TomaItem.count >= 6)
+        /*if(HuevosItem != null && HuevosItem.count >=30 && ZanItem != null && ZanItem.count >= 6 && TomaItem != null && TomaItem.count >= 6)
         {
             HuevosItem.count -= 30;
             ZanItem.count -= 6;
             TomaItem.count -= 6;
+            E1 = true;
+        }
+        else
+        {
+            Debug.Log("no");
+        }*/
+
+        if (HuevosItem != null && HuevosItem.count >= 5)
+        {
+            HuevosItem.count -= 5;
+            entregar1.gameObject.SetActive(false);
             E1 = true;
         }
         else
@@ -136,7 +187,7 @@ public class BuzónUI : MonoBehaviour
     private void Entrega2()
     {
         var inventory = guardar_Inventario.Instance;
-        InventoryItemData HuevosItem = inventory.inventario.Find(item => item.nombre == "Huevos");
+        InventoryItemData HuevosItem = inventory.inventario.Find(item => item.nombre == "Huevo");
         InventoryItemData CarneItem = inventory.inventario.Find(item => item.nombre == "Carne");
         InventoryItemData PatItem = inventory.inventario.Find(item => item.nombre == "Patata");
         InventoryItemData PiedraItem = inventory.inventario.Find(item => item.nombre == "Roca");
@@ -160,7 +211,7 @@ public class BuzónUI : MonoBehaviour
     private void Entrega3()
     {
         var inventory = guardar_Inventario.Instance;
-        InventoryItemData HuevosItem = inventory.inventario.Find(item => item.nombre == "Huevos");
+        InventoryItemData HuevosItem = inventory.inventario.Find(item => item.nombre == "Huevo");
         InventoryItemData CarneItem = inventory.inventario.Find(item => item.nombre == "Carne");
         InventoryItemData LecheItem = inventory.inventario.Find(item => item.nombre == "Leche");
         InventoryItemData MaderaItem = inventory.inventario.Find(item => item.nombre == "Madera");

@@ -68,6 +68,7 @@ public class guardar_Inventario : MonoBehaviour
             {
                 AgregarHuevo();
                 Debug.Log("Hola");
+                colisionado = null;
             }
             else
             {
@@ -83,6 +84,7 @@ public class guardar_Inventario : MonoBehaviour
 
                     AgregarItem(itemData.nombre, itemData.prefab);
                     Destroy(colisionado);
+                    colisionado = null;
 
 
                 }
@@ -92,18 +94,21 @@ public class guardar_Inventario : MonoBehaviour
             {
                 AgregarCarne();
                 Debug.Log("Hola");
+                colisionado = null;
             }
 
             if (colisionado.tag == "Recogida_Lana")
             {
                 AgregarLana();
                 Debug.Log("Hola");
+                colisionado = null;
             }
 
             if (colisionado.tag == "Recogida_Leche")
             {
                 AgregarLeche();
                 Debug.Log("Hola");
+                colisionado = null;
             }
 
 

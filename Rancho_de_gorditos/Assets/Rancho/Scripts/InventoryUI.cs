@@ -88,13 +88,13 @@ public class InventoryUI : MonoBehaviour
         salir.onClick.AddListener(() => ads());
         Ajustes.onClick.AddListener(() => ajus());
         player = GameObject.Find("Player");
-        Ajs = GameObject.Find("AjustesIU");
+        Ajs = GameObject.Find("MenuPausa");
 
     }
 
     private void ajus()
     {
-        AjustesUI a = Ajs.GetComponent<AjustesUI>();
+        MenuPausaUI a = Ajs.GetComponent<MenuPausaUI>();
         c.enabled = false;
         a.inicio();
     }

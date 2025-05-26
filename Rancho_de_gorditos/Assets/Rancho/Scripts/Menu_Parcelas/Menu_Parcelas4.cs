@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Menu_Parcelas4 : MonoBehaviour
 {
     private GameObject baseParcelas, gallina;
-    public GameObject terreno;
+    public GameObject terreno, buzon;
     private Canvas canvasP;
     public Button Comprar_Gallinas;
     public Button Comprar_Vacas;
@@ -34,11 +34,7 @@ public class Menu_Parcelas4 : MonoBehaviour
         baseParcelas = GameObject.Find("Base de parcelas4");
         gallina = GameObject.Find("Gallina");
         contmonedas = GameObject.Find("Canvas");
-
-
-
-
-
+        //buzon = GameObject.Find("MenúBuzón");
     }
 
     public void ComprarP(int n)
@@ -143,24 +139,65 @@ public class Menu_Parcelas4 : MonoBehaviour
     {
         canvasP.enabled = true;
         Time.timeScale = 0;
-        if(comprado == false)
+        BuzónUI b = buzon.GetComponent<BuzónUI>();
+        if (comprado == false && !b.E1 && !b.E2 && !b.E3)
         {
             Comprar_Gallinas.gameObject.SetActive(true);
-            Comprar_Vacas.gameObject.SetActive(true);
-            Comprar_Cerdos.gameObject.SetActive(true);
-            Comprar_Ovejas.gameObject.SetActive(true);
+            Comprar_Vacas.gameObject.SetActive(false);
+            Comprar_Cerdos.gameObject.SetActive(false);
+            Comprar_Ovejas.gameObject.SetActive(false);
             Mejorar.gameObject.SetActive(false);
             Ampliar.gameObject.SetActive(false);
 
         }
         else
         {
-            Comprar_Gallinas.gameObject.SetActive(false);
-            Comprar_Vacas.gameObject.SetActive(false);
-            Comprar_Cerdos.gameObject.SetActive(false);
-            Comprar_Ovejas.gameObject.SetActive(false);
-            Mejorar.gameObject.SetActive(true);
-            Ampliar.gameObject.SetActive(true);
+            if (comprado == false && b.E1 && !b.E2 && !b.E3)
+            {
+                Comprar_Gallinas.gameObject.SetActive(true);
+                Comprar_Vacas.gameObject.SetActive(false);
+                Comprar_Cerdos.gameObject.SetActive(true);
+                Comprar_Ovejas.gameObject.SetActive(false);
+                Mejorar.gameObject.SetActive(false);
+                Ampliar.gameObject.SetActive(false);
+
+            }
+            else
+            {
+
+                if (comprado == false && b.E2 && !b.E3)
+                {
+                    Comprar_Gallinas.gameObject.SetActive(true);
+                    Comprar_Vacas.gameObject.SetActive(true);
+                    Comprar_Cerdos.gameObject.SetActive(true);
+                    Comprar_Ovejas.gameObject.SetActive(false);
+                    Mejorar.gameObject.SetActive(false);
+                    Ampliar.gameObject.SetActive(false);
+
+                }
+                else
+                {
+                    if (comprado == false && b.E3)
+                    {
+                        Comprar_Gallinas.gameObject.SetActive(true);
+                        Comprar_Vacas.gameObject.SetActive(true);
+                        Comprar_Cerdos.gameObject.SetActive(true);
+                        Comprar_Ovejas.gameObject.SetActive(true);
+                        Mejorar.gameObject.SetActive(false);
+                        Ampliar.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        Comprar_Gallinas.gameObject.SetActive(false);
+                        Comprar_Vacas.gameObject.SetActive(false);
+                        Comprar_Cerdos.gameObject.SetActive(false);
+                        Comprar_Ovejas.gameObject.SetActive(false);
+                        Mejorar.gameObject.SetActive(true);
+                        Ampliar.gameObject.SetActive(true);
+                    }
+
+                }
+            }
 
         }
     }

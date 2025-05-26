@@ -41,6 +41,12 @@ public class MenuPausaUI : MonoBehaviour
         }
     }
    
+    public void inicio()
+    {
+        c.enabled = true;
+        Time.timeScale = 0;
+    }
+
     void Update()
     {
         if(AjustesU != null)
