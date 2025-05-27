@@ -11,7 +11,7 @@ public class BuzónUI : MonoBehaviour
     public GameObject panel, panel2, panel3, Inventario, Pausa;
     private Image i, i2, i3;
     private GameObject Casa;
-    public bool E1 = false, E2= false, E3= false, EM = false;
+    public bool E1 = false, E2 = false, E3 = false, EM = false, V1 = false, V2 = false;
     void Start()
     {
         Vercarta1.onClick.AddListener(() => Elegir(1));
@@ -60,12 +60,12 @@ public class BuzónUI : MonoBehaviour
             Vercarta1.gameObject.SetActive(true);
         }
 
-       if(c.dia >= 6)
+       if(c.dia >= 6 && V1)
         {
             Vercarta2.gameObject.SetActive(true);
         }
 
-        if (c.dia >= 9)
+        if (c.dia >= 9 && V2)
         {
             Vercarta3.gameObject.SetActive(true);
         }
@@ -175,23 +175,13 @@ public class BuzónUI : MonoBehaviour
         InventoryItemData ZanItem = inventory.inventario.Find(item => item.nombre == "Zanahoria");
         InventoryItemData TomaItem = inventory.inventario.Find(item => item.nombre == "Tomate");
 
-        /*if(HuevosItem != null && HuevosItem.count >=30 && ZanItem != null && ZanItem.count >= 6 && TomaItem != null && TomaItem.count >= 6)
+        if(HuevosItem != null && HuevosItem.count >=30 && ZanItem != null && ZanItem.count >= 6 && TomaItem != null && TomaItem.count >= 6)
         {
             HuevosItem.count -= 30;
             ZanItem.count -= 6;
             TomaItem.count -= 6;
             E1 = true;
-        }
-        else
-        {
-            Debug.Log("no");
-        }*/
-
-        if (HuevosItem != null && HuevosItem.count >= 5)
-        {
-            HuevosItem.count -= 5;
-            entregar1.gameObject.SetActive(false);
-            E1 = true;
+            V1 = true;
         }
         else
         {
@@ -218,6 +208,7 @@ public class BuzónUI : MonoBehaviour
             ManzanaItem.count -= 10;
             PiedraItem.count -= 3;
             E2 = true;
+            V2 = true;
         }
         else
         {

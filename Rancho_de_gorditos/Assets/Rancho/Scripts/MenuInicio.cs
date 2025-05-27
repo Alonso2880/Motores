@@ -7,15 +7,18 @@ using UnityEngine.UI;
 public class MenuInicio : MonoBehaviour
 {
     public Canvas Menu;
-    public Button Jugar, Salir;
+    public Button Jugar, Salir, Creditos;
     public bool menuIncio = false;
+    public Image Cred;
     private void Awake()
     {
         Menu.enabled = true;
         Time.timeScale = 0;
         Jugar.onClick.AddListener(() => Opciones(1));
         Salir.onClick.AddListener(()=>  Opciones(2));
+        Creditos.onClick.AddListener(() => Opciones(3));
         menuIncio = true;
+        Cred.gameObject.SetActive(false);
     }
 
     private void Opciones(int n)
@@ -29,6 +32,17 @@ public class MenuInicio : MonoBehaviour
                 break;
             case 2:
                 Application.Quit();
+                break;
+            case 3:
+                Cred.gameObject.SetActive(true);
+                Jugar.gameObject.SetActive(false);
+                Salir.gameObject.SetActive(false);
+                if(Input.GetKeyUp(KeyCode.Escape))
+                {
+                    Cred.gameObject.SetActive(false);
+                    Jugar.gameObject.SetActive(true);
+                    Salir.gameObject.SetActive(true);
+                }
                 break;
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tienda : MonoBehaviour
 {
     GameObject jugador, contMonedas, MenuV;
-    int monedasT=0;
+    int monedasT = 0;
 
 
     void Start()
@@ -15,10 +15,10 @@ public class Tienda : MonoBehaviour
         MenuV = GameObject.Find("MenuVender");
     }
 
-   
+
     void Update()
     {
-       
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -40,20 +40,90 @@ public class Tienda : MonoBehaviour
             if (item.nombre != "Huevo" || cantidadAVender <= 0)
                 continue;
 
-            // vendemos como máximo los que hay en inventario
+
             int vendibles = Mathf.Min(cantidadAVender, item.count);
 
-            // restar del inventario
             item.count -= vendibles;
-            // sumar monedas
+
             contador.monedas += vendibles;
 
-            // descontar de lo que aún queda por vender
             cantidadAVender -= vendibles;
 
-            // si ya vendimos todo lo que pedía, salimos
+            if (cantidadAVender <= 0)
+                break;
+        }
+    }
+
+    public void Carne(int cantidadAVender)
+    {
+        var inventario = jugador.GetComponent<guardar_Inventario>().inventario;
+        var contador = contMonedas.GetComponent<Contador_Moneas>();
+
+        foreach (InventoryItemData item in inventario)
+        {
+            if (item.nombre != "Carne" || cantidadAVender <= 0)
+                continue;
+
+
+            int vendibles = Mathf.Min(cantidadAVender, item.count);
+
+            item.count -= vendibles;
+
+            contador.monedas += vendibles;
+
+            cantidadAVender -= vendibles;
+
+            if (cantidadAVender <= 0)
+                break;
+        }
+    }
+
+    public void Leche(int cantidadAVender)
+    {
+        var inventario = jugador.GetComponent<guardar_Inventario>().inventario;
+        var contador = contMonedas.GetComponent<Contador_Moneas>();
+
+        foreach (InventoryItemData item in inventario)
+        {
+            if (item.nombre != "Leche" || cantidadAVender <= 0)
+                continue;
+
+
+            int vendibles = Mathf.Min(cantidadAVender, item.count);
+
+            item.count -= vendibles;
+
+            contador.monedas += vendibles;
+
+            cantidadAVender -= vendibles;
+
+            if (cantidadAVender <= 0)
+                break;
+        }
+    }
+
+    public void Lana(int cantidadAVender)
+    {
+        var inventario = jugador.GetComponent<guardar_Inventario>().inventario;
+        var contador = contMonedas.GetComponent<Contador_Moneas>();
+
+        foreach (InventoryItemData item in inventario)
+        {
+            if (item.nombre != "Lana" || cantidadAVender <= 0)
+                continue;
+
+
+            int vendibles = Mathf.Min(cantidadAVender, item.count);
+
+            item.count -= vendibles;
+
+            contador.monedas += vendibles;
+
+            cantidadAVender -= vendibles;
+
             if (cantidadAVender <= 0)
                 break;
         }
     }
 }
+
