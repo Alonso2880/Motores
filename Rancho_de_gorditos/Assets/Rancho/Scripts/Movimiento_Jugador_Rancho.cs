@@ -9,7 +9,7 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
     private const float fixedY = 0.002f;
     private GameObject Zona, menuPausa, huertoUI, menuInicial;
     public GameObject Rancho, Bosque;
-
+    public int minijuego =0;
     void Start()
     {
         velCopia = vel;
@@ -60,6 +60,12 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
         {
             h.AbrirUI();
         }
+
+        if (collision.gameObject.CompareTag("Minijuego"))
+        {
+            minijuego += 1;
+            Destroy(collision.gameObject);
+        }
     }
 
     void Update()
@@ -71,37 +77,41 @@ public class Movimiento_Jugador_Rancho : MonoBehaviour
             Time.timeScale = 0;
         }
 
-        cordX = Input.GetAxis("Horizontal");
-        cordZ = Input.GetAxis("Vertical");
-        pos = new Vector3(cordX, 0, cordZ).normalized;
+       
+        
+            cordX = Input.GetAxis("Horizontal");
+            cordZ = Input.GetAxis("Vertical");
+            pos = new Vector3(cordX, 0, cordZ).normalized;
 
-        if (pos != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(pos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, velRot * Time.deltaTime);
-        }
+            if (pos != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(pos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, velRot * Time.deltaTime);
+            }
 
-        transform.Translate(pos * vel * Time.deltaTime, Space.World);
+            transform.Translate(pos * vel * Time.deltaTime, Space.World);
 
-        // Aplicamos animaciones de caminar
-        animator.SetBool("Andar", pos != Vector3.zero);
+            // Aplicamos animaciones de caminar
+            animator.SetBool("Andar", pos != Vector3.zero);
 
-        // Gestión de correr
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            vel = velCorrer;
-            animator.SetBool("Correr", true);
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            vel = velCopia;
-            animator.SetBool("Correr", false);
-        }
+            // Gestión de correr
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                vel = velCorrer;
+                animator.SetBool("Correr", true);
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                vel = velCopia;
+                animator.SetBool("Correr", false);
+            }
 
-        // Fijar la posición en Y para evitar deriva
-        Vector3 curPos = transform.position;
-        curPos.y = fixedY;
-        transform.position = curPos;
+            // Fijar la posición en Y para evitar deriva
+            Vector3 curPos = transform.position;
+            curPos.y = fixedY;
+            transform.position = curPos;
+        
+        
     }
 }
 

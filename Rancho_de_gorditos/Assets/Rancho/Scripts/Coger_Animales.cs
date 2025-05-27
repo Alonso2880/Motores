@@ -10,6 +10,7 @@ public class Coger_Animales : MonoBehaviour
     public GameObject gallinaPrefab, cerdoPrefab, vacaPrefab, ovejaPrefab;
     public Transform puntoSujección;
     public float fuerzaLanzamiento = 10f;
+    public Animator animator;
 
     [HideInInspector] public GameObject gallinaActual, cerdoActual, vacaActual, ovejaActual;
     [HideInInspector] public bool tieneGallina = false, tieneCerdo = false, tieneOveja = false, tieneVaca = false, g=false, c= false, v=false, o=false;
@@ -27,6 +28,7 @@ public class Coger_Animales : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 LanzarGallina();
+                animator.SetBool("CogerW", false);
             }
         }
         if (tieneCerdo)
@@ -34,6 +36,7 @@ public class Coger_Animales : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 LanzarCerdo();
+                animator.SetBool("CogerW", false);
             }
         }
         if (tieneOveja)
@@ -41,6 +44,7 @@ public class Coger_Animales : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 LanzarOveja();
+                animator.SetBool("CogerW", false);
             }
         }
         if (tieneVaca)
@@ -48,6 +52,7 @@ public class Coger_Animales : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 LanzarVaca();
+                animator.SetBool("CogerW", false);
             }
         }
 
@@ -56,6 +61,7 @@ public class Coger_Animales : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 RecogerGallina();
+                animator.SetBool("CogerW", true);
             }
         }
 
@@ -64,6 +70,7 @@ public class Coger_Animales : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 RecogerCerdo();
+                animator.SetBool("CogerW", true);
             }
         }
 
@@ -72,6 +79,7 @@ public class Coger_Animales : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 RecogerOveja();
+                animator.SetBool("CogerW", true);
             }
         }
 
@@ -80,6 +88,7 @@ public class Coger_Animales : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 RecogerVaca();
+                animator.SetBool("CogerW", true);
             }
         }
 

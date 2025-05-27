@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class guardar_Inventario : MonoBehaviour
     GameObject player, objeto, colisionado, huevoG, CarneC, LanaL, LecheL;
     [HideInInspector] public List<InventoryItemData> inventario = new List<InventoryItemData>();
     [HideInInspector] public bool recogidaH = false;
-
+    public Animator animator;
     void Awake()
     {
         if (Instance == null)
@@ -69,57 +70,62 @@ public class guardar_Inventario : MonoBehaviour
                 AgregarHuevo();
                 Debug.Log("Hola");
                 colisionado = null;
+                StartCoroutine(DisparaYCancelaCoger());
             }
             else
             {
-                ItemCount itemData = colisionado.GetComponent<ItemCount>();
-                if (itemData != null)
+                if (colisionado.tag == "Recogida_Carne")
                 {
-                    //Esto controla en bucle. Si ambas condiciones son verdaderas el return termina la ejecución del bloque donde está (el forech sigue funcionando).
-                    //Como tenemos el collider activo, esto evita que el jugador pueda guardar huevos cuando no los hay.
-                    /* if (itemData.nombre == "Huevo(Clone)" && gallina.huevo <= 0)
-                     {
-                         return;
-                     }*/
-
-                    AgregarItem(itemData.nombre, itemData.prefab);
-                    Destroy(colisionado);
+                    AgregarCarne();
+                    Debug.Log("Hola");
                     colisionado = null;
+                    StartCoroutine(DisparaYCancelaCoger());
+                }
+                else
+                {
+                    if (colisionado.tag == "Recogida_Leche")
+                    {
+                        AgregarLeche();
+                        Debug.Log("Hola");
+                        colisionado = null;
+                        StartCoroutine(DisparaYCancelaCoger());
+                    }
+                    else
+                    {
+                        if (colisionado.tag == "Recogida_Lana")
+                        {
+                            AgregarLana();
+                            Debug.Log("Hola");
+                            colisionado = null;
+                            StartCoroutine(DisparaYCancelaCoger());
+                        }
+                        else
+                        {
+                            ItemCount itemData = colisionado.GetComponent<ItemCount>();
+                            if (itemData != null)
+                            {
 
+                                AgregarItem(itemData.nombre, itemData.prefab);
+                                Destroy(colisionado);
+                                colisionado = null;
+                                StartCoroutine(DisparaYCancelaCoger());
 
+                            }
+                        }
+                    }
                 }
             }
 
-            if (colisionado.tag == "Recogida_Carne")
-            {
-                AgregarCarne();
-                Debug.Log("Hola");
-                colisionado = null;
-            }
-
-            if (colisionado.tag == "Recogida_Lana")
-            {
-                AgregarLana();
-                Debug.Log("Hola");
-                colisionado = null;
-            }
-
-            if (colisionado.tag == "Recogida_Leche")
-            {
-                AgregarLeche();
-                Debug.Log("Hola");
-                colisionado = null;
-            }
-
-
-
         }
 
+    }
 
-        /*foreach(InventoryItemData item in inventario)
-         {
-             Debug.Log(item.nombre + " x" + item.count);
-         }*/
+    private IEnumerator DisparaYCancelaCoger()
+    {
+        animator.SetBool("Coger", true);
+        // espera **un frame**:
+        yield return null;
+        animator.SetBool("Coger", false);
     }
 
     //Agregar item al inventario

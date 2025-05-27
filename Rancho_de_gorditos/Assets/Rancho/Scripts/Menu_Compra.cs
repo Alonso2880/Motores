@@ -80,7 +80,7 @@ public class Menu_Compra : MonoBehaviour
             c_vacas.gameObject.SetActive(true);
         }
 
-        if (b.E3)
+        if (b.EM)
         {
             c_ovejas.gameObject.SetActive(false);
         }

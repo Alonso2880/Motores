@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cerdo
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e955006a329e9a4f90d69a4e3aecf1b, type: 3}
+      propertyPath: m_TagString
+      value: Cerdo
+      objectReference: {fileID: 0}
     - target: {fileID: 8698496538749183665, guid: 5e955006a329e9a4f90d69a4e3aecf1b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

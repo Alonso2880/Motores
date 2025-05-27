@@ -2,16 +2,18 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BuzónUI : MonoBehaviour
 {
     public Button Vercarta1, Vercarta2, Vercarta3, entregar1, entregar2, entregar3, minijuego, inventario, ajustes;
     public Button salir;
     public Canvas can;
-    public GameObject panel, panel2, panel3, Inventario, Pausa;
+    public GameObject panel, panel2, panel3, Inventario, Pausa, miniJuego;
     private Image i, i2, i3;
-    private GameObject Casa;
+    private GameObject Casa, player;
     public bool E1 = false, E2 = false, E3 = false, EM = false, V1 = false, V2 = false;
+    public TextMeshProUGUI m;
     void Start()
     {
         Vercarta1.onClick.AddListener(() => Elegir(1));
@@ -29,12 +31,14 @@ public class BuzónUI : MonoBehaviour
         can.enabled = false;
 
         Casa = GameObject.Find("CasaBrujita");
+        player = GameObject.Find("Player");
 
         panel.SetActive(false);
         panel2.SetActive(false);
         panel3.SetActive(false);
 
-
+        m.gameObject.SetActive(false);
+        miniJuego.SetActive(false);
     }
 
     private void invent()
@@ -55,7 +59,8 @@ public class BuzónUI : MonoBehaviour
     private void Update()
     {
         casa c = Casa.GetComponent<casa>();
-       if(c.dia >= 3)
+        Movimiento_Jugador_Rancho mo = player.GetComponent<Movimiento_Jugador_Rancho>();
+        if (c.dia >= 3)
         {
             Vercarta1.gameObject.SetActive(true);
         }
@@ -73,6 +78,14 @@ public class BuzónUI : MonoBehaviour
         if (E3)
         {
             minijuego.gameObject.SetActive(true);
+        }
+
+        if (mo.minijuego == 6)
+        {
+            EM = true;
+            miniJuego.SetActive(false);
+            m.gameObject.SetActive(false);
+            minijuego.gameObject.SetActive(false);
         }
     }
     public void Elegir(int i)
@@ -245,6 +258,8 @@ public class BuzónUI : MonoBehaviour
 
     private void Minijuego()
     {
-
+        
+        m.gameObject.SetActive(true);
+        miniJuego.SetActive(true);
     }
 }
