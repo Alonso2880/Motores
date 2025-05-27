@@ -10,6 +10,8 @@ public class MenuInicio : MonoBehaviour
     public Button Jugar, Salir, Creditos;
     public bool menuIncio = false;
     public Image Cred;
+    public AudioSource musicaRancho;
+    private AudioSource musicaInicio;
     private void Awake()
     {
         Menu.enabled = true;
@@ -19,6 +21,7 @@ public class MenuInicio : MonoBehaviour
         Creditos.onClick.AddListener(() => Opciones(3));
         menuIncio = true;
         Cred.gameObject.SetActive(false);
+        musicaInicio = GetComponent<AudioSource>();
     }
 
     private void Opciones(int n)
@@ -29,6 +32,9 @@ public class MenuInicio : MonoBehaviour
                 Menu.enabled = false;
                 Time.timeScale = 1;
                 menuIncio = false;
+                musicaInicio.mute = true;
+                musicaRancho.mute = false;
+
                 break;
             case 2:
                 Application.Quit();

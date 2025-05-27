@@ -13,8 +13,9 @@ public class ZonasUI : MonoBehaviour
     private float tiempo = 3f;
     private bool mostrado = false;
 
-    
-    
+    public AudioSource musicaRancho;
+    public AudioSource musicaBosque;
+
     void Start()
     {
         c.enabled = false;
@@ -28,13 +29,17 @@ public class ZonasUI : MonoBehaviour
          if (rancho && !mostrado)
          {
              mostrado = true;
-             StartCoroutine(RanchoI(tiempo));
+            musicaRancho.mute = false;
+            musicaBosque.mute = true;
+            StartCoroutine(RanchoI(tiempo));
          }
 
          if(bosque && !mostrado)
          {
              mostrado = true;
-             StartCoroutine(BosqueI(tiempo));
+            musicaRancho.mute = true;
+            musicaBosque.mute = false;
+            StartCoroutine(BosqueI(tiempo));
              if (rancho)
              {
                  StopCoroutine (BosqueI(tiempo));
